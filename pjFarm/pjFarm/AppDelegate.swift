@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseDatabase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,6 +18,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        FirebaseApp.configure()
+        
+        // create variable that point to firebase's realtime_database
+        let ref = Database.database().reference()
+        
+        // example of read
+        ref.child("Users/PangExMai").observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            // Get User data
+            let datas = snapshot.value as? NSDictionary
+            let name = datas?["Name"] as? String
+            let surname = datas?["Surname"] as? String
+            let age = datas?["Age"] as? Int
+            
+            print(name!)
+            print(surname!)
+            print(age!)
+            })
+        
+        // example of write
+        ref.child("Users/TeteExenFire/Name").setValue(["Name1":"Tete", "Name2":"Santiphop"])
         return true
     }
 
