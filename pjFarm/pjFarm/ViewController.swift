@@ -9,10 +9,17 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+//    var pig:Pig
+    
+//    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+//        pig = Pig(id: "1111", date: Date(timeIntervalSinceReferenceDate: 0), mother: "mom", father: "dad", gender: "chai")
+//    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
     }
 
     override func didReceiveMemoryWarning() {

@@ -14,6 +14,8 @@
 		6A57B67B21427E53004DE381 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A57B67921427E53004DE381 /* LaunchScreen.storyboard */; };
 		6A57B68621427E53004DE381 /* pjFarmTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A57B68521427E53004DE381 /* pjFarmTests.swift */; };
 		6A57B69121427E53004DE381 /* pjFarmUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A57B69021427E53004DE381 /* pjFarmUITests.swift */; };
+		8F18C6F7216DCFD9001BBF0F /* Pig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F18C6F6216DCFD9001BBF0F /* Pig.swift */; };
+		8F18C6F9216DD111001BBF0F /* PigData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F18C6F8216DD111001BBF0F /* PigData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +49,8 @@
 		6A57B68C21427E53004DE381 /* pjFarmUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = pjFarmUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A57B69021427E53004DE381 /* pjFarmUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pjFarmUITests.swift; sourceTree = "<group>"; };
 		6A57B69221427E53004DE381 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8F18C6F6216DCFD9001BBF0F /* Pig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pig.swift; sourceTree = "<group>"; };
+		8F18C6F8216DD111001BBF0F /* PigData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PigData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +104,8 @@
 				6A57B67021427E53004DE381 /* AppDelegate.swift */,
 				6A57B67221427E53004DE381 /* ViewController.swift */,
 				6A57B67421427E53004DE381 /* Main.storyboard */,
+				8F18C6F6216DCFD9001BBF0F /* Pig.swift */,
+				8F18C6F8216DD111001BBF0F /* PigData.swift */,
 				6A57B67721427E53004DE381 /* Assets.xcassets */,
 				6A57B67921427E53004DE381 /* LaunchScreen.storyboard */,
 				6A57B67C21427E53004DE381 /* Info.plist */,
@@ -188,20 +194,23 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0900;
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 1000;
 				ORGANIZATIONNAME = "iOS Dev";
 				TargetAttributes = {
 					6A57B66C21427E53004DE381 = {
 						CreatedOnToolsVersion = 9.0;
+						LastSwiftMigration = 1000;
 						ProvisioningStyle = Automatic;
 					};
 					6A57B68021427E53004DE381 = {
 						CreatedOnToolsVersion = 9.0;
+						LastSwiftMigration = 1000;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 6A57B66C21427E53004DE381;
 					};
 					6A57B68B21427E53004DE381 = {
 						CreatedOnToolsVersion = 9.0;
+						LastSwiftMigration = 1000;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 6A57B66C21427E53004DE381;
 					};
@@ -259,7 +268,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8F18C6F7216DCFD9001BBF0F /* Pig.swift in Sources */,
 				6A57B67321427E53004DE381 /* ViewController.swift in Sources */,
+				8F18C6F9216DD111001BBF0F /* PigData.swift in Sources */,
 				6A57B67121427E53004DE381 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -329,6 +340,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -336,6 +348,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -386,6 +399,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -393,6 +407,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -429,10 +444,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 89ST658N5L;
 				INFOPLIST_FILE = pjFarm/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = th.ac.ku.sci.cs.pjFarm;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -444,10 +460,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 89ST658N5L;
 				INFOPLIST_FILE = pjFarm/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = th.ac.ku.sci.cs.pjFarm;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -463,7 +480,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = th.ac.ku.sci.cs.pjFarmTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/pjFarm.app/pjFarm";
 			};
@@ -480,7 +497,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = th.ac.ku.sci.cs.pjFarmTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/pjFarm.app/pjFarm";
 			};
@@ -496,7 +513,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = th.ac.ku.sci.cs.pjFarmUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = pjFarm;
 			};
@@ -512,7 +529,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = th.ac.ku.sci.cs.pjFarmUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = pjFarm;
 			};
