@@ -16,26 +16,50 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var db = DatabaseManager()
     
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
+        let dateFormat = DateFormatter()
+        dateFormat.dateFormat = "yyyyMMdd"
+        
 //        FirebaseApp.configure()
+//        already done in DatabaseManager.swift
         
         // create variable that point to firebase's realtime_database
 //        let ref = Database.database().reference()
-        
-        
-        
-        // example of read
-//        ref.child("หมูสาว/1001").observeSingleEvent(of: .value, with: { (snapshot) in
-//            
+//
+//        ref.child("หมูสาว").observeSingleEvent(of: .value, with: { (snapshot) in
+//
 //            // Get User data
 //            let datas = snapshot.value as? NSDictionary
-//            let dateIn = datas?["วันแรกเข้า"] as? String
-//            let age = datas?["อายุ"] as? Int
-//            
-//            print(dateIn!)
-//            print(age!)
+//            let id = datas?["currentID"] as? Int
+//            print("id")
+//            print(id!)
+////            self.currentIDMS = id!
+////            print(self.currentIDMS)
+//        })
+//
+//        // workdata
+//        var workData = WorkData.shared.workID
+//        print(dateFormat.string(from: Date()))
+//        ref.child("งาน/2018-12-02/ทั้งหมด").observeSingleEvent(of: .value, with: { (snapshot) in
+//            let data = snapshot.value as? NSDictionary
+//            let one = data?["1"] as? Int
+//            print(one)
+//        })
+//
+//
+//
+//
+//        // example of read
+//        ref.child("งาน/20181202").observeSingleEvent(of: .value, with: { (snapshot) in
+//
+//            // Get User data
+//            let datas = snapshot.value as? NSDictionary
+//            let dateIn = datas?["1"] as? Int
+//
+//            print(dateIn)
 //            })
         // example of write
 //
@@ -70,6 +94,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        ref.child("คอกอนุบาล/2000/1/3/วันฉีดวัคซีนพิษสุนัขบ้าเทียมรอบที่2").setValue(["วันกำหนด":"21-11-2018", "วันจริง":""])
 //        ref.child("งาน/22-07-2018").setValue(["เสร็จ":["1":"1222"],"ไม่เสร็จ":["1":"4444"]])
 
+        
         return true
     }
 

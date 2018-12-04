@@ -10,30 +10,28 @@ import UIKit
 
 class RegisterViewController: UIViewController {
 
-    @IBOutlet weak var mom: UITextField!
-    @IBOutlet weak var dad: UISegmentedControl!
-    @IBOutlet weak var gender: UISegmentedControl!
-    @IBOutlet weak var dateTextField: UITextField!
-    
     var appDelegate = UIApplication.shared.delegate as! AppDelegate
-    
-    var datePicker = UIDatePicker()
-    var numPicker = UIKeyboardType.numberPad
-    
+    var currentID:Int = 0
     
     @IBOutlet weak var momTextField: UITextField! {
         didSet {
-            momTextField?.addDoneCancelToolbar(onDone: (target: self, action: #selector(doneButtonTappedForMyNumericTextField)))
+            momTextField?.addDoneToolbar(onDone: (target: self, action: #selector(doneButtonTappedForMomTextField)))
             momTextField.keyboardType = UIKeyboardType.numberPad
         }
     }
-    
+    @objc func doneButtonTappedForMomTextField() { momTextField.resignFirstResponder() }
+
+    @IBOutlet weak var dad: UISegmentedControl!
+    @IBOutlet weak var gender: UISegmentedControl!
+    @IBOutlet weak var dateTextField: UITextField!
     @IBAction func registerButton(_ sender: Any) {
+        
         let db = self.appDelegate.db
+        
         var dadString:String = ""
         let momString:String = momTextField.text!
         var genderString:String = ""
-        print(mom.text!)
+        
         if dad.selectedSegmentIndex == 0 {
             dadString = ("LW")
         }
@@ -43,6 +41,7 @@ class RegisterViewController: UIViewController {
         if dad.selectedSegmentIndex == 2 {
             dadString = ("LR")
         }
+        
         if gender.selectedSegmentIndex == 0 {
             genderString = ("Male")
         }
@@ -50,8 +49,11 @@ class RegisterViewController: UIViewController {
             genderString = ("Female")
         }
         
-        db.regisMS(dad: dadString, mom: momString, gender: genderString)
+        currentID = db.regisMS(dad: dadString, mom: momString, gender: genderString, date:datePicker.date)
+        showOptionsAlert()
     }
+    
+    var datePicker:UIDatePicker = UIDatePicker()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,57 +76,58 @@ class RegisterViewController: UIViewController {
     
     func createDatePicker() {
         datePicker.datePickerMode = .date
-        
-        let toolbar = UIToolbar()
+        let onDone = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneActionForDatePicker))
+        let toolbar:UIToolbar = UIToolbar()
+        toolbar.barStyle = .default
+        toolbar.items = [
+            UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil),
+            UIBarButtonItem(title: "Done", style: .done, target: onDone.target, action: onDone.action)
+        ]
         toolbar.sizeToFit()
-        
-        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneAction))
-        
-        toolbar.setItems([doneButton], animated: true)
         dateTextField.inputAccessoryView = toolbar
-        
         dateTextField.inputView = datePicker
     }
     
-    @objc func doneAction() {
-        let dateFormat = DateFormatter()
-        dateFormat.dateFormat = "MM-dd-yyyy"
-        
-        
-        dateTextField.text = dateFormat.string(from: datePicker.date)
+    @objc func doneActionForDatePicker() {
+        let dateFormatForTextField = DateFormatter()
+        dateFormatForTextField.dateFormat = "MMMM d, yyyy"
+        dateTextField.text = dateFormatForTextField.string(from: datePicker.date)
         self.view.endEditing(true)
     }
     
-    @objc func doneButtonTappedForMyNumericTextField() {
-        print("Done");
-        momTextField.resignFirstResponder()
+    func showOptionsAlert() {
+        let alertController = UIAlertController(title: "Yeah!", message: "This pig ID is : \(self.currentID)", preferredStyle: UIAlertController.Style.alert)
+        
+        let actionNothing = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) { (action) in }
+        
+        let actionBackHome = UIAlertAction(title: "Home", style: UIAlertAction.Style.default) { action in
+            self.performSegue(withIdentifier: "unwindRegisterToHome", sender: self)
+        }
+        
+        alertController.addAction(actionBackHome)
+        alertController.addAction(actionNothing)
+
+        present(alertController, animated: true, completion: nil)
+        
+        
     }
 
 }
 
 extension UITextField {
-    func addDoneCancelToolbar(onDone: (target: Any, action: Selector)? = nil, onCancel: (target: Any, action: Selector)? = nil) {
-        let onCancel = onCancel ?? (target: self, action: #selector(cancelButtonTapped))
+    func addDoneToolbar(onDone: (target: Any, action: Selector)? = nil, onCancel: (target: Any, action: Selector)? = nil) {
         let onDone = onDone ?? (target: self, action: #selector(doneButtonTapped))
         
         let toolbar: UIToolbar = UIToolbar()
         toolbar.barStyle = .default
         toolbar.items = [
-            UIBarButtonItem(title: "Cancel", style: .plain, target: onCancel.target, action: onCancel.action),
             UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil),
             UIBarButtonItem(title: "Done", style: .done, target: onDone.target, action: onDone.action)
         ]
         toolbar.sizeToFit()
-        
         self.inputAccessoryView = toolbar
     }
     
-    // Default actions:
     @objc func doneButtonTapped() { self.resignFirstResponder() }
-    @objc func cancelButtonTapped() { self.resignFirstResponder() }
-    
-    
-    
-    
-    
+ 
 }
