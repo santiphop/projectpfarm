@@ -10,6 +10,11 @@ import UIKit
 
 class FirstRutViewController: UIViewController {
 
+    var appDelegate = UIApplication.shared.delegate as! AppDelegate
+    var datePicker = UIDatePicker()
+    let dateFormatForTextField = DateFormatter()
+    
+
     @IBOutlet weak var idTextField: UITextField! {
         didSet {
             idTextField?.addDoneToolbar(onDone: (target: self, action: #selector(doneButtonTappedIDTextField)))
@@ -20,10 +25,44 @@ class FirstRutViewController: UIViewController {
     
     @objc func doneButtonTappedIDTextField() { idTextField.resignFirstResponder() }
     
+    @IBOutlet weak var dateTextField: UITextField!
+    
+    @IBAction func saveButton(_ sender: Any) {
+        let db = self.appDelegate.db
+        let idString = idTextField.text!
+        
+        db.turnIntoMom(date: datePicker.date, id: idString)
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        createDatePicker()
+        dateFormatForTextField.dateFormat = "MMMM d, yyyy"
+        dateTextField.text! = dateFormatForTextField.string(from: Date())
+    }
+    
+    func createDatePicker() {
+        datePicker.datePickerMode = .date
+        let onDone = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneActionForDatePicker))
+        let toolbar:UIToolbar = UIToolbar()
+        toolbar.barStyle = .default
+        toolbar.items = [
+            UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil),
+            UIBarButtonItem(title: "Done", style: .done, target: onDone.target, action: onDone.action)
+        ]
+        toolbar.sizeToFit()
+        dateTextField.inputAccessoryView = toolbar
+        dateTextField.inputView = datePicker
+    }
+    
+    @objc func doneActionForDatePicker() {
+        let dateFormatForTextField = DateFormatter()
+        dateFormatForTextField.dateFormat = "MMMM d, yyyy"
+        dateTextField.text = dateFormatForTextField.string(from: datePicker.date)
+        self.view.endEditing(true)
     }
     
 

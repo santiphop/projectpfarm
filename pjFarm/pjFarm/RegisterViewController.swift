@@ -11,6 +11,10 @@ import UIKit
 class RegisterViewController: UIViewController {
 
     var appDelegate = UIApplication.shared.delegate as! AppDelegate
+    var datePicker = UIDatePicker()
+    let dateFormatForTextField = DateFormatter()
+
+    //  currentID for Display in UIAlert
     var currentID:Int = 0
     
     @IBOutlet weak var momTextField: UITextField! {
@@ -24,6 +28,7 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var dad: UISegmentedControl!
     @IBOutlet weak var gender: UISegmentedControl!
     @IBOutlet weak var dateTextField: UITextField!
+    
     @IBAction func registerButton(_ sender: Any) {
         
         let db = self.appDelegate.db
@@ -53,13 +58,14 @@ class RegisterViewController: UIViewController {
         showOptionsAlert()
     }
     
-    var datePicker:UIDatePicker = UIDatePicker()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         createDatePicker()
+        dateFormatForTextField.dateFormat = "MMMM d, yyyy"
+        dateTextField.text! = dateFormatForTextField.string(from: Date())
     }
     
     
@@ -89,9 +95,10 @@ class RegisterViewController: UIViewController {
     }
     
     @objc func doneActionForDatePicker() {
-        let dateFormatForTextField = DateFormatter()
-        dateFormatForTextField.dateFormat = "MMMM d, yyyy"
         dateTextField.text = dateFormatForTextField.string(from: datePicker.date)
+        let db = self.appDelegate.db
+        db.generateWorkIDCountForMusao()
+        db.generateWorkDateForMusao(date: datePicker.date)
         self.view.endEditing(true)
     }
     
@@ -115,7 +122,9 @@ class RegisterViewController: UIViewController {
 }
 
 extension UITextField {
-    func addDoneToolbar(onDone: (target: Any, action: Selector)? = nil, onCancel: (target: Any, action: Selector)? = nil) {
+    //  for Textfield with NumberPad
+    //  doneButton do nothing
+    func addDoneToolbar(onDone: (target: Any, action: Selector)? = nil) {
         let onDone = onDone ?? (target: self, action: #selector(doneButtonTapped))
         
         let toolbar: UIToolbar = UIToolbar()

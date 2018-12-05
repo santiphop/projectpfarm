@@ -20,14 +20,7 @@ class PreviewViewController: UIViewController {
     
     // เป็นสัดครั้งแรก ใส่ ID หมูที่เป็นสัด
     @IBAction func firstRut(_ sender: Any) {
-        let db = self.appDelegate.db
-        // example of read
-        let currentDate = Date()
-        var dateComponent = DateComponents()
-        dateComponent.day = -1
-        let thisDate = Calendar.current.date(byAdding: dateComponent, to: currentDate)!
-        let arrayint = db.readWork(date: (thisDate))
-        print(arrayint)
+
     }
     
     /*

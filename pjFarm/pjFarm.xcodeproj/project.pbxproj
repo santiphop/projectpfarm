@@ -14,9 +14,8 @@
 		6A57B67B21427E53004DE381 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A57B67921427E53004DE381 /* LaunchScreen.storyboard */; };
 		6A57B68621427E53004DE381 /* pjFarmTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A57B68521427E53004DE381 /* pjFarmTests.swift */; };
 		6A57B69121427E53004DE381 /* pjFarmUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A57B69021427E53004DE381 /* pjFarmUITests.swift */; };
-		8F18C6F7216DCFD9001BBF0F /* Pig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F18C6F6216DCFD9001BBF0F /* Pig.swift */; };
+		8F18C6F7216DCFD9001BBF0F /* PigMusao.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F18C6F6216DCFD9001BBF0F /* PigMusao.swift */; };
 		8F18C6F9216DD111001BBF0F /* PigData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F18C6F8216DD111001BBF0F /* PigData.swift */; };
-		8F47B53C21B3DDE000A1F25F /* Work.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F47B53B21B3DDE000A1F25F /* Work.swift */; };
 		8F47B53E21B3DF2E00A1F25F /* WorkData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F47B53D21B3DF2E00A1F25F /* WorkData.swift */; };
 		8FAD343421A2CAB70048A3EC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8FAD343321A2CAB70048A3EC /* GoogleService-Info.plist */; };
 		8FAD344021A2CCA00048A3EC /* GoogleAppMeasurement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FAD343821A2CCA00048A3EC /* GoogleAppMeasurement.framework */; };
@@ -67,9 +66,8 @@
 		6A57B68C21427E53004DE381 /* pjFarmUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = pjFarmUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A57B69021427E53004DE381 /* pjFarmUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pjFarmUITests.swift; sourceTree = "<group>"; };
 		6A57B69221427E53004DE381 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8F18C6F6216DCFD9001BBF0F /* Pig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pig.swift; sourceTree = "<group>"; };
+		8F18C6F6216DCFD9001BBF0F /* PigMusao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PigMusao.swift; sourceTree = "<group>"; };
 		8F18C6F8216DD111001BBF0F /* PigData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PigData.swift; sourceTree = "<group>"; };
-		8F47B53B21B3DDE000A1F25F /* Work.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Work.swift; sourceTree = "<group>"; };
 		8F47B53D21B3DF2E00A1F25F /* WorkData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkData.swift; sourceTree = "<group>"; };
 		8FAD343321A2CAB70048A3EC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8FAD343821A2CCA00048A3EC /* GoogleAppMeasurement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleAppMeasurement.framework; path = pjFarm/Framework/Firebase/Analytics/GoogleAppMeasurement.framework; sourceTree = "<group>"; };
@@ -168,14 +166,13 @@
 				8FEDCBEE21B6620700F935EA /* FirstRutViewController.swift */,
 				6A57B67421427E53004DE381 /* Main.storyboard */,
 				8F18C6F8216DD111001BBF0F /* PigData.swift */,
-				8F18C6F6216DCFD9001BBF0F /* Pig.swift */,
+				8F18C6F6216DCFD9001BBF0F /* PigMusao.swift */,
 				6A57B67721427E53004DE381 /* Assets.xcassets */,
 				6A57B67921427E53004DE381 /* LaunchScreen.storyboard */,
 				6A57B67C21427E53004DE381 /* Info.plist */,
 				8FAD343321A2CAB70048A3EC /* GoogleService-Info.plist */,
 				8FAD344921A2CD570048A3EC /* pjFarm-Bridging-Header.h */,
 				8F47B53D21B3DF2E00A1F25F /* WorkData.swift */,
-				8F47B53B21B3DDE000A1F25F /* Work.swift */,
 				8FAD343521A2CC370048A3EC /* Framework */,
 			);
 			path = pjFarm;
@@ -395,8 +392,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8F18C6F7216DCFD9001BBF0F /* Pig.swift in Sources */,
-				8F47B53C21B3DDE000A1F25F /* Work.swift in Sources */,
+				8F18C6F7216DCFD9001BBF0F /* PigMusao.swift in Sources */,
 				8FEC468C21B0FE4300B2CB47 /* ScanViewController.swift in Sources */,
 				8FEDCBED21B4D5CE00F935EA /* PreviewViewController.swift in Sources */,
 				8FDC8B1121AD487700060F65 /* RegisterViewController.swift in Sources */,
@@ -577,7 +573,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 89ST658N5L;
+				DEVELOPMENT_TEAM = 79J6NX5GF8;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/pjFarm/Framework/Firebase/Analytics",
@@ -603,7 +599,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 89ST658N5L;
+				DEVELOPMENT_TEAM = 79J6NX5GF8;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/pjFarm/Framework/Firebase/Analytics",

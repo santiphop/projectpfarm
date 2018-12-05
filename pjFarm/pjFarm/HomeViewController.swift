@@ -12,6 +12,7 @@ class HomeViewController: UIViewController {
     
 //    var pig:Pig
     @IBOutlet weak var dateLabel: UILabel!
+    var dateFormat = DateFormatter()
 //    var appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     
@@ -22,7 +23,9 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        dateLabel.text = DateFormatter.localizedString(from: NSDate() as Date, dateStyle: DateFormatter.Style.long, timeStyle: DateFormatter.Style.none)
+        dateFormat.dateFormat = "d MMMM YYYY"
+        dateLabel.text! = dateFormat.string(from: Date())
+//        dateLabel.text = DateFormatter.localizedString(from: NSDate() as Date, dateStyle: DateFormatter.Style.long, timeStyle: DateFormatter.Style.none)
 //        let db = self.appDelegate.db
 //        db.regisMS(dad: "LL", mom: "11", gender: "GG")
         
@@ -34,10 +37,7 @@ class HomeViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func unwindToHome(_ unwindSegue: UIStoryboardSegue) {
-        let sourceViewController = unwindSegue.source
-        // Use data from the view controller which initiated the unwind segue
-    }
+    @IBAction func unwindToHome(_ unwindSegue: UIStoryboardSegue) { }
     
 
 

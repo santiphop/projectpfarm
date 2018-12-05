@@ -10,21 +10,21 @@ import UIKit
 
 class PigData: NSObject {
 
-    var pigData:[Pig]
+    var pigData:[PigMusao]
     
     override init() {
         pigData = []
     }
     
-    func add(pig:Pig) {
+    func add(pig:PigMusao) {
         pigData.append(pig)
     }
     
-    func getAt(index:Int) -> Pig {
+    func getAt(index:Int) -> PigMusao {
         return pigData[index]
     }
     
-    func delete(index:Int) -> Pig {
+    func delete(index:Int) -> PigMusao {
         return pigData.remove(at: index)
     }
     

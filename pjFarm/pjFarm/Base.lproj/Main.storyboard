@@ -316,7 +316,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cHP-DD-wfk">
-                                <rect key="frame" x="139" y="271" width="97" height="30"/>
+                                <rect key="frame" x="139" y="271" width="181" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -330,15 +330,33 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sxw-wr-h41">
-                                <rect key="frame" x="170" y="430" width="34" height="30"/>
+                                <rect key="frame" x="172" y="430" width="31" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Save"/>
+                                <state key="normal" title="Turn"/>
+                                <connections>
+                                    <action selector="saveButton:" destination="UaO-3F-3gM" eventType="touchUpInside" id="tzQ-79-lbz"/>
+                                </connections>
                             </button>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="t7M-ac-en8">
+                                <rect key="frame" x="139" y="340" width="181" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yGe-5L-bEt">
+                                <rect key="frame" x="42" y="349" width="36" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="0Kt-Ff-cOi"/>
                     </view>
                     <connections>
+                        <outlet property="dateTextField" destination="t7M-ac-en8" id="q4W-Et-npo"/>
                         <outlet property="idTextField" destination="cHP-DD-wfk" id="9gX-AA-6eq"/>
                         <segue destination="CGa-bi-ywg" kind="unwind" identifier="unwindRutToHome" unwindAction="unwindToHome:" id="0IZ-Bs-PfK"/>
                     </connections>
@@ -346,7 +364,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z41-nJ-iG5" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="CGa-bi-ywg" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3281" y="-819"/>
+            <point key="canvasLocation" x="3280.8000000000002" y="-819.45812807881782"/>
         </scene>
         <!--ToDo-->
         <scene sceneID="iZP-z3-K2z">

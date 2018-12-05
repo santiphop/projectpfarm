@@ -10,98 +10,187 @@ import Foundation
 import FirebaseDatabase
 
 class DatabaseManager {
-//    static let shared: DatabaseManager = DatabaseManager()
     var ref:DatabaseReference
-    var currentIDMS : Int = 0
+    var currentIDMS:Int = 0
+    
+    var musaoWorkDate:[Date] = []
+    var musaoWorkIDCount:[Int] = []
+    var musaoWorkString:[String] = [
+        "ถ่ายพยาธิ", "วัคซีนอหิวาห์", "วัคซีนพาร์โว", "วัคซีนพิษสุนัขบ้าเทียม", "วัคซีนปากเท้าเทียม", "วัคซีน PRRS"
+    ]
+    
+    var maepunWorkDate:[Date] = []
+    var maepunWorkIDCount:[Int] = []
+
+    
+    var workData = WorkData.shared
+    
+    
     let dateFormat = DateFormatter()
-    var currentDate = Date()
     
     
     init() {
         dateFormat.dateFormat = "yyyyMMdd"
         FirebaseApp.configure()
         ref = Database.database().reference()
-        ref.child("หมูสาว").observeSingleEvent(of: .value, with: { (snapshot) in
-            
-            // Get User data
-            let datas = snapshot.value as? NSDictionary
-            let id = datas?["currentID"] as? Int
-            
-            self.currentIDMS = id!
-            print("init in observeSingleEvent, currentID: \(self.currentIDMS)")
-            
-        })
+        
+        //  set up musao
+        self.generateWorkDateForMusao(date: Date())
+        self.generateWorkIDCountForMusao()
+        
+        
+        
+        //  set up maepun
+        
+        
+        //  set up หมูสาว's currentID
+        self.setUpCurrentIDMS()
+        
         
     }
     
+    func setUpCurrentIDMS() {
+        ref.child("หมูสาว").observeSingleEvent(of: .value, with: { snapshot in
+            // Get data
+            let data = snapshot.value as? NSDictionary
+            let id = data?["currentID"] as? Int
+            self.currentIDMS = id!
+            print("init in observeSingleEvent, currentID: \(self.currentIDMS)")
+        })
+    }
+    
+    func generateWorkDateForMusao(date:Date) {
+        let addDate = [0, 7, 14, 21, 28, 32]
+        musaoWorkDate.removeAll()
+        for i in 0...addDate.count - 1 {
+            musaoWorkDate.append(addDateComponent(date: date, intAdding: addDate[i]))
+        }
+        print("gen done")
+    }
+    
+    func generateWorkIDCountForMusao() {
+        musaoWorkIDCount.removeAll()
+        for i in 0...5 {
+            ref.child("งาน/\(musaoWorkDate[i])W/ทั้งหมด/\(musaoWorkString[i])").observeSingleEvent(of: .value, with: { snapshot in
+                // Get data
+                self.musaoWorkIDCount.append(Int(snapshot.childrenCount) + 1)
+            })
+        }
+    }
+    
+//    func generateWorkDateForMaepun(date:Date) -> [Date] {
+//        let addDate = [0, 7, 14, 21, 28, 32]
+//        var workDate:[Date] = []
+//        for i in 0...addDate.count - 1 {
+//            workDate.append(addDateComponent(date: date, intAdding: addDate[i]))
+//        }
+//        return workDate
+//    }
+//
+//    func generateWorkIDCountForMaepun() -> [Int] {
+//        var workIDCount:[Int] = []
+//        for i in 0...5 {
+//            ref.child("งาน/\(musaoWorkDate[i])/ทั้งหมด/ฉีดวัคซีน").observeSingleEvent(of: .value, with: { snapshot in
+//                // Get data
+//                workIDCount.append(Int(snapshot.childrenCount) + 1)
+//            })
+//        }
+//        return workIDCount
+//    }
+    
     func regisMS(dad:String, mom:String, gender:String, date:Date) -> Int {
-        let newID = String(currentIDMS + 1)
-        var dateComp1 = DateComponents()
-        var dateComp2 = DateComponents()
-        var dateComp3 = DateComponents()
-        var dateComp4 = DateComponents()
-        var dateComp5 = DateComponents()
+        self.currentIDMS += 1
+        ref.child("หมูสาว/currentID").setValue(self.currentIDMS)
         
-        dateComp1.day = 7
-        dateComp2.day = 14
-        dateComp3.day = 21
-        dateComp4.day = 28
-        dateComp5.day = 35
+        print(self.musaoWorkIDCount)
+        print(self.musaoWorkDate)
         
-        let vaccine1 = Calendar.current.date(byAdding: dateComp1, to: date)!
-        let vaccine2 = Calendar.current.date(byAdding: dateComp2, to: date)!
-        let vaccine3 = Calendar.current.date(byAdding: dateComp3, to: date)!
-        let vaccine4 = Calendar.current.date(byAdding: dateComp4, to: date)!
-        let vaccine5 = Calendar.current.date(byAdding: dateComp5, to: date)!
+        self.generateWorkDateForMusao(date: date)
 
-        ref.child("หมูสาว/\(newID)").setValue([
+        ref.child("หมูสาว/\(self.currentIDMS)").setValue([
             "แม่พันธุ์":mom,
             "พ่อพันธุ์":dad,
             "เพศ":gender,
             "วันแรกเข้า":dateFormat.string(from: date),
+            "วันถ่ายพยาธิ":[
+                "วันกำหนด":dateFormat.string(from: musaoWorkDate[0])
+            ],
             "วัคซีน":[
-                "อหิวาห์":[
-                    "วันกำหนดฉีด":dateFormat.string(from: vaccine1)
+                "1":[
+                    "โรค":"อหิวาห์",
+                    "วันกำหนด":dateFormat.string(from: musaoWorkDate[1])
                 ],
-                "พาร์โว":[
-                    "วันกำหนดฉีด":dateFormat.string(from: vaccine2)
+                "2":[
+                    "โรค":"พาร์โว",
+                    "วันกำหนด":dateFormat.string(from: musaoWorkDate[2])
                 ],
-                "พิษสุนัขบ้าเทียม":[
-                    "วันกำหนดฉีด":dateFormat.string(from: vaccine3)
+                "3":[
+                    "โรค":"พิษสุนัขบ้าเทียม",
+                    "วันกำหนด":dateFormat.string(from: musaoWorkDate[3])
                 ],
-                "ปากเท้าเทียม":[
-                    "วันกำหนดฉีด":dateFormat.string(from: vaccine4)
+                "4":[
+                    "โรค":"ปากเท้าเทียม",
+                    "วันกำหนด":dateFormat.string(from: musaoWorkDate[4])
                 ],
-                "PRRS":[
-                    "วันกำหนดฉีด":dateFormat.string(from: vaccine5)
+                "5":[
+                    "โรค":"PRRS",
+                    "วันกำหนด":dateFormat.string(from: musaoWorkDate[5])
                 ],
             ]
-            ])
-        ref.child("หมูสาว/currentID").setValue(Int(newID))
-        self.currentIDMS = Int(newID)!
-        return Int(newID)!
+        ])
+        
+        assignWork(index: 0, pigID: self.currentIDMS)
+        for i in 1...5 {
+            assignWork(index: i, pigID: self.currentIDMS)
+        }
+        
+        return self.currentIDMS
     }
     
-    func readWork(date:Date) -> [Int] {
-        var tmp:[Int] = []
-        ref.child("งาน/\(dateFormat.string(from: date))").observeSingleEvent(of: .value, with: { (snapshot) in
-            
-            // Get User data
-            let datas = snapshot.value as? NSDictionary
-            var i = 1
-            
-            while true {
-                let workID = datas?["\(i)"] as? Int
-                if workID != nil {
-                    print(workID!)
-                    tmp.append(workID!)
-                    i += 1
-                    continue
-                }
-                break
-            }
-        })
-        print(tmp)
-        return tmp
+    
+    
+    func turnIntoMom(date:Date, id:String) {
+        let checkRut1 = addDateComponent(date: date, intAdding: 21)
+        let checkRut2 = addDateComponent(date: date, intAdding: 42)
+        let checkRut3 = addDateComponent(date: date, intAdding: 63)
+        let checkPregnent = addDateComponent(date: date, intAdding: 84)
+
+        ref.child("แม่พันธุ์/\(id)").setValue([
+            "1":[
+                "เป็นสัดรอบแรก":dateFormat.string(from: date),
+                "1":[
+                    "วันตรวจสัดครั้งที่":[
+                        "1":[
+                            "วันกำหนด":dateFormat.string(from: checkRut1)
+                        ],
+                        "2":[
+                            "วันกำหนด":dateFormat.string(from: checkRut2)
+                        ],
+                        "3":[
+                            "วันกำหนด":dateFormat.string(from: checkRut3)
+                        ]
+                    ],
+                    "วันตรวจท้อง":[
+                        "วันกำหนด":dateFormat.string(from: checkPregnent)
+                    ]
+                ]
+            ],
+            "currentState":[
+                "รอบใหญ่":1,
+                "รอบย่อย":1
+            ]
+        ])
+    }
+    
+    func assignWork(index:Int, pigID:Int) {
+        ref.child("งาน/\(dateFormat.string(from: musaoWorkDate[index]))W/ทั้งหมด/\(musaoWorkString[index])/\(musaoWorkIDCount[index])").setValue(pigID)
+        musaoWorkIDCount[index] += 1
+    }
+    
+    private func addDateComponent(date:Date, intAdding:Int) -> Date {
+        var dateComponent = DateComponents()
+        dateComponent.day = intAdding
+        let newDate = Calendar.current.date(byAdding: dateComponent, to: date)!
+        return newDate
     }
 }
