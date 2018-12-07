@@ -19,6 +19,7 @@ class RegisterViewController: UIViewController {
     
     @IBOutlet weak var momTextField: UITextField! {
         didSet {
+            momTextField.removeCursor()
             momTextField?.addDoneToolbar(onDone: (target: self, action: #selector(doneButtonTappedForMomTextField)))
             momTextField.keyboardType = UIKeyboardType.numberPad
         }
@@ -27,7 +28,11 @@ class RegisterViewController: UIViewController {
 
     @IBOutlet weak var dad: UISegmentedControl!
     @IBOutlet weak var gender: UISegmentedControl!
-    @IBOutlet weak var dateTextField: UITextField!
+    @IBOutlet weak var dateTextField: UITextField! {
+        didSet {
+            dateTextField.removeCursor()
+        }
+    }
     
     @IBAction func registerButton(_ sender: Any) {
         
@@ -122,9 +127,15 @@ class RegisterViewController: UIViewController {
 }
 
 extension UITextField {
+    //  remove cursor of textField
+    func removeCursor() {
+        self.tintColor = UIColor.clear
+    }
+    
     //  for Textfield with NumberPad
     //  doneButton do nothing
     func addDoneToolbar(onDone: (target: Any, action: Selector)? = nil) {
+        self.tintColor = UIColor.clear
         let onDone = onDone ?? (target: self, action: #selector(doneButtonTapped))
         
         let toolbar: UIToolbar = UIToolbar()
@@ -139,4 +150,5 @@ extension UITextField {
     
     @objc func doneButtonTapped() { self.resignFirstResponder() }
  
+    
 }
