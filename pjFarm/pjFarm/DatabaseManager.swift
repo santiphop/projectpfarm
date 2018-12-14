@@ -29,18 +29,20 @@ class DatabaseManager {
     ]
     
     
-    var work:String = ""
+    var currentWork:String = ""
     
     
-    //  based on firebase in one day work
-    var workList:[String] = [
-        "ถ่ายพยาธิ", "วัคซีนอหิวาห์"
-    ]
     
-    var details:[Int:[Int]] = [
-        0:[1104, 1105],
-        1:[1103]
-    ]
+    
+    var workList = [String]()
+    var details = [String:[Int]]()
+    
+    var report = [String:[Bool]]()
+    
+    
+
+    
+    
     
     
     
@@ -67,11 +69,11 @@ class DatabaseManager {
         
     }
     
-    func setWork(workString:String) {
-        self.work = workString
+    func reportDetail(bools:[Bool]) {
+        report[currentWork] = bools
+        print(report)
     }
     
-
     
     func setUpFirstInitIDMP(id:Int) {
         ref.child("แม่พันธุ์/\(id)/currentState").observeSingleEvent(of: .value, with: { snapshot in
@@ -149,6 +151,39 @@ class DatabaseManager {
         let newDate = Calendar.current.date(byAdding: dateComponent, to: date)!
         return newDate
     }
+    
+    func get1912work() {
+        ref.child("งาน/20181219W/ทั้งหมด").observeSingleEvent(of: .value, with: { snapshot in
+            let data = snapshot.value as? NSDictionary
+            
+            for (key, _) in data! {
+                self.workList.append("\(key as! String)")
+            }
+            
+            for workName in self.workList {
+                let path = "งาน/20181219W/ทั้งหมด/\(workName)"
+                self.report[workName] = []
+                self.ref.child(path).observeSingleEvent(of: .value, with: { snapshot in
+                    let count = snapshot.childrenCount
+                    var array:[Int] = []
+                    for i in 1...Int(count) {
+                        self.ref.child("\(path)/\(i)").observeSingleEvent(of: .value, with: { snapshot in
+                            let id = snapshot.value
+                            array.append(id as! Int)
+                            self.details[workName] = array
+                            self.report[workName]?.append(false)
+                        })
+                    }
+                })
+            }
+        })
+    }
+    
+    func println()  {
+        print(self.details)
+    }
+    
+    
 }
 
 

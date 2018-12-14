@@ -13,7 +13,7 @@ class HomeViewController: UIViewController {
 //    var pig:Pig
     @IBOutlet weak var dateLabel: UILabel!
     var dateFormat = DateFormatter()
-//    var appDelegate = UIApplication.shared.delegate as! AppDelegate
+    var appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     
 //    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -28,6 +28,10 @@ class HomeViewController: UIViewController {
 //        dateLabel.text = DateFormatter.localizedString(from: NSDate() as Date, dateStyle: DateFormatter.Style.long, timeStyle: DateFormatter.Style.none)
 //        let db = self.appDelegate.db
 //        db.regisMS(dad: "LL", mom: "11", gender: "GG")
+        
+        let db = appDelegate.db
+        
+        db.get1912work()
         
         
     }

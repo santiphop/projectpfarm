@@ -65,6 +65,8 @@ class FirstRutViewController: UIViewController {
         self.view.endEditing(true)
     }
     
+    
+    
 
     /*
     // MARK: - Navigation
