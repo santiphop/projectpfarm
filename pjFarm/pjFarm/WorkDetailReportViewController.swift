@@ -22,7 +22,7 @@ class WorkDetailReportViewController: UIViewController {
         print(detailSelect)
         print(idSelect)
         let db = appDelegate.db
-        db.reportDetail(ids: idSelect, bools: detailSelect, date:Date())
+        db.reportWorkMusao(ids: idSelect, bools: detailSelect, date:Date())
         performSegue(withIdentifier: "detailToReportSegue", sender: self)
     }
     

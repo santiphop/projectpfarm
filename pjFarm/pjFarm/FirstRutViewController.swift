@@ -32,6 +32,7 @@ class FirstRutViewController: UIViewController {
         let idString = idTextField.text!
         
         db.turnIntoMom(date: datePicker.date, id: idString)
+        showOptionsAlert()
         
     }
     
@@ -63,6 +64,21 @@ class FirstRutViewController: UIViewController {
         dateFormatForTextField.dateFormat = "MMMM d, yyyy"
         dateTextField.text = dateFormatForTextField.string(from: datePicker.date)
         self.view.endEditing(true)
+    }
+    
+    func showOptionsAlert() {
+        let alertController = UIAlertController(title: "Yeah!", message: "This pig ID is : \(idTextField.text!)", preferredStyle: UIAlertController.Style.alert)
+        
+        let actionNothing = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) { (action) in }
+        
+        let actionBackHome = UIAlertAction(title: "Home", style: UIAlertAction.Style.default) { action in
+            self.performSegue(withIdentifier: "unwindRutToHome", sender: self)
+        }
+        
+        alertController.addAction(actionBackHome)
+        alertController.addAction(actionNothing)
+        
+        present(alertController, animated: true, completion: nil)
     }
     
     

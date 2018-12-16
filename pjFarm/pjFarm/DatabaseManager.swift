@@ -56,6 +56,7 @@ class DatabaseManager {
         ref = Database.database().reference()
         
         //  set up musao
+        self.setUpCurrentIDMS()
         self.generateWorkDateForMusao(date: Date())
         self.generateWorkIDCountForMusao()
         
@@ -64,26 +65,12 @@ class DatabaseManager {
         //  set up maepun
         
         
-        //  set up หมูสาว's currentID
-        self.setUpCurrentIDMS()
+        
         
         
     }
     
-    func reportDetail(ids:[Int], bools:[Bool], date:Date) {
-        let todayPath = "งาน/\(dateFormat.string(from: date))W/งานค้าง/\(currentWork)"
-        let tomorrowPath = "งาน/\(dateFormat.string(from: addDateComponent(date: date, intAdding: 1)))W/ทั้งหมด/\(currentWork)"
-        var index = 1
-        for i in 0...bools.count-1 {
-            if bools[i] {
-                print(ids[i])
-                ref.child("\(todayPath)/\(index)").setValue(ids[i])
-                ref.child("\(tomorrowPath)/\(tmrWorkIDCount)").setValue(ids[i])
-                index += 1
-                tmrWorkIDCount += 1
-            }
-        }
-    }
+    
     
     
     
@@ -125,24 +112,23 @@ class DatabaseManager {
         let checkRut2 = addDateComponent(date: date, intAdding: 42)
         let checkRut3 = addDateComponent(date: date, intAdding: 63)
         let checkPregnent = addDateComponent(date: date, intAdding: 84)
+        let movekok = addDateComponent(date: date, intAdding: 109)
+        let knklod = addDateComponent(date: date, intAdding: 114)
+        
 
         ref.child("แม่พันธุ์/\(id)").setValue([
             "1":[
                 "เป็นสัดรอบแรก":dateFormat.string(from: date),
                 "1":[
-                    "วันตรวจสัดครั้งที่":[
-                        "1":[
-                            "วันกำหนด":dateFormat.string(from: checkRut1)
+                    "งาน":[
+                        "วันตรวจสัดครั้งที่":[
+                            "1":dateFormat.string(from: checkRut1),
+                            "2":dateFormat.string(from: checkRut2),
+                            "3":dateFormat.string(from: checkRut3)
                         ],
-                        "2":[
-                            "วันกำหนด":dateFormat.string(from: checkRut2)
-                        ],
-                        "3":[
-                            "วันกำหนด":dateFormat.string(from: checkRut3)
-                        ]
-                    ],
-                    "วันตรวจท้อง":[
-                        "วันกำหนด":dateFormat.string(from: checkPregnent)
+                        "วันตรวจท้อง":dateFormat.string(from: checkPregnent),
+                        "วันขึ้นคลอด":dateFormat.string(from: movekok),
+                        "วันกำหนดคลอด":dateFormat.string(from: knklod)
                     ]
                 ]
             ],
@@ -153,9 +139,13 @@ class DatabaseManager {
         ])
     }
     
-    func assignWorkMusao(index:Int, pigID:Int) {
-        ref.child("งาน/\(dateFormat.string(from: musaoWorkDate[index]))W/ทั้งหมด/\(musaoWorkString[index])/\(musaoWorkIDCount[index])").setValue(pigID)
-        musaoWorkIDCount[index] += 1
+//    func assignWorkMaepun() {
+//
+//    }
+    
+    func assignWork(date:Date, work:String, IDCount:Int, pigID:Int) -> Int {
+        ref.child("งาน/\(dateFormat.string(from: date))W/ทั้งหมด/\(work)/\(IDCount)").setValue(pigID)
+        return IDCount + 1
     }
     
     private func addDateComponent(date:Date, intAdding:Int) -> Date {
@@ -165,6 +155,19 @@ class DatabaseManager {
         return newDate
     }
     
+    
+    
+    func initcheck()  {
+        print(self.details)
+    }
+    
+    
+    
+    
+}
+
+/////     รายงาน    /////
+extension DatabaseManager {
     func getTodayWork() {
         ref.child("งาน/\(dateFormat.string(from: Date()))W/ทั้งหมด").observeSingleEvent(of: .value, with: { snapshot in
             let data = snapshot.value as? NSDictionary
@@ -192,21 +195,15 @@ class DatabaseManager {
         })
     }
     
-//    func println()  {
-//        print(self.details)
-//    }
-    
-    
     func generateIDCountForTomorrowWork() {
         ref.child("งาน/\(dateFormat.string(from: addDateComponent(date: Date(), intAdding: 1)))W/ทั้งหมด/\(currentWork)").observeSingleEvent(of: .value, with: { snapshot in
             self.tmrWorkIDCount = Int(snapshot.childrenCount) + 1
         })
     }
-    
 }
 
 
-/////     หมูสาว     ///////
+/////     หมูสาว     /////
 extension DatabaseManager {
     func setUpCurrentIDMS() {
         ref.child("หมูสาว").observeSingleEvent(of: .value, with: { snapshot in
@@ -236,7 +233,20 @@ extension DatabaseManager {
         }
     }
     
-    
+    func reportWorkMusao(ids:[Int], bools:[Bool], date:Date) {
+        let todayPath = "งาน/\(dateFormat.string(from: date))W/งานค้าง/\(currentWork)"
+        let tomorrowPath = "งาน/\(dateFormat.string(from: addDateComponent(date: date, intAdding: 1)))W/ทั้งหมด/\(currentWork)"
+        var index = 1
+        for i in 0...bools.count-1 {
+            if bools[i] {
+                print(ids[i])
+                ref.child("\(todayPath)/\(index)").setValue(ids[i])
+                ref.child("\(tomorrowPath)/\(tmrWorkIDCount)").setValue(ids[i])
+                index += 1
+                tmrWorkIDCount += 1
+            }
+        }
+    }
     
     func regisMS(dad:String, mom:String, gender:String, date:Date) -> Int {
         self.currentIDMS += 1
@@ -280,9 +290,8 @@ extension DatabaseManager {
             ]
         ])
         
-        assignWorkMusao(index: 0, pigID: self.currentIDMS)
-        for i in 1...5 {
-            assignWorkMusao(index: i, pigID: self.currentIDMS)
+        for i in 0...5 {
+            musaoWorkIDCount[i] = assignWork(date: musaoWorkDate[i], work: musaoWorkString[i], IDCount: musaoWorkIDCount[i], pigID: self.currentIDMS)
         }
         
         return self.currentIDMS
