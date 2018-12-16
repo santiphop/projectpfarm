@@ -37,7 +37,8 @@ class DatabaseManager {
     var workList = [String]()
     var details = [String:[Int]]()
     
-    var report = [String:[Bool]]()
+    
+    var tmrWorkIDCount:Int = 0
     
     
 
@@ -69,10 +70,22 @@ class DatabaseManager {
         
     }
     
-    func reportDetail(bools:[Bool]) {
-        report[currentWork] = bools
-        print(report)
+    func reportDetail(ids:[Int], bools:[Bool], date:Date) {
+        let todayPath = "งาน/\(dateFormat.string(from: date))W/งานค้าง/\(currentWork)"
+        let tomorrowPath = "งาน/\(dateFormat.string(from: addDateComponent(date: date, intAdding: 1)))W/ทั้งหมด/\(currentWork)"
+        var index = 1
+        for i in 0...bools.count-1 {
+            if bools[i] {
+                print(ids[i])
+                ref.child("\(todayPath)/\(index)").setValue(ids[i])
+                ref.child("\(tomorrowPath)/\(tmrWorkIDCount)").setValue(ids[i])
+                index += 1
+                tmrWorkIDCount += 1
+            }
+        }
     }
+    
+    
     
     
     func setUpFirstInitIDMP(id:Int) {
@@ -140,7 +153,7 @@ class DatabaseManager {
         ])
     }
     
-    func assignWork(index:Int, pigID:Int) {
+    func assignWorkMusao(index:Int, pigID:Int) {
         ref.child("งาน/\(dateFormat.string(from: musaoWorkDate[index]))W/ทั้งหมด/\(musaoWorkString[index])/\(musaoWorkIDCount[index])").setValue(pigID)
         musaoWorkIDCount[index] += 1
     }
@@ -152,8 +165,8 @@ class DatabaseManager {
         return newDate
     }
     
-    func get1912work() {
-        ref.child("งาน/20181219W/ทั้งหมด").observeSingleEvent(of: .value, with: { snapshot in
+    func getTodayWork() {
+        ref.child("งาน/\(dateFormat.string(from: Date()))W/ทั้งหมด").observeSingleEvent(of: .value, with: { snapshot in
             let data = snapshot.value as? NSDictionary
             
             for (key, _) in data! {
@@ -161,8 +174,8 @@ class DatabaseManager {
             }
             
             for workName in self.workList {
-                let path = "งาน/20181219W/ทั้งหมด/\(workName)"
-                self.report[workName] = []
+                let path = "งาน/\(self.dateFormat.string(from: Date()))W/ทั้งหมด/\(workName)"
+                
                 self.ref.child(path).observeSingleEvent(of: .value, with: { snapshot in
                     let count = snapshot.childrenCount
                     var array:[Int] = []
@@ -171,7 +184,7 @@ class DatabaseManager {
                             let id = snapshot.value
                             array.append(id as! Int)
                             self.details[workName] = array
-                            self.report[workName]?.append(false)
+                            
                         })
                     }
                 })
@@ -179,10 +192,16 @@ class DatabaseManager {
         })
     }
     
-    func println()  {
-        print(self.details)
-    }
+//    func println()  {
+//        print(self.details)
+//    }
     
+    
+    func generateIDCountForTomorrowWork() {
+        ref.child("งาน/\(dateFormat.string(from: addDateComponent(date: Date(), intAdding: 1)))W/ทั้งหมด/\(currentWork)").observeSingleEvent(of: .value, with: { snapshot in
+            self.tmrWorkIDCount = Int(snapshot.childrenCount) + 1
+        })
+    }
     
 }
 
@@ -217,6 +236,8 @@ extension DatabaseManager {
         }
     }
     
+    
+    
     func regisMS(dad:String, mom:String, gender:String, date:Date) -> Int {
         self.currentIDMS += 1
         ref.child("หมูสาว/currentID").setValue(self.currentIDMS)
@@ -224,40 +245,44 @@ extension DatabaseManager {
         self.generateWorkDateForMusao(date: date)
         
         ref.child("หมูสาว/\(self.currentIDMS)").setValue([
-            "แม่พันธุ์":mom,
-            "พ่อพันธุ์":dad,
-            "เพศ":gender,
-            "วันแรกเข้า":dateFormat.string(from: date),
-            "วันถ่ายพยาธิ":[
-                "วันกำหนด":dateFormat.string(from: musaoWorkDate[0])
+            "ประวัติ":[
+                "แม่พันธุ์":mom,
+                "พ่อพันธุ์":dad,
+                "เพศ":gender,
+                "วันแรกเข้า":dateFormat.string(from: date)
             ],
-            "วัคซีน":[
-                "1":[
-                    "โรค":"อหิวาห์",
-                    "วันกำหนด":dateFormat.string(from: musaoWorkDate[1])
+            "งาน":[
+                "วันถ่ายพยาธิ":[
+                    "วันกำหนด":dateFormat.string(from: musaoWorkDate[0])
                 ],
-                "2":[
-                    "โรค":"พาร์โว",
-                    "วันกำหนด":dateFormat.string(from: musaoWorkDate[2])
-                ],
-                "3":[
-                    "โรค":"พิษสุนัขบ้าเทียม",
-                    "วันกำหนด":dateFormat.string(from: musaoWorkDate[3])
-                ],
-                "4":[
-                    "โรค":"ปากเท้าเทียม",
-                    "วันกำหนด":dateFormat.string(from: musaoWorkDate[4])
-                ],
-                "5":[
-                    "โรค":"PRRS",
-                    "วันกำหนด":dateFormat.string(from: musaoWorkDate[5])
-                ],
+                "วัคซีน":[
+                    "1":[
+                        "โรค":"อหิวาห์",
+                        "วันกำหนด":dateFormat.string(from: musaoWorkDate[1])
+                    ],
+                    "2":[
+                        "โรค":"พาร์โว",
+                        "วันกำหนด":dateFormat.string(from: musaoWorkDate[2])
+                    ],
+                    "3":[
+                        "โรค":"พิษสุนัขบ้าเทียม",
+                        "วันกำหนด":dateFormat.string(from: musaoWorkDate[3])
+                    ],
+                    "4":[
+                        "โรค":"ปากเท้าเทียม",
+                        "วันกำหนด":dateFormat.string(from: musaoWorkDate[4])
+                    ],
+                    "5":[
+                        "โรค":"PRRS",
+                        "วันกำหนด":dateFormat.string(from: musaoWorkDate[5])
+                    ],
+                ]
             ]
-            ])
+        ])
         
-        assignWork(index: 0, pigID: self.currentIDMS)
+        assignWorkMusao(index: 0, pigID: self.currentIDMS)
         for i in 1...5 {
-            assignWork(index: i, pigID: self.currentIDMS)
+            assignWorkMusao(index: i, pigID: self.currentIDMS)
         }
         
         return self.currentIDMS

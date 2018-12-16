@@ -16,7 +16,7 @@ class PreviewViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         let db = appDelegate.db
-        db.println()
+//        db.println()
     }
     
     

@@ -31,7 +31,7 @@ class HomeViewController: UIViewController {
         
         let db = appDelegate.db
         
-        db.get1912work()
+        db.getTodayWork()
         
         
     }
