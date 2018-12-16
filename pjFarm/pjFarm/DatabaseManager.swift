@@ -186,23 +186,20 @@ extension DatabaseManager {
                 self.workList.append("\(key as! String)")
             }
             
-//            for workName in self.workList {
-//                let path = "งาน/\(self.dateFormat.string(from: Date()))W/ทั้งหมด/\(workName)"
-//
-//                self.ref.child(path).observeSingleEvent(of: .value, with: { snapshot in
-//                    let count = snapshot.childrenCount
-//                    var array:[Int] = []
-//                    for i in 1...Int(count) {
-//                        self.ref.child("\(path)/\(i)").observeSingleEvent(of: .value, with: { snapshot in
-//                            let id = snapshot.value
-//                            print(id)
-//                            array.append(id as! Int)
-//                            self.details[workName] = array
-//
-//                        })
-//                    }
-//                })
-//            }
+            for workName in self.workList {
+                let path = "งาน/\(self.dateFormat.string(from: Date()))W/ทั้งหมด/\(workName)"
+                self.ref.child(path).observeSingleEvent(of: .value, with: { snapshot in
+                    let count = snapshot.childrenCount
+                    var array:[Int] = []
+                    for i in 1...Int(count) {
+                        self.ref.child("\(path)/\(i)").observeSingleEvent(of: .value, with: { snapshot in
+                            let id = snapshot.value
+                            array.append(id as! Int)
+                            self.details[workName] = array
+                        })
+                    }
+                })
+            }
         })
     }
     
