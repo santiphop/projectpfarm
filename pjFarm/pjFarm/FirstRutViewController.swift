@@ -31,7 +31,7 @@ class FirstRutViewController: UIViewController {
         let db = self.appDelegate.db
         let idString = idTextField.text!
         
-        db.turnIntoMom(date: datePicker.date, id: idString)
+        db.regisMP(date: datePicker.date, id: idString)
         showOptionsAlert()
         
     }
@@ -60,9 +60,10 @@ class FirstRutViewController: UIViewController {
     }
     
     @objc func doneActionForDatePicker() {
-        let dateFormatForTextField = DateFormatter()
-        dateFormatForTextField.dateFormat = "MMMM d, yyyy"
         dateTextField.text = dateFormatForTextField.string(from: datePicker.date)
+        let db = self.appDelegate.db
+        db.generateWorkIDCountForMaepun(index: 0)
+        db.generateWorkDateForMaepun(date: datePicker.date)
         self.view.endEditing(true)
     }
     

@@ -23,7 +23,7 @@ class DatabaseManager {
     
     var currentIDMP:Int = 0
     var maepunWorkDate:[Date] = []
-    var maepunWorkIDCount:[Int] = []
+    var maepunWorkIDCount:Int = 0
     var maepunWorkString:[String] = [
         "ตรวจสัดครั้งที่1", "ตรวจสัดครั้งที่2", "ตรวจสัดครั้งที่3", "ตรวจท้อง"
     ]
@@ -64,8 +64,9 @@ class DatabaseManager {
         
         //  set up maepun
         
-        
-        
+        self.generateWorkDateForMaepun(date: Date())
+        self.generateWorkIDCountForMaepun(index: 0)
+
         
         
     }
@@ -103,32 +104,35 @@ class DatabaseManager {
 //        return workIDCount
 //    }
     
-
+    func generateWorkDateForMaepun(date:Date) {
+        let addDate = [21, 42, 63, 84, 109, 114]
+        maepunWorkDate.removeAll()
+        for i in 0...addDate.count - 1 {
+            maepunWorkDate.append(addDateComponent(date: date, intAdding: addDate[i]))
+        }
+    }
     
+    func generateWorkIDCountForMaepun(index:Int) {
+        ref.child("งาน/\(dateFormat.string(from: maepunWorkDate[index]))W/ทั้งหมด/\(maepunWorkString[index])").observeSingleEvent(of: .value, with: { snapshot in
+            // Get data
+            self.maepunWorkIDCount = (Int(snapshot.childrenCount) + 1)
+        })
+    }
     
-    
-    func turnIntoMom(date:Date, id:String) {
-        let checkRut1 = addDateComponent(date: date, intAdding: 21)
-        let checkRut2 = addDateComponent(date: date, intAdding: 42)
-        let checkRut3 = addDateComponent(date: date, intAdding: 63)
-        let checkPregnent = addDateComponent(date: date, intAdding: 84)
-        let movekok = addDateComponent(date: date, intAdding: 109)
-        let knklod = addDateComponent(date: date, intAdding: 114)
-        
-
+    func regisMP(date:Date, id:String) {
         ref.child("แม่พันธุ์/\(id)").setValue([
             "1":[
                 "เป็นสัดรอบแรก":dateFormat.string(from: date),
                 "1":[
                     "งาน":[
                         "วันตรวจสัดครั้งที่":[
-                            "1":dateFormat.string(from: checkRut1),
-                            "2":dateFormat.string(from: checkRut2),
-                            "3":dateFormat.string(from: checkRut3)
+                            "1":dateFormat.string(from: maepunWorkDate[0]),
+                            "2":dateFormat.string(from: maepunWorkDate[1]),
+                            "3":dateFormat.string(from: maepunWorkDate[2])
                         ],
-                        "วันตรวจท้อง":dateFormat.string(from: checkPregnent),
-                        "วันขึ้นคลอด":dateFormat.string(from: movekok),
-                        "วันกำหนดคลอด":dateFormat.string(from: knklod)
+                        "วันตรวจท้อง":dateFormat.string(from: maepunWorkDate[3]),
+                        "วันขึ้นคลอด":dateFormat.string(from: maepunWorkDate[4]),
+                        "วันกำหนดคลอด":dateFormat.string(from: maepunWorkDate[5])
                     ]
                 ]
             ],
@@ -137,7 +141,13 @@ class DatabaseManager {
                 "secondary":1
             ]
         ])
+        
+        maepunWorkIDCount = self.assignWork(date: maepunWorkDate[0], work: maepunWorkString[0], IDCount: maepunWorkIDCount, pigID: Int(id)!)
     }
+    
+    
+    
+    
     
 //    func assignWorkMaepun() {
 //
@@ -176,22 +186,23 @@ extension DatabaseManager {
                 self.workList.append("\(key as! String)")
             }
             
-            for workName in self.workList {
-                let path = "งาน/\(self.dateFormat.string(from: Date()))W/ทั้งหมด/\(workName)"
-                
-                self.ref.child(path).observeSingleEvent(of: .value, with: { snapshot in
-                    let count = snapshot.childrenCount
-                    var array:[Int] = []
-                    for i in 1...Int(count) {
-                        self.ref.child("\(path)/\(i)").observeSingleEvent(of: .value, with: { snapshot in
-                            let id = snapshot.value
-                            array.append(id as! Int)
-                            self.details[workName] = array
-                            
-                        })
-                    }
-                })
-            }
+//            for workName in self.workList {
+//                let path = "งาน/\(self.dateFormat.string(from: Date()))W/ทั้งหมด/\(workName)"
+//
+//                self.ref.child(path).observeSingleEvent(of: .value, with: { snapshot in
+//                    let count = snapshot.childrenCount
+//                    var array:[Int] = []
+//                    for i in 1...Int(count) {
+//                        self.ref.child("\(path)/\(i)").observeSingleEvent(of: .value, with: { snapshot in
+//                            let id = snapshot.value
+//                            print(id)
+//                            array.append(id as! Int)
+//                            self.details[workName] = array
+//
+//                        })
+//                    }
+//                })
+//            }
         })
     }
     
@@ -226,7 +237,7 @@ extension DatabaseManager {
     func generateWorkIDCountForMusao() {
         musaoWorkIDCount.removeAll()
         for i in 0...5 {
-            ref.child("งาน/\(musaoWorkDate[i])W/ทั้งหมด/\(musaoWorkString[i])").observeSingleEvent(of: .value, with: { snapshot in
+            ref.child("งาน/\(dateFormat.string(from: musaoWorkDate[i]))W/ทั้งหมด/\(musaoWorkString[i])").observeSingleEvent(of: .value, with: { snapshot in
                 // Get data
                 self.musaoWorkIDCount.append(Int(snapshot.childrenCount) + 1)
             })
