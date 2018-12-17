@@ -1,30 +1,27 @@
 //
-//  PreviewViewController.swift
+//  WeanViewController.swift
 //  pjFarm
 //
-//  Created by Santiphop on 3/12/2561 BE.
+//  Created by Santiphop on 17/12/2561 BE.
 //  Copyright © 2561 iOS Dev. All rights reserved.
 //
 
 import UIKit
 
-class PreviewViewController: UIViewController {
+class WeanViewController: UIViewController {
 
-    var appDelegate = UIApplication.shared.delegate as! AppDelegate
+    /*
+     รหัสแม่
+     วันที่หย่า
+     
+     */
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        let db = appDelegate.db
-        db.initcheck()
     }
     
-    
-    // เป็นสัดครั้งแรก ใส่ ID หมูที่เป็นสัด
-    @IBAction func firstRut(_ sender: Any) {
 
-    }
-    
     /*
     // MARK: - Navigation
 

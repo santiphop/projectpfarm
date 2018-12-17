@@ -30,10 +30,13 @@ class FirstRutViewController: UIViewController {
     @IBAction func saveButton(_ sender: Any) {
         let db = self.appDelegate.db
         let idString = idTextField.text!
-        
-        db.regisMP(date: datePicker.date, id: idString)
-        showOptionsAlert()
-        
+        if idString.isEmpty {
+            showEmptyTextExceptionAlert()
+        }
+        else {
+            db.regisMP(date: datePicker.date, id: idString)
+            showOptionsAlert()
+        }
     }
     
     override func viewDidLoad() {
@@ -80,6 +83,18 @@ class FirstRutViewController: UIViewController {
         alertController.addAction(actionNothing)
         
         present(alertController, animated: true, completion: nil)
+    }
+    
+    func showEmptyTextExceptionAlert() {
+        let alertController = UIAlertController(title: "ลงทะเบียนไม่สำเร็จ", message: "ข้อมูลไม่ถูกต้อง กรุณาใส่ ID แม่พันธุ์", preferredStyle: UIAlertController.Style.alert)
+        
+        let actionNothing = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) { (action) in }
+        
+        alertController.addAction(actionNothing)
+        
+        present(alertController, animated: true, completion: nil)
+        
+        
     }
     
     

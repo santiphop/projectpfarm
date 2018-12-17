@@ -25,13 +25,9 @@ class HomeViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         dateFormat.dateFormat = "d MMMM YYYY"
         dateLabel.text! = dateFormat.string(from: Date())
-//        dateLabel.text = DateFormatter.localizedString(from: NSDate() as Date, dateStyle: DateFormatter.Style.long, timeStyle: DateFormatter.Style.none)
-//        let db = self.appDelegate.db
-//        db.regisMS(dad: "LL", mom: "11", gender: "GG")
         
         let db = appDelegate.db
-        
-        db.getTodayWork()
+        db.getAllWorkFrom(date: Date())
         
         
     }

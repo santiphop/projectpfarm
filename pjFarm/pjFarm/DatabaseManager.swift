@@ -25,28 +25,19 @@ class DatabaseManager {
     var maepunWorkDate:[Date] = []
     var maepunWorkIDCount:Int = 0
     var maepunWorkString:[String] = [
-        "ตรวจสัดครั้งที่1", "ตรวจสัดครั้งที่2", "ตรวจสัดครั้งที่3", "ตรวจท้อง"
+        "ตรวจสัดครั้งที่1", "ตรวจสัดครั้งที่2", "ตรวจสัดครั้งที่3", "ตรวจท้อง", "ขึ้นคลอด"  /* "กำหนดคลอด" ไม่ได้อยู่ในตารางงาน */
     ]
     
     
     var currentWork:String = ""
     
-    
-    
-    
     var workList = [String]()
     var details = [String:[Int]]()
     
-    
     var tmrWorkIDCount:Int = 0
     
-    
-
-    
-    
-    
-    
-    
+    var pri:Int = 0
+    var sec:Int = 0
     
     
     
@@ -60,50 +51,86 @@ class DatabaseManager {
         self.generateWorkDateForMusao(date: Date())
         self.generateWorkIDCountForMusao()
         
-        
-        
         //  set up maepun
-        
+        //  maepun has no currentID
         self.generateWorkDateForMaepun(date: Date())
-        self.generateWorkIDCountForMaepun(index: 0)
-
-        
-        
+        self.generateWorkIDCountForMaepun(index: 0) // เฉพาะงานแรก: "ตรวจสัดครั้งที่1"
     }
     
-    
-    
-    
-    
-    
-    func setUpFirstInitIDMP(id:Int) {
+    func getIDMaepun(id:String) {
         ref.child("แม่พันธุ์/\(id)/currentState").observeSingleEvent(of: .value, with: { snapshot in
+            /*
+             ref.child("หมูสาว").observeSingleEvent(of: .value, with: { snapshot in
+             // Get data
+             let data = snapshot.value as? NSDictionary
+             let id = data?["currentID"] as? Int
+             self.currentIDMS = id!
+             print("init in observeSingleEvent, currentID: \(self.currentIDMS)")
+             })
+             */
             let data = snapshot.value as? NSDictionary
-            let primary = data?["primary"] as? Int
-            let secondary = data?["secondary"] as? Int
+            self.pri = data?["primary"] as! Int
+            self.sec = data?["secondary"] as! Int
+            print(self.pri)
+            print(self.sec)
         })
     }
     
-//    func generateWorkDateForMaepun(date:Date) -> [Date] {
-//        let addDate = [0, 7, 14, 21, 28, 32]
-//        var workDate:[Date] = []
-//        for i in 0...addDate.count - 1 {
-//            workDate.append(addDateComponent(date: date, intAdding: addDate[i]))
-//        }
-//        return workDate
-//    }
-//
-//    func generateWorkIDCountForMaepun() -> [Int] {
-//        var workIDCount:[Int] = []
-//        for i in 0...5 {
-//            ref.child("งาน/\(musaoWorkDate[i])/ทั้งหมด/ฉีดวัคซีน").observeSingleEvent(of: .value, with: { snapshot in
-//                // Get data
-//                workIDCount.append(Int(snapshot.childrenCount) + 1)
-//            })
-//        }
-//        return workIDCount
-//    }
+    func assignWork(date:Date, work:String, IDCount:Int, pigID:Int) -> Int {
+        ref.child("งาน/\(dateFormat.string(from: date))W/ทั้งหมด/\(work)/\(IDCount)").setValue(pigID)
+        return IDCount + 1
+    }
     
+    func initcheck()  {
+        print(self.details)
+    }
+    
+    private func addDateComponent(date:Date, intAdding:Int) -> Date {
+        var dateComponent = DateComponents()
+        dateComponent.day = intAdding
+        let newDate = Calendar.current.date(byAdding: dateComponent, to: date)!
+        return newDate
+    }
+}
+
+/////     รายงาน    /////
+extension DatabaseManager {
+    func getAllWorkFrom(date:Date) {
+        //  append WorkList
+        //  change details
+        ref.child("งาน/\(dateFormat.string(from: date))W/ทั้งหมด").observeSingleEvent(of: .value, with: { snapshot in
+            let data = snapshot.value as? NSDictionary
+            
+            for (key, _) in data! {
+                self.workList.append("\(key as! String)")
+            }
+            
+            for workName in self.workList {
+                let path = "งาน/\(self.dateFormat.string(from: date))W/ทั้งหมด/\(workName)"
+                self.ref.child(path).observeSingleEvent(of: .value, with: { snapshot in
+                    let count = snapshot.childrenCount
+                    var array:[Int] = []
+                    for i in 1...Int(count) {
+                        self.ref.child("\(path)/\(i)").observeSingleEvent(of: .value, with: { snapshot in
+                            let id = snapshot.value
+                            array.append(id as! Int)
+                            self.details[workName] = array
+                        })
+                    }
+                })
+            }
+        })
+    }
+    
+    func generateIDCountForTomorrowWork() {
+        ref.child("งาน/\(dateFormat.string(from: addDateComponent(date: Date(), intAdding: 1)))W/ทั้งหมด/\(currentWork)").observeSingleEvent(of: .value, with: { snapshot in
+            self.tmrWorkIDCount = Int(snapshot.childrenCount) + 1
+        })
+    }
+}
+
+/////     แม่พันธุ์     /////
+extension DatabaseManager {
     func generateWorkDateForMaepun(date:Date) {
         let addDate = [21, 42, 63, 84, 109, 114]
         maepunWorkDate.removeAll()
@@ -142,71 +169,7 @@ class DatabaseManager {
             ]
         ])
         
-        maepunWorkIDCount = self.assignWork(date: maepunWorkDate[0], work: maepunWorkString[0], IDCount: maepunWorkIDCount, pigID: Int(id)!)
-    }
-    
-    
-    
-    
-    
-//    func assignWorkMaepun() {
-//
-//    }
-    
-    func assignWork(date:Date, work:String, IDCount:Int, pigID:Int) -> Int {
-        ref.child("งาน/\(dateFormat.string(from: date))W/ทั้งหมด/\(work)/\(IDCount)").setValue(pigID)
-        return IDCount + 1
-    }
-    
-    private func addDateComponent(date:Date, intAdding:Int) -> Date {
-        var dateComponent = DateComponents()
-        dateComponent.day = intAdding
-        let newDate = Calendar.current.date(byAdding: dateComponent, to: date)!
-        return newDate
-    }
-    
-    
-    
-    func initcheck()  {
-        print(self.details)
-    }
-    
-    
-    
-    
-}
-
-/////     รายงาน    /////
-extension DatabaseManager {
-    func getTodayWork() {
-        ref.child("งาน/\(dateFormat.string(from: Date()))W/ทั้งหมด").observeSingleEvent(of: .value, with: { snapshot in
-            let data = snapshot.value as? NSDictionary
-            
-            for (key, _) in data! {
-                self.workList.append("\(key as! String)")
-            }
-            
-            for workName in self.workList {
-                let path = "งาน/\(self.dateFormat.string(from: Date()))W/ทั้งหมด/\(workName)"
-                self.ref.child(path).observeSingleEvent(of: .value, with: { snapshot in
-                    let count = snapshot.childrenCount
-                    var array:[Int] = []
-                    for i in 1...Int(count) {
-                        self.ref.child("\(path)/\(i)").observeSingleEvent(of: .value, with: { snapshot in
-                            let id = snapshot.value
-                            array.append(id as! Int)
-                            self.details[workName] = array
-                        })
-                    }
-                })
-            }
-        })
-    }
-    
-    func generateIDCountForTomorrowWork() {
-        ref.child("งาน/\(dateFormat.string(from: addDateComponent(date: Date(), intAdding: 1)))W/ทั้งหมด/\(currentWork)").observeSingleEvent(of: .value, with: { snapshot in
-            self.tmrWorkIDCount = Int(snapshot.childrenCount) + 1
-        })
+        maepunWorkIDCount = assignWork(date: maepunWorkDate[0], work: maepunWorkString[0], IDCount: maepunWorkIDCount, pigID: Int(id)!)
     }
 }
 
@@ -241,7 +204,7 @@ extension DatabaseManager {
         }
     }
     
-    func reportWorkMusao(ids:[Int], bools:[Bool], date:Date) {
+    func reportWorkForTomorrow(ids:[Int], bools:[Bool], date:Date) {
         let todayPath = "งาน/\(dateFormat.string(from: date))W/งานค้าง/\(currentWork)"
         let tomorrowPath = "งาน/\(dateFormat.string(from: addDateComponent(date: date, intAdding: 1)))W/ทั้งหมด/\(currentWork)"
         var index = 1
@@ -300,6 +263,7 @@ extension DatabaseManager {
         
         for i in 0...5 {
             musaoWorkIDCount[i] = assignWork(date: musaoWorkDate[i], work: musaoWorkString[i], IDCount: musaoWorkIDCount[i], pigID: self.currentIDMS)
+            
         }
         
         return self.currentIDMS

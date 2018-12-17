@@ -19,10 +19,8 @@ class WorkDetailReportViewController: UIViewController {
 
     @IBOutlet weak var titleBar: UINavigationItem!
     @IBAction func reportButton(_ sender: Any) {
-        print(detailSelect)
-        print(idSelect)
         let db = appDelegate.db
-        db.reportWorkMusao(ids: idSelect, bools: detailSelect, date:Date())
+        db.reportWorkForTomorrow(ids: idSelect, bools: detailSelect, date:Date())
         performSegue(withIdentifier: "detailToReportSegue", sender: self)
     }
     

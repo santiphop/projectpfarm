@@ -58,9 +58,13 @@ class RegisterViewController: UIViewController {
         if gender.selectedSegmentIndex == 1 {
             genderString = ("Female")
         }
-        
-        currentID = db.regisMS(dad: dadString, mom: momString, gender: genderString, date:datePicker.date)
-        showOptionsAlert()
+        if momString.isEmpty {
+            showMomExceptionAlert()
+        }
+        else {
+            currentID = db.regisMS(dad: dadString, mom: momString, gender: genderString, date:datePicker.date)
+            showOptionsAlert()
+        }
     }
     
     
@@ -119,6 +123,18 @@ class RegisterViewController: UIViewController {
         alertController.addAction(actionBackHome)
         alertController.addAction(actionNothing)
 
+        present(alertController, animated: true, completion: nil)
+        
+        
+    }
+    
+    func showMomExceptionAlert() {
+        let alertController = UIAlertController(title: "ลงทะเบียนไม่สำเร็จ", message: "ข้อมูลไม่ถูกต้อง กรุณาใส่ ID แม่พันธุ์ของหมู", preferredStyle: UIAlertController.Style.alert)
+        
+        let actionNothing = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) { (action) in }
+        
+        alertController.addAction(actionNothing)
+        
         present(alertController, animated: true, completion: nil)
         
         
