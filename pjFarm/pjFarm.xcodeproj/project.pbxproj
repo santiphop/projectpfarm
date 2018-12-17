@@ -21,6 +21,7 @@
 		8F295DCD21C792940017D376 /* KlodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F295DCC21C792940017D376 /* KlodViewController.swift */; };
 		8F295DCF21C794340017D376 /* WeanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F295DCE21C794340017D376 /* WeanViewController.swift */; };
 		8F295DD121C7971B0017D376 /* KlodAmountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F295DD021C7971B0017D376 /* KlodAmountViewController.swift */; };
+		8F295DD521C7B1760017D376 /* NumpadTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F295DD421C7B1760017D376 /* NumpadTextField.swift */; };
 		8F47B53E21B3DF2E00A1F25F /* WorkData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F47B53D21B3DF2E00A1F25F /* WorkData.swift */; };
 		8FAD343421A2CAB70048A3EC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8FAD343321A2CAB70048A3EC /* GoogleService-Info.plist */; };
 		8FAD344021A2CCA00048A3EC /* GoogleAppMeasurement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FAD343821A2CCA00048A3EC /* GoogleAppMeasurement.framework */; };
@@ -78,6 +79,7 @@
 		8F295DCC21C792940017D376 /* KlodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KlodViewController.swift; sourceTree = "<group>"; };
 		8F295DCE21C794340017D376 /* WeanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeanViewController.swift; sourceTree = "<group>"; };
 		8F295DD021C7971B0017D376 /* KlodAmountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KlodAmountViewController.swift; sourceTree = "<group>"; };
+		8F295DD421C7B1760017D376 /* NumpadTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumpadTextField.swift; sourceTree = "<group>"; };
 		8F47B53D21B3DF2E00A1F25F /* WorkData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkData.swift; sourceTree = "<group>"; };
 		8FAD343321A2CAB70048A3EC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8FAD343821A2CCA00048A3EC /* GoogleAppMeasurement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleAppMeasurement.framework; path = pjFarm/Framework/Firebase/Analytics/GoogleAppMeasurement.framework; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 				8F295DCC21C792940017D376 /* KlodViewController.swift */,
 				8F295DD021C7971B0017D376 /* KlodAmountViewController.swift */,
 				8F295DCE21C794340017D376 /* WeanViewController.swift */,
+				8F295DD421C7B1760017D376 /* NumpadTextField.swift */,
 			);
 			path = pjFarm;
 			sourceTree = "<group>";
@@ -412,6 +415,7 @@
 				8FEC468C21B0FE4300B2CB47 /* ScanViewController.swift in Sources */,
 				8F295DD121C7971B0017D376 /* KlodAmountViewController.swift in Sources */,
 				8F295DCF21C794340017D376 /* WeanViewController.swift in Sources */,
+				8F295DD521C7B1760017D376 /* NumpadTextField.swift in Sources */,
 				8F0EECE021BA2DC4003885BE /* WorkReportViewController.swift in Sources */,
 				8FEDCBED21B4D5CE00F935EA /* WorkViewController.swift in Sources */,
 				8FDC8B1121AD487700060F65 /* RegisterViewController.swift in Sources */,

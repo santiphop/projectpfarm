@@ -59,21 +59,26 @@ class DatabaseManager {
     
     func getIDMaepun(id:String) {
         ref.child("แม่พันธุ์/\(id)/currentState").observeSingleEvent(of: .value, with: { snapshot in
-            /*
-             ref.child("หมูสาว").observeSingleEvent(of: .value, with: { snapshot in
-             // Get data
-             let data = snapshot.value as? NSDictionary
-             let id = data?["currentID"] as? Int
-             self.currentIDMS = id!
-             print("init in observeSingleEvent, currentID: \(self.currentIDMS)")
-             })
-             */
             let data = snapshot.value as? NSDictionary
-            self.pri = data?["primary"] as! Int
-            self.sec = data?["secondary"] as! Int
-            print(self.pri)
-            print(self.sec)
+            if data != nil {
+                self.pri = data?["primary"] as! Int
+                self.sec = data?["secondary"] as! Int
+                print(self.pri)
+                print(self.sec)
+            }
         })
+    }
+    
+    func writeKlodHistory(id:String, dad:String, date:Date, all:Int, dead:Int, mummy:Int, male:Int, female:Int) {
+        ref.child("แม่พันธุ์/\(id)/\(pri)/\(sec)/ประวัติการทำคลอด").setValue([
+            "วันคลอด":dateFormat.string(from: date),
+            "จำนวนลูกทั้งหมด":all,
+            "จำนวนลูกที่ตาย":dead,
+            "จำนวนลูกที่พิการ":mummy,
+            "จำนวนลูกที่เหลือ":all-(dead+mummy),
+            "จำนวนลูกที่เหลือเพศผู้":male,
+            "จำนวนลูกที่เหลือเพศเมีย":female
+        ])
     }
     
     func assignWork(date:Date, work:String, IDCount:Int, pigID:Int) -> Int {

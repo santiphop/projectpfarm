@@ -17,22 +17,10 @@ class RegisterViewController: UIViewController {
     //  currentID for Display in UIAlert
     var currentID:Int = 0
     
-    @IBOutlet weak var momTextField: UITextField! {
-        didSet {
-            momTextField.removeCursor()
-            momTextField?.addDoneToolbar(onDone: (target: self, action: #selector(doneButtonTappedForMomTextField)))
-            momTextField.keyboardType = UIKeyboardType.numberPad
-        }
-    }
-    @objc func doneButtonTappedForMomTextField() { momTextField.resignFirstResponder() }
-
+    @IBOutlet weak var momTextField: NumpadTextField!
     @IBOutlet weak var dad: UISegmentedControl!
     @IBOutlet weak var gender: UISegmentedControl!
-    @IBOutlet weak var dateTextField: UITextField! {
-        didSet {
-            dateTextField.removeCursor()
-        }
-    }
+    @IBOutlet weak var dateTextField: UITextField!
     
     @IBAction func registerButton(_ sender: Any) {
         
@@ -142,29 +130,4 @@ class RegisterViewController: UIViewController {
 
 }
 
-extension UITextField {
-    //  remove cursor of textField
-    func removeCursor() {
-        self.tintColor = UIColor.clear
-    }
-    
-    //  for Textfield with NumberPad
-    //  doneButton do nothing
-    func addDoneToolbar(onDone: (target: Any, action: Selector)? = nil) {
-        self.tintColor = UIColor.clear
-        let onDone = onDone ?? (target: self, action: #selector(doneButtonTapped))
-        
-        let toolbar: UIToolbar = UIToolbar()
-        toolbar.barStyle = .default
-        toolbar.items = [
-            UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil),
-            UIBarButtonItem(title: "Done", style: .done, target: onDone.target, action: onDone.action)
-        ]
-        toolbar.sizeToFit()
-        self.inputAccessoryView = toolbar
-    }
-    
-    @objc func doneButtonTapped() { self.resignFirstResponder() }
- 
-    
-}
+

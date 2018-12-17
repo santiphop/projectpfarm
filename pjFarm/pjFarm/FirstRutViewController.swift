@@ -15,13 +15,13 @@ class FirstRutViewController: UIViewController {
     let dateFormatForTextField = DateFormatter()
     
 
-    @IBOutlet weak var idTextField: UITextField! {
-        didSet {
-            idTextField?.addDoneToolbar(onDone: (target: self, action: #selector(doneButtonTappedIDTextField)))
-            idTextField.keyboardType = UIKeyboardType.numberPad
-        }
-        
-    }
+    @IBOutlet weak var idTextField: NumpadTextField!
+//        didSet {
+//            idTextField?.addDoneToolbar(onDone: (target: self, action: #selector(doneButtonTappedIDTextField)))
+//            idTextField.keyboardType = UIKeyboardType.numberPad
+//        }
+//
+//    }
     
     @objc func doneButtonTappedIDTextField() { idTextField.resignFirstResponder() }
     

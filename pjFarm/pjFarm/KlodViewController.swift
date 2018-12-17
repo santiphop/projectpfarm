@@ -25,29 +25,18 @@ class KlodViewController: UIViewController {
     var datePicker = UIDatePicker()
     let dateFormatForTextField = DateFormatter()
     
-    @IBOutlet weak var momTextField: UITextField! {
-        didSet {
-            momTextField.removeCursor()
-            momTextField?.addDoneToolbar(onDone: (target: self, action: #selector(doneButtonTappedForMomTextField)))
-            momTextField.keyboardType = UIKeyboardType.numberPad
-        }
-    }
+    var momString = ""
+    var dadString = ""
+    
+    @IBOutlet weak var momTextField: NumpadTextField!
+    
     @IBOutlet weak var dad: UISegmentedControl!
     
-    @objc func doneButtonTappedForMomTextField() { momTextField.resignFirstResponder() }
-
-    
-    @IBOutlet weak var dateTextField: UITextField! {
-        didSet {
-            dateTextField.removeCursor()
-        }
-    }
+    @IBOutlet weak var dateTextField: UITextField!
     
     @IBAction func nextButton(_ sender: Any) {
         let db = appDelegate.db
-        var momString = ""
         
-        var dadString = ""
         momString = momTextField.text!
         if dad.selectedSegmentIndex == 0 {
             dadString = ("LW")
@@ -88,11 +77,17 @@ class KlodViewController: UIViewController {
     
     @objc func doneActionForDatePicker() {
         dateTextField.text = dateFormatForTextField.string(from: datePicker.date)
-        let db = self.appDelegate.db
-//        db.generateWorkIDCountForMusao()
-//        db.generateWorkDateForMusao(date: datePicker.date)
+        
         
         self.view.endEditing(true)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let controller = segue.destination as! KlodAmountViewController
+        
+        controller.mom = momString
+        controller.dad = dadString
+        controller.date = datePicker.date
     }
 
     /*
@@ -106,3 +101,5 @@ class KlodViewController: UIViewController {
     */
 
 }
+
+
