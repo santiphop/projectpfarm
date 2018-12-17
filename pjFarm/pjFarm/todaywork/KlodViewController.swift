@@ -47,9 +47,8 @@ class KlodViewController: UIViewController {
         if dad.selectedSegmentIndex == 2 {
             dadString = ("LR")
         }
-        db.getIDMaepun(id: momString)
-        db.generateWorkDateForKokKlod(date: datePicker.date)
-        db.generateWorkIDCountForKokKlod()
+        db.getMaepunCurrentStateFrom(id: momString)
+        
     }
     
     
@@ -79,8 +78,9 @@ class KlodViewController: UIViewController {
     
     @objc func doneActionForDatePicker() {
         dateTextField.text = dateFormatForTextField.string(from: datePicker.date)
-        
-        
+        let db = appDelegate.db
+        db.generateWorkDateForKokKlod(date: datePicker.date)
+        db.generateWorkIDCountForKokKlod()
         self.view.endEditing(true)
     }
     

@@ -68,68 +68,38 @@ class DatabaseManager {
         self.generateWorkIDCountForKokKlod()
     }
     
-    func getIDMaepun(id:String) {
-        ref.child("แม่พันธุ์/\(id)/currentState").observeSingleEvent(of: .value, with: { snapshot in
-            let data = snapshot.value as? NSDictionary
-            if data != nil {
-                self.pri = data?["primary"] as! Int
-                self.sec = data?["secondary"] as! Int
-                print(self.pri)
-                print(self.sec)
+    
+    
+    
+    func reportWorkForTomorrow(ids:[Int], bools:[Bool], date:Date) {
+        let todayPath = "งาน/\(dateFormat.string(from: date))W/งานค้าง/\(currentWork)"
+        let tomorrowPath = "งาน/\(dateFormat.string(from: addDateComponent(date: date, intAdding: 1)))W/ทั้งหมด/\(currentWork)"
+        var index = 1
+        for i in 0...bools.count-1 {
+            if bools[i] {
+                print(ids[i])
+                ref.child("\(todayPath)/\(index)").setValue(ids[i])
+                ref.child("\(tomorrowPath)/\(tmrWorkIDCount)").setValue(ids[i])
+                index += 1
+                tmrWorkIDCount += 1
             }
-        })
-    }
-    
-    func writeKlodHistory(id:String, dad:String, date:Date, all:Int, dead:Int, mummy:Int, male:Int, female:Int) {
-        ref.child("แม่พันธุ์/\(id)/\(pri)/\(sec)/ประวัติการทำคลอด").setValue([
-            "วันคลอด":dateFormat.string(from: date),
-            "จำนวนลูกทั้งหมด":all,
-            "จำนวนลูกที่ตาย":dead,
-            "จำนวนลูกที่พิการ":mummy,
-            "จำนวนลูกที่เหลือ":all-(dead+mummy),
-            "จำนวนลูกที่เหลือเพศผู้":male,
-            "จำนวนลูกที่เหลือเพศเมีย":female
-        ])
-        regisKK(id: id, date: date)
-    }
-    
-    func regisKK(id:String, date:Date) {
-        self.generateWorkDateForKokKlod(date: date)
-
-        ref.child("คอกคลอด/\(id)/\(pri)").setValue([
-            "secondary":sec,
-            "วันคลอด":dateFormat.string(from: date),
-            "\(kokklodWorkString[0])":dateFormat.string(from: kokklodWorkDate[0]),
-            "\(kokklodWorkString[1])":dateFormat.string(from: kokklodWorkDate[1]),
-            "\(kokklodWorkString[2])":dateFormat.string(from: kokklodWorkDate[2])
-        ])
-        
-        for i in 0...2 {
-            kokklodIDCount[i] = assignWork(date: kokklodWorkDate[i], work: kokklodWorkString[i], IDCount: kokklodIDCount[i], pigID: Int(id)!)
-            
-        }
-    }
-    
-    func generateWorkDateForKokKlod(date:Date) {
-        let addDate = [3, 7, 24]
-        kokklodWorkDate.removeAll()
-        for i in 0...addDate.count - 1 {
-            kokklodWorkDate.append(addDateComponent(date: date, intAdding: addDate[i]))
-        }
-    }
-    
-    func generateWorkIDCountForKokKlod() {
-        kokklodIDCount.removeAll()
-        for i in 0...2 {
-            ref.child("งาน/\(dateFormat.string(from: kokklodWorkDate[i]))W/ทั้งหมด/\(kokklodWorkString[i])").observeSingleEvent(of: .value, with: { snapshot in
-                // Get data
-                self.kokklodIDCount.append(Int(snapshot.childrenCount) + 1)
-            })
         }
     }
     
     func assignWork(date:Date, work:String, IDCount:Int, pigID:Int) -> Int {
         ref.child("งาน/\(dateFormat.string(from: date))W/ทั้งหมด/\(work)/\(IDCount)").setValue(pigID)
+        
+        //  append the getAllWork()
+        if dateFormat.string(from: date).elementsEqual(dateFormat.string(from: Date())) {
+            if !workList.contains(work) {
+                workList.append(work)
+                details[work] = []
+                details[work]?.append(pigID)
+            } else {
+                details[work]?.append(pigID)
+            }
+        }
+        
         return IDCount + 1
     }
     
@@ -178,6 +148,68 @@ extension DatabaseManager {
         ref.child("งาน/\(dateFormat.string(from: addDateComponent(date: Date(), intAdding: 1)))W/ทั้งหมด/\(currentWork)").observeSingleEvent(of: .value, with: { snapshot in
             self.tmrWorkIDCount = Int(snapshot.childrenCount) + 1
         })
+    }
+}
+
+/////     คอกคลอด   /////
+extension DatabaseManager {
+    //  get primary, secondary from ID
+    func getMaepunCurrentStateFrom(id:String) {
+        ref.child("แม่พันธุ์/\(id)/currentState").observeSingleEvent(of: .value, with: { snapshot in
+            let data = snapshot.value as? NSDictionary
+            if data != nil {
+                self.pri = data?["primary"] as! Int
+                self.sec = data?["secondary"] as! Int
+            }
+        })
+    }
+    
+    func generateWorkDateForKokKlod(date:Date) {
+        let addDate = [3, 7, 24]
+        kokklodWorkDate.removeAll()
+        for i in 0...addDate.count - 1 {
+            kokklodWorkDate.append(addDateComponent(date: date, intAdding: addDate[i]))
+        }
+    }
+    
+    func generateWorkIDCountForKokKlod() {
+        kokklodIDCount.removeAll()
+        for i in 0...2 {
+            ref.child("งาน/\(dateFormat.string(from: kokklodWorkDate[i]))W/ทั้งหมด/\(kokklodWorkString[i])").observeSingleEvent(of: .value, with: { snapshot in
+                // Get data
+                self.kokklodIDCount.append(Int(snapshot.childrenCount) + 1)
+            })
+        }
+    }
+    
+    func regisKK(id:String, date:Date) {
+        self.generateWorkDateForKokKlod(date: date)
+        
+        ref.child("คอกคลอด/\(id)/\(pri)").setValue([
+            "secondary":sec,
+            "วันคลอด":dateFormat.string(from: date),
+            "\(kokklodWorkString[0])":dateFormat.string(from: kokklodWorkDate[0]),
+            "\(kokklodWorkString[1])":dateFormat.string(from: kokklodWorkDate[1]),
+            "\(kokklodWorkString[2])":dateFormat.string(from: kokklodWorkDate[2])
+        ])
+        
+        for i in 0...1 {
+            kokklodIDCount[i] = assignWork(date: kokklodWorkDate[i], work: kokklodWorkString[i], IDCount: kokklodIDCount[i], pigID: Int(id)!)
+            
+        }
+    }
+    
+    func writeKlodHistory(id:String, dad:String, date:Date, all:Int, dead:Int, mummy:Int, male:Int, female:Int) {
+        ref.child("แม่พันธุ์/\(id)/\(pri)/\(sec)/ประวัติการทำคลอด").setValue([
+            "วันคลอด":dateFormat.string(from: date),
+            "จำนวนลูกทั้งหมด":all,
+            "จำนวนลูกที่ตาย":dead,
+            "จำนวนลูกที่พิการ":mummy,
+            "จำนวนลูกที่เหลือ":all-(dead+mummy),
+            "จำนวนลูกที่เหลือเพศผู้":male,
+            "จำนวนลูกที่เหลือเพศเมีย":female
+            ])
+        regisKK(id: id, date: date)
     }
 }
 
@@ -256,20 +288,6 @@ extension DatabaseManager {
         }
     }
     
-    func reportWorkForTomorrow(ids:[Int], bools:[Bool], date:Date) {
-        let todayPath = "งาน/\(dateFormat.string(from: date))W/งานค้าง/\(currentWork)"
-        let tomorrowPath = "งาน/\(dateFormat.string(from: addDateComponent(date: date, intAdding: 1)))W/ทั้งหมด/\(currentWork)"
-        var index = 1
-        for i in 0...bools.count-1 {
-            if bools[i] {
-                print(ids[i])
-                ref.child("\(todayPath)/\(index)").setValue(ids[i])
-                ref.child("\(tomorrowPath)/\(tmrWorkIDCount)").setValue(ids[i])
-                index += 1
-                tmrWorkIDCount += 1
-            }
-        }
-    }
     
     func regisMS(dad:String, mom:String, gender:String, date:Date) -> Int {
         self.currentIDMS += 1
