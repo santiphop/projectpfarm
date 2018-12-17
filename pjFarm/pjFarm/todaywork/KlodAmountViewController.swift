@@ -13,9 +13,9 @@ class KlodAmountViewController: UIViewController {
     var dad = String()
     var date = Date()
     
-    var appDelegate = UIApplication.shared.delegate as! AppDelegate
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
 
-    
+    @IBOutlet weak var titleBar: UINavigationItem!
     @IBOutlet weak var all: NumpadTextField!
     @IBOutlet weak var dead: NumpadTextField!
     @IBOutlet weak var mummy: NumpadTextField!
@@ -26,9 +26,6 @@ class KlodAmountViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        print(mom)
-        print(dad)
-        print(date)
         let db = appDelegate.db
         db.generateWorkIDCountForKokKlod()
     }

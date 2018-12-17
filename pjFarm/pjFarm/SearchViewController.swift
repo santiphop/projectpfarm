@@ -9,11 +9,11 @@
 import UIKit
 import AVFoundation
 
-class ScanViewController: UIViewController {
+class SearchViewController: UIViewController {
     
     @IBOutlet weak var camaraView: UIView!
     @IBAction func scanButtonTouchUp(_ sender: UIButton) {
-        startReading()
+        print(startReading())
     }
     @IBOutlet weak var outputTextView: UITextView!
 
@@ -73,7 +73,7 @@ class ScanViewController: UIViewController {
     }
 }
 
-extension ScanViewController:AVCaptureMetadataOutputObjectsDelegate {
+extension SearchViewController:AVCaptureMetadataOutputObjectsDelegate {
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
         var qrText = ""
         

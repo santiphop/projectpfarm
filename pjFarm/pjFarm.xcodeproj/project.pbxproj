@@ -35,7 +35,7 @@
 		8FAD346221A2D1160048A3EC /* FirebaseDatabase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FAD346021A2D1160048A3EC /* FirebaseDatabase.framework */; };
 		8FD4864921AE60B400A2C7A1 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD4864821AE60B400A2C7A1 /* DatabaseManager.swift */; };
 		8FDC8B1121AD487700060F65 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FDC8B1021AD487700060F65 /* RegisterViewController.swift */; };
-		8FEC468C21B0FE4300B2CB47 /* ScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FEC468B21B0FE4300B2CB47 /* ScanViewController.swift */; };
+		8FEC468C21B0FE4300B2CB47 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FEC468B21B0FE4300B2CB47 /* SearchViewController.swift */; };
 		8FEDCBED21B4D5CE00F935EA /* WorkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FEDCBEC21B4D5CE00F935EA /* WorkViewController.swift */; };
 		8FEDCBEF21B6620700F935EA /* FirstRutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FEDCBEE21B6620700F935EA /* FirstRutViewController.swift */; };
 /* End PBXBuildFile section */
@@ -103,7 +103,7 @@
 		8FAD346021A2D1160048A3EC /* FirebaseDatabase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseDatabase.framework; sourceTree = "<group>"; };
 		8FD4864821AE60B400A2C7A1 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		8FDC8B1021AD487700060F65 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
-		8FEC468B21B0FE4300B2CB47 /* ScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanViewController.swift; sourceTree = "<group>"; };
+		8FEC468B21B0FE4300B2CB47 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		8FEDCBEC21B4D5CE00F935EA /* WorkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkViewController.swift; sourceTree = "<group>"; };
 		8FEDCBEE21B6620700F935EA /* FirstRutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstRutViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -170,9 +170,9 @@
 				6A57B67021427E53004DE381 /* AppDelegate.swift */,
 				8FD4864821AE60B400A2C7A1 /* DatabaseManager.swift */,
 				6A57B67221427E53004DE381 /* HomeViewController.swift */,
-				8FDC8B1021AD487700060F65 /* RegisterViewController.swift */,
-				8FEC468B21B0FE4300B2CB47 /* ScanViewController.swift */,
 				8F295DD821C7BC290017D376 /* todaywork */,
+				8FDC8B1021AD487700060F65 /* RegisterViewController.swift */,
+				8FEC468B21B0FE4300B2CB47 /* SearchViewController.swift */,
 				6A57B67421427E53004DE381 /* Main.storyboard */,
 				8F18C6F6216DCFD9001BBF0F /* PigMusao.swift */,
 				6A57B67721427E53004DE381 /* Assets.xcassets */,
@@ -183,7 +183,6 @@
 				8F295DD421C7B1760017D376 /* NumpadTextField.swift */,
 				8F47B53D21B3DF2E00A1F25F /* WorkData.swift */,
 				8FAD343521A2CC370048A3EC /* Framework */,
-				8F295DCE21C794340017D376 /* WeanViewController.swift */,
 			);
 			path = pjFarm;
 			sourceTree = "<group>";
@@ -215,6 +214,7 @@
 				8F0EECE121BA30A4003885BE /* WorkDetailReportViewController.swift */,
 				8F295DCC21C792940017D376 /* KlodViewController.swift */,
 				8F295DD021C7971B0017D376 /* KlodAmountViewController.swift */,
+				8F295DCE21C794340017D376 /* WeanViewController.swift */,
 			);
 			path = todaywork;
 			sourceTree = "<group>";
@@ -417,7 +417,7 @@
 			files = (
 				8F0EECE221BA30A4003885BE /* WorkDetailReportViewController.swift in Sources */,
 				8F18C6F7216DCFD9001BBF0F /* PigMusao.swift in Sources */,
-				8FEC468C21B0FE4300B2CB47 /* ScanViewController.swift in Sources */,
+				8FEC468C21B0FE4300B2CB47 /* SearchViewController.swift in Sources */,
 				8F295DD121C7971B0017D376 /* KlodAmountViewController.swift in Sources */,
 				8F295DCF21C794340017D376 /* WeanViewController.swift in Sources */,
 				8F295DD521C7B1760017D376 /* NumpadTextField.swift in Sources */,

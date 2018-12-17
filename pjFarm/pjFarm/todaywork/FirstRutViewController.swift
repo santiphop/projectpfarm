@@ -16,15 +16,6 @@ class FirstRutViewController: UIViewController {
     
 
     @IBOutlet weak var idTextField: NumpadTextField!
-//        didSet {
-//            idTextField?.addDoneToolbar(onDone: (target: self, action: #selector(doneButtonTappedIDTextField)))
-//            idTextField.keyboardType = UIKeyboardType.numberPad
-//        }
-//
-//    }
-    
-    @objc func doneButtonTappedIDTextField() { idTextField.resignFirstResponder() }
-    
     @IBOutlet weak var dateTextField: UITextField!
     
     @IBAction func saveButton(_ sender: Any) {
@@ -65,8 +56,8 @@ class FirstRutViewController: UIViewController {
     @objc func doneActionForDatePicker() {
         dateTextField.text = dateFormatForTextField.string(from: datePicker.date)
         let db = self.appDelegate.db
-        db.generateWorkIDCountForMaepun(index: 0)
         db.generateWorkDateForMaepun(date: datePicker.date)
+        db.generateWorkIDCountForMaepun(index: 0)
         self.view.endEditing(true)
     }
     

@@ -10,12 +10,11 @@ import UIKit
 
 class RegisterViewController: UIViewController {
 
-    var appDelegate = UIApplication.shared.delegate as! AppDelegate
-    var datePicker = UIDatePicker()
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    let datePicker = UIDatePicker()
     let dateFormatForTextField = DateFormatter()
-
-    //  currentID for Display in UIAlert
-    var currentID:Int = 0
+    let dadArray = ["Large White", "Duroc", "Landrace"]
+    let genderArray = ["Male", "Female"]
     
     @IBOutlet weak var momTextField: NumpadTextField!
     @IBOutlet weak var dad: UISegmentedControl!
@@ -23,35 +22,17 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var dateTextField: UITextField!
     
     @IBAction func registerButton(_ sender: Any) {
-        
         let db = self.appDelegate.db
-        
-        var dadString:String = ""
         let momString:String = momTextField.text!
-        var genderString:String = ""
+        let dadString:String = dadArray[dad.selectedSegmentIndex]
+        let genderString:String = genderArray[gender.selectedSegmentIndex]
         
-        if dad.selectedSegmentIndex == 0 {
-            dadString = ("LW")
-        }
-        if dad.selectedSegmentIndex == 1 {
-            dadString = ("DR")
-        }
-        if dad.selectedSegmentIndex == 2 {
-            dadString = ("LR")
-        }
-        
-        if gender.selectedSegmentIndex == 0 {
-            genderString = ("Male")
-        }
-        if gender.selectedSegmentIndex == 1 {
-            genderString = ("Female")
-        }
         if momString.isEmpty {
             showMomExceptionAlert()
         }
         else {
-            currentID = db.regisMS(dad: dadString, mom: momString, gender: genderString, date:datePicker.date)
-            showOptionsAlert()
+            let currentID = db.regisMS(dad: dadString, mom: momString, gender: genderString, date:datePicker.date)
+            showOptionsAlert(id: currentID)
         }
     }
     
@@ -94,13 +75,13 @@ class RegisterViewController: UIViewController {
     @objc func doneActionForDatePicker() {
         dateTextField.text = dateFormatForTextField.string(from: datePicker.date)
         let db = self.appDelegate.db
-        db.generateWorkIDCountForMusao()
         db.generateWorkDateForMusao(date: datePicker.date)
+        db.generateWorkIDCountForMusao()
         self.view.endEditing(true)
     }
     
-    func showOptionsAlert() {
-        let alertController = UIAlertController(title: "Yeah!", message: "This pig ID is : \(self.currentID)", preferredStyle: UIAlertController.Style.alert)
+    func showOptionsAlert(id:Int) {
+        let alertController = UIAlertController(title: "Yeah!", message: "This pig ID is : \(id)", preferredStyle: UIAlertController.Style.alert)
         
         let actionNothing = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) { (action) in }
         

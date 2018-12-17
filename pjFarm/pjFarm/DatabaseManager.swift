@@ -21,20 +21,24 @@ class DatabaseManager {
         "ถ่ายพยาธิ", "วัคซีนอหิวาห์", "วัคซีนพาร์โว", "วัคซีนพิษสุนัขบ้าเทียม", "วัคซีนปากเท้าเทียม", "วัคซีน PRRS"
     ]
     
-    var currentIDMP:Int = 0
     var maepunWorkDate:[Date] = []
     var maepunWorkIDCount:Int = 0
     var maepunWorkString:[String] = [
-        "ตรวจสัดครั้งที่1", "ตรวจสัดครั้งที่2", "ตรวจสัดครั้งที่3", "ตรวจท้อง", "ขึ้นคลอด"  /* "กำหนดคลอด" ไม่ได้อยู่ในตารางงาน */
+        "ตรวจสัดครั้งที่1", "ตรวจสัดครั้งที่2", "ตรวจสัดครั้งที่3", "ตรวจท้อง", "ขึ้นคลอด", "กำหนดคลอด"
     ]
     
     
     var kokklodWorkDate:[Date] = []
     var kokklodIDCount:[Int] = []
     var kokklodWorkString:[String] = [
-        "วันตอนตัวผู้-ตัดหูตัวเมีย", "วันตัดเขี้ยวและหาง", "วันถ่ายพยาธิ-หย่านม"
+        "ตอนตัวผู้-ตัดหูตัวเมีย", "ตัดเขี้ยวและหาง", "ถ่ายพยาธิ-กำหนดหย่านม"
     ]
     
+    var kindergartenWorkDate:[Date] = []
+    var kindergartenIDCount:[Int] = []
+    var kindergartenWorkString:[String] = [
+        "วัคซีนอหิวาห์รอบที่1", "วัคซีนพิษสุนัขบ้าเทียมรอบที่1", "วัคซีนอหิวาห์รอบที่2", "วัคซีนพิษสุนัขบ้าเทียมรอบที่2"
+    ]
     
     
     var currentWork:String = ""
@@ -66,9 +70,46 @@ class DatabaseManager {
         //  set up kokklod
         self.generateWorkDateForKokKlod(date: Date())
         self.generateWorkIDCountForKokKlod()
+        
+        //  set up kindergarten
+        self.generateWorkDateForKindergarten(date: Date())
+        self.generateWorkIDCountForKindergarten()
     }
     
+    func generateWorkDateForKindergarten(date:Date) {
+        let addDate = [7, 14, 21, 28]
+        kindergartenWorkDate.removeAll()
+        for i in 0...addDate.count - 1 {
+            kindergartenWorkDate.append(addDateComponent(date: date, intAdding: addDate[i]))
+        }
+    }
     
+    func generateWorkIDCountForKindergarten() {
+        kindergartenIDCount.removeAll()
+        for i in 0...3 {
+            ref.child("งาน/\(dateFormat.string(from: kindergartenWorkDate[i]))W/ทั้งหมด/\(kindergartenWorkString[i])").observeSingleEvent(of: .value, with: { snapshot in
+                // Get data
+                self.kindergartenIDCount.append(Int(snapshot.childrenCount) + 1)
+            })
+        }
+    }
+    
+    func regisKG(id:String, date:Date) {
+        ref.child("คอกคลอด/\(id)").observeSingleEvent(of: .value, with: { snapshot in
+            let primaryCount = snapshot.childrenCount
+            self.ref.child("คอกอนุบาล/\(id)/\(primaryCount)").setValue([
+                "เข้าคอกอนุบาล": self.dateFormat.string(from: date),
+                "\(self.kindergartenWorkString[0])": self.dateFormat.string(from: self.kindergartenWorkDate[0]),
+                "\(self.kindergartenWorkString[1])": self.dateFormat.string(from: self.kindergartenWorkDate[1]),
+                "\(self.kindergartenWorkString[2])": self.dateFormat.string(from: self.kindergartenWorkDate[2]),
+                "\(self.kindergartenWorkString[3])": self.dateFormat.string(from: self.kindergartenWorkDate[3]),
+            ])
+            
+            for i in 0...3 {
+                self.kindergartenIDCount[i] = self.assignWork(date: self.kindergartenWorkDate[i], work: self.kindergartenWorkString[i], IDCount: self.kindergartenIDCount[i], pigID: Int(id)!)
+            }
+        })
+    }
     
     
     func reportWorkForTomorrow(ids:[Int], bools:[Bool], date:Date) {
@@ -88,7 +129,6 @@ class DatabaseManager {
     
     func assignWork(date:Date, work:String, IDCount:Int, pigID:Int) -> Int {
         ref.child("งาน/\(dateFormat.string(from: date))W/ทั้งหมด/\(work)/\(IDCount)").setValue(pigID)
-        
         //  append the getAllWork()
         if dateFormat.string(from: date).elementsEqual(dateFormat.string(from: Date())) {
             if !workList.contains(work) {
@@ -99,7 +139,6 @@ class DatabaseManager {
                 details[work]?.append(pigID)
             }
         }
-        
         return IDCount + 1
     }
     
@@ -208,7 +247,7 @@ extension DatabaseManager {
             "จำนวนลูกที่เหลือ":all-(dead+mummy),
             "จำนวนลูกที่เหลือเพศผู้":male,
             "จำนวนลูกที่เหลือเพศเมีย":female
-            ])
+        ])
         regisKK(id: id, date: date)
     }
 }
@@ -241,9 +280,9 @@ extension DatabaseManager {
                             "2":dateFormat.string(from: maepunWorkDate[1]),
                             "3":dateFormat.string(from: maepunWorkDate[2])
                         ],
-                        "วันตรวจท้อง":dateFormat.string(from: maepunWorkDate[3]),
-                        "วันขึ้นคลอด":dateFormat.string(from: maepunWorkDate[4]),
-                        "วันกำหนดคลอด":dateFormat.string(from: maepunWorkDate[5])
+                        "\(maepunWorkString[3])":dateFormat.string(from: maepunWorkDate[3]),
+                        "\(maepunWorkString[4])":dateFormat.string(from: maepunWorkDate[4]),
+                        "\(maepunWorkString[5])":dateFormat.string(from: maepunWorkDate[5])
                     ]
                 ]
             ],
@@ -293,7 +332,7 @@ extension DatabaseManager {
         self.currentIDMS += 1
         ref.child("หมูสาว/currentID").setValue(self.currentIDMS)
         
-        self.generateWorkDateForMusao(date: date)
+//        self.generateWorkDateForMusao(date: date)
         
         ref.child("หมูสาว/\(self.currentIDMS)").setValue([
             "ประวัติ":[
