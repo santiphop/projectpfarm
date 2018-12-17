@@ -12,8 +12,8 @@ class HomeViewController: UIViewController {
     
 //    var pig:Pig
     @IBOutlet weak var dateLabel: UILabel!
-    var dateFormat = DateFormatter()
-    var appDelegate = UIApplication.shared.delegate as! AppDelegate
+    let dateFormat = DateFormatter()
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     
 //    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {

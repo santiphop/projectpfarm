@@ -11,22 +11,41 @@ import UIKit
 class WorkViewController: UIViewController {
 
     var appDelegate = UIApplication.shared.delegate as! AppDelegate
+    let dateFormatForReportHTML = DateFormatter()
+
+    var invoiceInfo: [String: AnyObject]!
+    
+    var invoiceComposer: InvoiceComposer!
+    
+    var HTMLContent: String!
+    
+    var documentController : UIDocumentInteractionController!
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        dateFormatForReportHTML.dateFormat = "MMM d, YYYY"
         let db = appDelegate.db
         db.initcheck()
-//        db.generateWorkDateForKokKlod(date: Date())
-//        db.generateWorkIDCountForKokKlod()
-//        print(db.kokklodWorkDate)
-//        print(db.kokklodIDCount)
+        createReportAsHTML()
     }
     
+    @IBOutlet weak var exportButton: UIButton!
+    @IBAction func export(_ sender: Any) {
+        let pdfFilename = invoiceComposer.exportHTMLContentToPDF(HTMLContent: self.HTMLContent)
+        documentController = UIDocumentInteractionController.init(url: NSURL.init(fileURLWithPath: pdfFilename) as URL)
+        documentController.presentOptionsMenu(from: self.exportButton.frame, in: self.view, animated: true)
+    }
+    @IBOutlet weak var webView: UIWebView!
     
-    // เป็นสัดครั้งแรก ใส่ ID หมูที่เป็นสัด
-    @IBAction func firstRut(_ sender: Any) {
-
+    func createReportAsHTML() {
+        invoiceComposer = InvoiceComposer()
+        if let invoiceHTML = invoiceComposer.renderInvoice(invoiceDate: dateFormatForReportHTML.string(from: Date())) {
+            
+            webView.loadHTMLString(invoiceHTML, baseURL: NSURL(string: invoiceComposer.pathToInvoiceHTMLTemplate!)! as URL)
+            HTMLContent = invoiceHTML
+            
+        }
     }
     
     /*

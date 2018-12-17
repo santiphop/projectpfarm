@@ -284,9 +284,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="V3J-gh-NCK">
-                                <rect key="frame" x="16" y="88" width="343" height="479"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <webView contentMode="scaleToFill" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="V3J-gh-NCK">
+                                <rect key="frame" x="0.0" y="88" width="375" height="509"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </webView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bka-pw-rW0">
@@ -294,21 +293,18 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="First Rut"/>
                                 <connections>
-                                    <action selector="firstRut:" destination="MFU-TC-d6O" eventType="touchUpInside" id="rTx-s1-FUu"/>
                                     <segue destination="UaO-3F-3gM" kind="show" id="xPN-mX-E43"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kgM-mC-ybE">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kgM-mC-ybE">
                                 <rect key="frame" x="244" y="683" width="47" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Report"/>
                                 <connections>
                                     <segue destination="71f-hW-CiI" kind="show" id="U7C-je-qb8"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ejv-My-qFY">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ejv-My-qFY">
                                 <rect key="frame" x="252" y="597" width="31" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Klod"/>
                                 <connections>
                                     <segue destination="lOQ-fV-oK9" kind="show" id="fPT-I1-Wnt"/>
@@ -324,15 +320,39 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="kgM-mC-ybE" firstAttribute="top" secondItem="ejv-My-qFY" secondAttribute="bottom" constant="56" id="2Tl-3g-Ejy"/>
+                            <constraint firstItem="ejv-My-qFY" firstAttribute="centerX" secondItem="kgM-mC-ybE" secondAttribute="centerX" id="8Yz-wt-Pcb"/>
+                            <constraint firstItem="1XD-j1-LO8" firstAttribute="trailing" secondItem="ejv-My-qFY" secondAttribute="trailing" constant="92" id="8m7-ni-WbI"/>
+                            <constraint firstAttribute="trailing" secondItem="V3J-gh-NCK" secondAttribute="trailing" id="cMo-QT-IJZ"/>
+                            <constraint firstItem="ejv-My-qFY" firstAttribute="top" secondItem="V3J-gh-NCK" secondAttribute="bottom" id="eQH-Ph-OxR"/>
+                            <constraint firstItem="V3J-gh-NCK" firstAttribute="top" secondItem="tIR-CD-KXI" secondAttribute="topMargin" id="meg-tF-oOg"/>
+                            <constraint firstAttribute="bottom" secondItem="ejv-My-qFY" secondAttribute="bottom" constant="185" id="wc6-mW-IIc"/>
+                            <constraint firstItem="V3J-gh-NCK" firstAttribute="leading" secondItem="1XD-j1-LO8" secondAttribute="leading" id="xyM-0x-U0o"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="1XD-j1-LO8"/>
                     </view>
                     <navigationItem key="navigationItem" title="Today's Work" id="r1t-9K-dPc">
                         <barButtonItem key="backBarButtonItem" title="Work" id="fKa-a0-dLR"/>
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="PQn-Gy-K0u">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="9Yk-Hu-YTa">
+                                <rect key="frame" x="276" y="7" width="83" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Export"/>
+                                <connections>
+                                    <action selector="export:" destination="MFU-TC-d6O" eventType="touchUpInside" id="N6o-2Q-fJy"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="exportButton" destination="9Yk-Hu-YTa" id="pC8-F3-PJN"/>
+                        <outlet property="webView" destination="V3J-gh-NCK" id="qvq-XN-yMY"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ptZ-iw-T5D" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2505" y="-1896"/>
+            <point key="canvasLocation" x="2504.8000000000002" y="-1896.0591133004928"/>
         </scene>
         <!--Report-->
         <scene sceneID="NZv-8M-VDc">

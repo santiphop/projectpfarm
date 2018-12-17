@@ -22,6 +22,9 @@
 		8F295DD121C7971B0017D376 /* KlodAmountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F295DD021C7971B0017D376 /* KlodAmountViewController.swift */; };
 		8F295DD521C7B1760017D376 /* NumpadTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F295DD421C7B1760017D376 /* NumpadTextField.swift */; };
 		8F47B53E21B3DF2E00A1F25F /* WorkData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F47B53D21B3DF2E00A1F25F /* WorkData.swift */; };
+		8F8E845021C8121E00CE8CAF /* InvoiceComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F8E844F21C8121E00CE8CAF /* InvoiceComposer.swift */; };
+		8F8E845421C814B700CE8CAF /* CustomPrintPageRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F8E845321C814B700CE8CAF /* CustomPrintPageRenderer.swift */; };
+		8F8E845621C81D5800CE8CAF /* invoice.html in Resources */ = {isa = PBXBuildFile; fileRef = 8F8E845521C81D5800CE8CAF /* invoice.html */; };
 		8FAD343421A2CAB70048A3EC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8FAD343321A2CAB70048A3EC /* GoogleService-Info.plist */; };
 		8FAD344021A2CCA00048A3EC /* GoogleAppMeasurement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FAD343821A2CCA00048A3EC /* GoogleAppMeasurement.framework */; };
 		8FAD344121A2CCA00048A3EC /* GoogleUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FAD343921A2CCA00048A3EC /* GoogleUtilities.framework */; };
@@ -79,6 +82,9 @@
 		8F295DD021C7971B0017D376 /* KlodAmountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KlodAmountViewController.swift; sourceTree = "<group>"; };
 		8F295DD421C7B1760017D376 /* NumpadTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumpadTextField.swift; sourceTree = "<group>"; };
 		8F47B53D21B3DF2E00A1F25F /* WorkData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkData.swift; sourceTree = "<group>"; };
+		8F8E844F21C8121E00CE8CAF /* InvoiceComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceComposer.swift; sourceTree = "<group>"; };
+		8F8E845321C814B700CE8CAF /* CustomPrintPageRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPrintPageRenderer.swift; sourceTree = "<group>"; };
+		8F8E845521C81D5800CE8CAF /* invoice.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = invoice.html; sourceTree = "<group>"; };
 		8FAD343321A2CAB70048A3EC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8FAD343821A2CCA00048A3EC /* GoogleAppMeasurement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleAppMeasurement.framework; path = pjFarm/Framework/Firebase/Analytics/GoogleAppMeasurement.framework; sourceTree = "<group>"; };
 		8FAD343921A2CCA00048A3EC /* GoogleUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleUtilities.framework; path = pjFarm/Framework/Firebase/Analytics/GoogleUtilities.framework; sourceTree = "<group>"; };
@@ -209,6 +215,7 @@
 			isa = PBXGroup;
 			children = (
 				8FEDCBEC21B4D5CE00F935EA /* WorkViewController.swift */,
+				8F8E845721C8221600CE8CAF /* reportsheet */,
 				8FEDCBEE21B6620700F935EA /* FirstRutViewController.swift */,
 				8F0EECDF21BA2DC4003885BE /* WorkReportViewController.swift */,
 				8F0EECE121BA30A4003885BE /* WorkDetailReportViewController.swift */,
@@ -217,6 +224,16 @@
 				8F295DCE21C794340017D376 /* WeanViewController.swift */,
 			);
 			path = todaywork;
+			sourceTree = "<group>";
+		};
+		8F8E845721C8221600CE8CAF /* reportsheet */ = {
+			isa = PBXGroup;
+			children = (
+				8F8E845521C81D5800CE8CAF /* invoice.html */,
+				8F8E844F21C8121E00CE8CAF /* InvoiceComposer.swift */,
+				8F8E845321C814B700CE8CAF /* CustomPrintPageRenderer.swift */,
+			);
+			path = reportsheet;
 			sourceTree = "<group>";
 		};
 		8FAD343521A2CC370048A3EC /* Framework */ = {
@@ -387,6 +404,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8F8E845621C81D5800CE8CAF /* invoice.html in Resources */,
 				6A57B67B21427E53004DE381 /* LaunchScreen.storyboard in Resources */,
 				8FAD343421A2CAB70048A3EC /* GoogleService-Info.plist in Resources */,
 				6A57B67821427E53004DE381 /* Assets.xcassets in Resources */,
@@ -418,11 +436,13 @@
 				8F0EECE221BA30A4003885BE /* WorkDetailReportViewController.swift in Sources */,
 				8F18C6F7216DCFD9001BBF0F /* PigMusao.swift in Sources */,
 				8FEC468C21B0FE4300B2CB47 /* SearchViewController.swift in Sources */,
+				8F8E845021C8121E00CE8CAF /* InvoiceComposer.swift in Sources */,
 				8F295DD121C7971B0017D376 /* KlodAmountViewController.swift in Sources */,
 				8F295DCF21C794340017D376 /* WeanViewController.swift in Sources */,
 				8F295DD521C7B1760017D376 /* NumpadTextField.swift in Sources */,
 				8F0EECE021BA2DC4003885BE /* WorkReportViewController.swift in Sources */,
 				8FEDCBED21B4D5CE00F935EA /* WorkViewController.swift in Sources */,
+				8F8E845421C814B700CE8CAF /* CustomPrintPageRenderer.swift in Sources */,
 				8FDC8B1121AD487700060F65 /* RegisterViewController.swift in Sources */,
 				8FD4864921AE60B400A2C7A1 /* DatabaseManager.swift in Sources */,
 				6A57B67321427E53004DE381 /* HomeViewController.swift in Sources */,

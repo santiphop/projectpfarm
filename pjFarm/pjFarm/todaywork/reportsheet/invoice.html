@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <link href="https://fonts.googleapis.com/css?family=Gamja+Flower" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Signika+Negative" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Athiti:500" rel="stylesheet">
+    <title>Schedule</title>
+    <style>
+
+        .invoice-box{
+            max-width:800px;
+            margin:auto;
+            padding:30px;
+            /*border:1px solid #eee;*/
+            /*box-shadow:0 0 10px rgba(0, 0, 0, .15); */
+            font-size:16px;
+            line-height:24px;
+            font-family:'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+            color:#555;
+        }
+
+        .invoice-box table{
+            width:100%;
+            line-height:inherit;
+            text-align:left;
+        }
+
+        .header-border {
+            border: 2px solid ;
+            border-radius: 7px;
+            background: #f0c2c5;
+            width: 50%;
+            padding: 4px;
+            font-size: 20px;
+
+        }
+
+        .font-head{
+            font-family: 'Gamja Flower', cursive;
+
+        }
+        .font-head-date{
+            font-family: 'Signika Negative', sans-serif;
+
+        }
+        .font-data{
+            font-family: 'Athiti', sans-serif;
+        }
+
+        .padding-data-work{
+            padding-top: 4px;
+        }
+        tr.separated td {
+            /* set border style for separated rows */
+            border-bottom: 1px solid lightgray;
+        }
+
+        table {
+            /* make the border continuous (without gaps between columns) */
+            border-collapse: collapse;
+        }
+
+    </style>
+</head>
+<body>
+<div class="invoice-box">
+    <table cellpadding="0" cellspacing="0"  >
+        <tbody>
+        <tr class="top">
+            <td colspan="2">
+                <table>
+                    <tbody>
+                    <tr>
+
+                        <td class="font-head" STYLE="font-size: 50px">
+                            <p style="color: #b62544">PIG'S PLAN</p>
+                            <p STYLE="margin-top: -15px;color: #d26270">SCHEDULE</p>
+                            <!--#f0c2c5-->
+
+                        </td>
+                        <td class="font-head-date" STYLE="font-size: 20px;color:  #d26270;text-align: right">
+                            <p style="margin-top: 100px">DATE: #WORK_DATE#</p>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+
+
+        <table class="font-table" style="width:80%;text-align: center;margin-left: 10%;font-size: 18px">
+
+            <tr class="font-data"
+                style="background-color:  #f0c2c5;color: white;
+                                text-align: center;border-radius: 3% !important;border: 2px solid black"
+            >
+                <th  class="header-border" >
+                    งาน
+                </th>
+                <th  class="header-border" >
+                    ID หมู
+                </th>
+            </tr>
+            <tr class="font-data" >
+                <td class="padding-data-work">ถ่ายพยาธิ</td>
+                <td class="padding-data-work">6124</td>
+            </tr >
+            <tr class="font-data" >
+                <td></td>
+                <td>6045</td>
+            </tr >
+            <tr class="separated font-data">
+                <td></td>
+                <td>6032</td>
+
+            </tr>
+
+
+
+            <tr class="font-data">
+                <td class="padding-data-work">วัคซีนพิษสุนัขบ้า</td>
+                <td class="padding-data-work">6114</td>
+            </tr>
+            <tr class="font-data">
+                <td></td>
+                <td>6075</td>
+            </tr>
+            <tr class="separated font-data">
+                <td></td>
+                <td>6089</td>
+
+            </tr>
+
+
+
+            <tr class="font-data">
+                <td class="padding-data-work">ตรวจท้อง</td>
+                <td class="padding-data-work">6153</td>
+            </tr>
+            <tr class="separated font-data">
+                <td></td>
+                <td>6127</td>
+
+            </tr>
+
+
+
+            <tr class="font-data">
+                <td class="padding-data-work">วันตัดเขี้ยวและหาง</td>
+                <td class="padding-data-work">6183</td>
+            </tr>
+            <tr class="font-data">
+                <td></td>
+                <td>6195</td>
+            </tr>
+            <tr class="separated font-data">
+                <td></td>
+                <td>6179</td>
+
+            </tr>
+
+        </table>
+
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
