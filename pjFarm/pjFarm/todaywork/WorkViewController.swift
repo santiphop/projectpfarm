@@ -17,6 +17,10 @@ class WorkViewController: UIViewController {
         // Do any additional setup after loading the view.
         let db = appDelegate.db
         db.initcheck()
+//        db.generateWorkDateForKokKlod(date: Date())
+//        db.generateWorkIDCountForKokKlod()
+//        print(db.kokklodWorkDate)
+//        print(db.kokklodIDCount)
     }
     
     

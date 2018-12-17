@@ -48,6 +48,8 @@ class KlodViewController: UIViewController {
             dadString = ("LR")
         }
         db.getIDMaepun(id: momString)
+        db.generateWorkDateForKokKlod(date: datePicker.date)
+        db.generateWorkIDCountForKokKlod()
     }
     
     

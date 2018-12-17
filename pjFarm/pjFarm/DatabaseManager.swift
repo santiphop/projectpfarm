@@ -29,6 +29,14 @@ class DatabaseManager {
     ]
     
     
+    var kokklodWorkDate:[Date] = []
+    var kokklodIDCount:[Int] = []
+    var kokklodWorkString:[String] = [
+        "วันตอนตัวผู้-ตัดหูตัวเมีย", "วันตัดเขี้ยวและหาง", "วันถ่ายพยาธิ-หย่านม"
+    ]
+    
+    
+    
     var currentWork:String = ""
     
     var workList = [String]()
@@ -52,9 +60,12 @@ class DatabaseManager {
         self.generateWorkIDCountForMusao()
         
         //  set up maepun
-        //  maepun has no currentID
         self.generateWorkDateForMaepun(date: Date())
         self.generateWorkIDCountForMaepun(index: 0) // เฉพาะงานแรก: "ตรวจสัดครั้งที่1"
+        
+        //  set up kokklod
+        self.generateWorkDateForKokKlod(date: Date())
+        self.generateWorkIDCountForKokKlod()
     }
     
     func getIDMaepun(id:String) {
@@ -79,6 +90,42 @@ class DatabaseManager {
             "จำนวนลูกที่เหลือเพศผู้":male,
             "จำนวนลูกที่เหลือเพศเมีย":female
         ])
+        regisKK(id: id, date: date)
+    }
+    
+    func regisKK(id:String, date:Date) {
+        self.generateWorkDateForKokKlod(date: date)
+
+        ref.child("คอกคลอด/\(id)/\(pri)").setValue([
+            "secondary":sec,
+            "วันคลอด":dateFormat.string(from: date),
+            "\(kokklodWorkString[0])":dateFormat.string(from: kokklodWorkDate[0]),
+            "\(kokklodWorkString[1])":dateFormat.string(from: kokklodWorkDate[1]),
+            "\(kokklodWorkString[2])":dateFormat.string(from: kokklodWorkDate[2])
+        ])
+        
+        for i in 0...2 {
+            kokklodIDCount[i] = assignWork(date: kokklodWorkDate[i], work: kokklodWorkString[i], IDCount: kokklodIDCount[i], pigID: Int(id)!)
+            
+        }
+    }
+    
+    func generateWorkDateForKokKlod(date:Date) {
+        let addDate = [3, 7, 24]
+        kokklodWorkDate.removeAll()
+        for i in 0...addDate.count - 1 {
+            kokklodWorkDate.append(addDateComponent(date: date, intAdding: addDate[i]))
+        }
+    }
+    
+    func generateWorkIDCountForKokKlod() {
+        kokklodIDCount.removeAll()
+        for i in 0...2 {
+            ref.child("งาน/\(dateFormat.string(from: kokklodWorkDate[i]))W/ทั้งหมด/\(kokklodWorkString[i])").observeSingleEvent(of: .value, with: { snapshot in
+                // Get data
+                self.kokklodIDCount.append(Int(snapshot.childrenCount) + 1)
+            })
+        }
     }
     
     func assignWork(date:Date, work:String, IDCount:Int, pigID:Int) -> Int {

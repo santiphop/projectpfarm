@@ -29,6 +29,8 @@ class KlodAmountViewController: UIViewController {
         print(mom)
         print(dad)
         print(date)
+        let db = appDelegate.db
+        db.generateWorkIDCountForKokKlod()
     }
     
     @IBAction func save(_ sender: Any) {
