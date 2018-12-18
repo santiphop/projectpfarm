@@ -22,6 +22,7 @@ class SearchByIDViewController: UIViewController {
     @IBAction func searchButton(_ sender: Any) {
         id = idTextField.text!
         search()
+        idTextField.text! = ""
     }
     @IBOutlet weak var pigInfoView: UITextView!
     override func viewDidLoad() {

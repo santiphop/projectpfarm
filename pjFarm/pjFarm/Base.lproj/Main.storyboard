@@ -169,7 +169,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="ID" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LNH-eI-HDI" customClass="NumpadTextField" customModule="pjFarm" customModuleProvider="target">
-                                <rect key="frame" x="94" y="140" width="97" height="30"/>
+                                <rect key="frame" x="94" y="140" width="153" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="0.9843560804" blue="0.98237671140000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="textColor"/>
@@ -183,14 +183,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wLi-75-blK">
-                                <rect key="frame" x="258" y="139" width="48" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Search"/>
-                                <connections>
-                                    <action selector="searchButton:" destination="FJP-UE-OtU" eventType="touchUpInside" id="A7h-sz-2Fj"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fal-1P-h5W" customClass="RoundButton" customModule="pjFarm" customModuleProvider="target">
                                 <rect key="frame" x="124" y="597" width="130" height="45"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -209,6 +201,14 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wLi-75-blK">
+                                <rect key="frame" x="220" y="144" width="22" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="Search"/>
+                                <connections>
+                                    <action selector="searchButton:" destination="FJP-UE-OtU" eventType="touchUpInside" id="A7h-sz-2Fj"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.93372752569999995" blue="0.90592893839999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <viewLayoutGuide key="safeArea" id="m3v-3c-NZb"/>
@@ -360,10 +360,10 @@
                     <navigationItem key="navigationItem" title="Today's Work" id="r1t-9K-dPc">
                         <barButtonItem key="backBarButtonItem" title="Work" id="fKa-a0-dLR"/>
                         <barButtonItem key="rightBarButtonItem" style="plain" id="PQn-Gy-K0u">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="9Yk-Hu-YTa">
-                                <rect key="frame" x="276" y="7" width="83" height="30"/>
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="9Yk-Hu-YTa">
+                                <rect key="frame" x="339" y="11" width="20" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Export"/>
+                                <state key="normal" image="Share"/>
                                 <connections>
                                     <action selector="export:" destination="MFU-TC-d6O" eventType="touchUpInside" id="N6o-2Q-fJy"/>
                                 </connections>
@@ -852,4 +852,8 @@
             <point key="canvasLocation" x="620" y="-818.14092953523243"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Search" width="18" height="18"/>
+        <image name="Share" width="18" height="18"/>
+    </resources>
 </document>

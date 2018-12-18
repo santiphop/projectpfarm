@@ -13,9 +13,6 @@ class WorkDetailReportViewController: UIViewController {
     var idSelect = [Int]()
     var detailSelect = [Bool]()
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
-    
-    let pigPath = ""
-    
 
     @IBOutlet weak var titleBar: UINavigationItem!
     @IBAction func reportButton(_ sender: Any) {

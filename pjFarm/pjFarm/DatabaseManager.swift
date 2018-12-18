@@ -105,40 +105,7 @@ class DatabaseManager {
         self.generateWorkIDCountForKindergarten()
     }
     
-    func generateWorkDateForKindergarten(date:Date) {
-        let addDate = [7, 14, 21, 28]
-        kindergartenWorkDate.removeAll()
-        for i in 0...addDate.count - 1 {
-            kindergartenWorkDate.append(addDateComponent(date: date, intAdding: addDate[i]))
-        }
-    }
     
-    func generateWorkIDCountForKindergarten() {
-        kindergartenIDCount.removeAll()
-        for i in 0...3 {
-            ref.child("งาน/\(dateFormat.string(from: kindergartenWorkDate[i]))W/ทั้งหมด/\(kindergartenWorkString[i])").observeSingleEvent(of: .value, with: { snapshot in
-                // Get data
-                self.kindergartenIDCount.append(Int(snapshot.childrenCount) + 1)
-            })
-        }
-    }
-    
-    func regisKG(id:String, date:Date) {
-        ref.child("คอกคลอด/\(id)").observeSingleEvent(of: .value, with: { snapshot in
-            let primaryCount = snapshot.childrenCount
-            self.ref.child("คอกอนุบาล/\(id)/\(primaryCount)").setValue([
-                "เข้าคอกอนุบาล": self.dateFormat.string(from: date),
-                "\(self.kindergartenWorkString[0])": self.dateFormat.string(from: self.kindergartenWorkDate[0]),
-                "\(self.kindergartenWorkString[1])": self.dateFormat.string(from: self.kindergartenWorkDate[1]),
-                "\(self.kindergartenWorkString[2])": self.dateFormat.string(from: self.kindergartenWorkDate[2]),
-                "\(self.kindergartenWorkString[3])": self.dateFormat.string(from: self.kindergartenWorkDate[3]),
-            ])
-            
-            for i in 0...3 {
-                self.kindergartenIDCount[i] = self.assignWork(date: self.kindergartenWorkDate[i], work: self.kindergartenWorkString[i], IDCount: self.kindergartenIDCount[i], pigID: Int(id)!)
-            }
-        })
-    }
     
     
     func reportWorkForTomorrow(ids:[Int], bools:[Bool], date:Date) {
@@ -173,7 +140,6 @@ class DatabaseManager {
     
     func initcheck()  {
         print(self.workInfo)
-        print(self.pigInfo)
     }
     
     private func addDateComponent(date:Date, intAdding:Int) -> Date {
@@ -216,6 +182,44 @@ extension DatabaseManager {
     func generateIDCountForTomorrowWork() {
         ref.child("งาน/\(dateFormat.string(from: addDateComponent(date: Date(), intAdding: 1)))W/ทั้งหมด/\(currentWork)").observeSingleEvent(of: .value, with: { snapshot in
             self.tmrWorkIDCount = Int(snapshot.childrenCount) + 1
+        })
+    }
+}
+
+/////     คอกอนุบาล  /////
+extension DatabaseManager {
+    func generateWorkDateForKindergarten(date:Date) {
+        let addDate = [7, 14, 21, 28]
+        kindergartenWorkDate.removeAll()
+        for i in 0...addDate.count - 1 {
+            kindergartenWorkDate.append(addDateComponent(date: date, intAdding: addDate[i]))
+        }
+    }
+    
+    func generateWorkIDCountForKindergarten() {
+        kindergartenIDCount.removeAll()
+        for i in 0...3 {
+            ref.child("งาน/\(dateFormat.string(from: kindergartenWorkDate[i]))W/ทั้งหมด/\(kindergartenWorkString[i])").observeSingleEvent(of: .value, with: { snapshot in
+                // Get data
+                self.kindergartenIDCount.append(Int(snapshot.childrenCount) + 1)
+            })
+        }
+    }
+    
+    func regisKG(id:String, date:Date) {
+        ref.child("คอกคลอด/\(id)").observeSingleEvent(of: .value, with: { snapshot in
+            let primaryCount = snapshot.childrenCount
+            self.ref.child("คอกอนุบาล/\(id)/\(primaryCount)").setValue([
+                "เข้าคอกอนุบาล": self.dateFormat.string(from: date),
+                "\(self.kindergartenWorkString[0])": self.dateFormat.string(from: self.kindergartenWorkDate[0]),
+                "\(self.kindergartenWorkString[1])": self.dateFormat.string(from: self.kindergartenWorkDate[1]),
+                "\(self.kindergartenWorkString[2])": self.dateFormat.string(from: self.kindergartenWorkDate[2]),
+                "\(self.kindergartenWorkString[3])": self.dateFormat.string(from: self.kindergartenWorkDate[3]),
+                ])
+            
+            for i in 0...3 {
+                self.kindergartenIDCount[i] = self.assignWork(date: self.kindergartenWorkDate[i], work: self.kindergartenWorkString[i], IDCount: self.kindergartenIDCount[i], pigID: Int(id)!)
+            }
         })
     }
 }
