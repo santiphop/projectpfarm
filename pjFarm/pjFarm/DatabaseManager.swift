@@ -61,8 +61,8 @@ class DatabaseManager {
                     self.pigList.append("\(key as! String)")
                 }
             }
-            print(self.pigList)
-            print(self.pigList.count)
+//            print(self.pigList)
+//            print(self.pigList.count)
             
             for id in self.pigList {
                 let path = "หมูสาว/\(id)/ประวัติ"
@@ -75,7 +75,6 @@ class DatabaseManager {
                     self.pigInfo[id]?.append(momID)
                     self.pigInfo[id]?.append(dadBreed)
                     self.pigInfo[id]?.append(dateIn)
-                    print(self.pigInfo[id]! as [String])
                 })
             }
         })

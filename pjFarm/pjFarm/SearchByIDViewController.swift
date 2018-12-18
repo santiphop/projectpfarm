@@ -10,14 +10,30 @@ import UIKit
 
 class SearchByIDViewController: UIViewController {
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    var id = String()
+    var autoSearch = Bool()
+    
+    
     var currentPigList = [String]()
     var currentPigInfo = [String:[String]]()
 
     
     @IBOutlet weak var idTextField: NumpadTextField!
-    @IBAction func search(_ sender: Any) {
+    @IBAction func searchButton(_ sender: Any) {
+        id = idTextField.text!
+        search()
+    }
+    @IBOutlet weak var pigInfoView: UITextView!
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        // Do any additional setup after loading the view.
+        if autoSearch { search() }
+    }
+    
+    func search() {
         let db = appDelegate.db
-        let id = idTextField.text!
+        
         currentPigList = db.pigList
         currentPigInfo = db.pigInfo
         if currentPigInfo[id] != nil {
@@ -25,12 +41,6 @@ class SearchByIDViewController: UIViewController {
         } else {
             showExceptionAlert()
         }
-    }
-    @IBOutlet weak var pigInfoView: UITextView!
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
     
     func showExceptionAlert() {

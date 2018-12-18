@@ -127,49 +127,26 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tJr-Ss-c7W" userLabel="Camera View">
-                                <rect key="frame" x="16" y="138" width="343" height="258"/>
-                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KbU-ye-dC5" userLabel="Scan Button" customClass="RoundButton" customModule="pjFarm" customModuleProvider="target">
-                                <rect key="frame" x="83" y="426" width="80" height="45"/>
-                                <color key="backgroundColor" red="1" green="0.6705882353" blue="0.68235294120000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Scan">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="scanButtonTouchUp:" destination="PcZ-jY-LH0" eventType="touchUpInside" id="hRr-MP-ReD"/>
-                                </connections>
-                            </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="8080" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="qGA-Ow-60O" userLabel="Output Text View">
-                                <rect key="frame" x="16" y="495" width="343" height="246"/>
+                                <rect key="frame" x="16" y="138" width="343" height="474"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hnJ-wW-REj" customClass="RoundButton" customModule="pjFarm" customModuleProvider="target">
-                                <rect key="frame" x="196" y="426" width="105" height="45"/>
+                                <rect key="frame" x="135" y="666" width="105" height="45"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="0.6705882353" blue="0.68235294120000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Search by ID">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <segue destination="FJP-UE-OtU" kind="show" id="KJj-NP-ZgY"/>
+                                    <segue destination="FJP-UE-OtU" kind="show" identifier="QRtoSearchID" id="KJj-NP-ZgY"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.93372752569999995" blue="0.90592893839999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
-                            <constraint firstItem="qGA-Ow-60O" firstAttribute="top" secondItem="KbU-ye-dC5" secondAttribute="bottom" constant="27" id="8mI-r3-sxf"/>
-                            <constraint firstItem="SHb-YI-rrm" firstAttribute="trailing" secondItem="KbU-ye-dC5" secondAttribute="trailing" constant="165" id="GwI-5l-mdW"/>
-                            <constraint firstItem="SHb-YI-rrm" firstAttribute="bottom" secondItem="qGA-Ow-60O" secondAttribute="bottom" constant="37" id="HmH-q3-bOi"/>
                             <constraint firstItem="tJr-Ss-c7W" firstAttribute="leading" secondItem="SHb-YI-rrm" secondAttribute="leading" constant="16" id="HzG-LO-UMQ"/>
-                            <constraint firstAttribute="bottom" secondItem="tJr-Ss-c7W" secondAttribute="bottom" constant="416" id="Kbv-fQ-lHh"/>
-                            <constraint firstItem="KbU-ye-dC5" firstAttribute="leading" secondItem="SHb-YI-rrm" secondAttribute="leading" constant="164" id="OX3-04-BL4"/>
-                            <constraint firstItem="SHb-YI-rrm" firstAttribute="trailing" secondItem="qGA-Ow-60O" secondAttribute="trailing" constant="16" id="ezO-Aa-eeY"/>
+                            <constraint firstAttribute="bottom" secondItem="tJr-Ss-c7W" secondAttribute="bottom" constant="200" id="Kbv-fQ-lHh"/>
                             <constraint firstItem="tJr-Ss-c7W" firstAttribute="top" secondItem="SHb-YI-rrm" secondAttribute="top" constant="50" id="hEQ-Nb-5xx"/>
-                            <constraint firstItem="KbU-ye-dC5" firstAttribute="top" secondItem="tJr-Ss-c7W" secondAttribute="bottom" constant="42" id="haY-2I-nN3"/>
-                            <constraint firstItem="qGA-Ow-60O" firstAttribute="leading" secondItem="SHb-YI-rrm" secondAttribute="leading" constant="16" id="n97-fo-j2m"/>
                             <constraint firstItem="SHb-YI-rrm" firstAttribute="trailing" secondItem="tJr-Ss-c7W" secondAttribute="trailing" constant="16" id="pAN-TY-47o"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="SHb-YI-rrm"/>
@@ -177,14 +154,13 @@
                     <navigationItem key="navigationItem" title="QR Code" id="HHR-Ta-MiI"/>
                     <connections>
                         <outlet property="camaraView" destination="tJr-Ss-c7W" id="wj1-dk-vDZ"/>
-                        <outlet property="outputTextView" destination="qGA-Ow-60O" id="RyQ-l3-vuI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tjK-K7-ab0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2108" y="213.54679802955667"/>
         </scene>
-        <!--Search ByID View Controller-->
+        <!--Search by ID-->
         <scene sceneID="nlc-Uk-9Ls">
             <objects>
                 <viewController id="FJP-UE-OtU" customClass="SearchByIDViewController" customModule="pjFarm" customModuleProvider="target" sceneMemberID="viewController">
@@ -212,7 +188,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Search"/>
                                 <connections>
-                                    <action selector="search:" destination="FJP-UE-OtU" eventType="touchUpInside" id="A7h-sz-2Fj"/>
+                                    <action selector="searchButton:" destination="FJP-UE-OtU" eventType="touchUpInside" id="A7h-sz-2Fj"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fal-1P-h5W" customClass="RoundButton" customModule="pjFarm" customModuleProvider="target">
@@ -226,11 +202,10 @@
                                     <segue destination="LZV-p6-KrR" kind="unwind" unwindAction="unwindToHome:" id="HmU-DP-p5L"/>
                                 </connections>
                             </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Obu-tQ-8qw">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Ready for scan..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Obu-tQ-8qw">
                                 <rect key="frame" x="32" y="202" width="314" height="317"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="0.9843560804" blue="0.98237671140000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <mutableString key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</mutableString>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
@@ -238,6 +213,7 @@
                         <color key="backgroundColor" red="1" green="0.93372752569999995" blue="0.90592893839999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <viewLayoutGuide key="safeArea" id="m3v-3c-NZb"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Search by ID" id="agk-HG-bbq"/>
                     <connections>
                         <outlet property="idTextField" destination="LNH-eI-HDI" id="PIs-7h-Wx5"/>
                         <outlet property="pigInfoView" destination="Obu-tQ-8qw" id="va4-dN-btZ"/>
@@ -248,7 +224,7 @@
             </objects>
             <point key="canvasLocation" x="3160.8000000000002" y="213.54679802955667"/>
         </scene>
-        <!--Pig Farm Name-->
+        <!--Pig's Plan App-->
         <scene sceneID="NHL-Xu-6hi">
             <objects>
                 <viewController id="k2H-9g-rGP" customClass="HomeViewController" customModule="pjFarm" customModuleProvider="target" sceneMemberID="viewController">
@@ -309,7 +285,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="CeJ-LF-yhU"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Pig Farm Name" id="ST9-fW-TIR">
+                    <navigationItem key="navigationItem" title="Pig's Plan App" id="ST9-fW-TIR">
                         <barButtonItem key="backBarButtonItem" title="Home" id="60E-9e-Zea"/>
                     </navigationItem>
                     <connections>
@@ -464,7 +440,7 @@
             </objects>
             <point key="canvasLocation" x="4117.6000000000004" y="-1037.4384236453202"/>
         </scene>
-        <!--Wean View Controller-->
+        <!--Wean-->
         <scene sceneID="Oec-hr-dsv">
             <objects>
                 <viewController id="eh0-Hb-92t" customClass="WeanViewController" customModule="pjFarm" customModuleProvider="target" sceneMemberID="viewController">
@@ -517,6 +493,7 @@
                         <color key="backgroundColor" red="1" green="0.93372752569999995" blue="0.90592893839999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <viewLayoutGuide key="safeArea" id="Xut-hn-AXr"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Wean" id="adH-yy-TxK"/>
                     <connections>
                         <outlet property="dateTextField" destination="E0a-lG-z1J" id="dv2-ZR-hRn"/>
                         <outlet property="momTextField" destination="6Xp-Te-7us" id="Azp-hE-AQ8"/>
@@ -651,7 +628,7 @@
             </objects>
             <point key="canvasLocation" x="3753" y="-2611"/>
         </scene>
-        <!--Klod-->
+        <!--Farrow-->
         <scene sceneID="nQi-iC-K1L">
             <objects>
                 <viewController id="lOQ-fV-oK9" customClass="KlodViewController" customModule="pjFarm" customModuleProvider="target" sceneMemberID="viewController">
@@ -723,7 +700,7 @@
                         <color key="backgroundColor" red="1" green="0.93372752569999995" blue="0.90592893839999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <viewLayoutGuide key="safeArea" id="4rj-DE-Lmw"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Klod" id="FJc-03-buG"/>
+                    <navigationItem key="navigationItem" title="Farrow" id="FJc-03-buG"/>
                     <connections>
                         <outlet property="dad" destination="tft-sa-MBi" id="Dby-9M-Z2k"/>
                         <outlet property="dateTextField" destination="qtV-Gz-MB0" id="vfX-nb-7y5"/>

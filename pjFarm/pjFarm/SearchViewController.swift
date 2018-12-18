@@ -10,23 +10,23 @@ import UIKit
 import AVFoundation
 
 class SearchViewController: UIViewController {
-    
-    @IBOutlet weak var camaraView: UIView!
-    @IBAction func scanButtonTouchUp(_ sender: UIButton) {
-        print(startReading())
-    }
-    @IBOutlet weak var outputTextView: UITextView!
+    let captureMetadataOutput = AVCaptureMetadataOutput()
 
+    @IBOutlet weak var camaraView: UIView!
+    
+    var outputText :String!
     var captureSession: AVCaptureSession!
     var videoPreviewLayer: AVCaptureVideoPreviewLayer!
     var isReading: Bool = false
+    var isScanned :Bool = false
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        startReading()
     }
-    
 
     /*
     // MARK: - Navigation
@@ -54,10 +54,9 @@ class SearchViewController: UIViewController {
             self.videoPreviewLayer.frame = self.camaraView.layer.bounds
             self.camaraView.layer.addSublayer(self.videoPreviewLayer)
             
-            let captureMetadataOutput = AVCaptureMetadataOutput()
             self.captureSession.addOutput(captureMetadataOutput)
             captureMetadataOutput.metadataObjectTypes = captureMetadataOutput.availableMetadataObjectTypes
-            self.outputTextView.text = captureMetadataOutput.availableMetadataObjectTypes.description
+            self.outputText = captureMetadataOutput.availableMetadataObjectTypes.description
             captureMetadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
             self.captureSession.startRunning()
         } else {
@@ -70,6 +69,13 @@ class SearchViewController: UIViewController {
         let alert = UIAlertController(title: msgTitle, message: msgText, preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let controller = segue.destination as! SearchByIDViewController
+        if isScanned {
+            controller.id = self.outputText
+            controller.autoSearch = true
+        }
     }
 }
 
@@ -84,11 +90,14 @@ extension SearchViewController:AVCaptureMetadataOutputObjectsDelegate {
         }
         
         // output
-        self.outputTextView.text = qrText
+        self.outputText = qrText
         
         // stop scanning
         self.captureSession.stopRunning()
         self.captureSession = nil
         self.videoPreviewLayer.removeFromSuperlayer()
+        isScanned = true
+        performSegue(withIdentifier: "QRtoSearchID", sender: self)
+        
     }
 }
