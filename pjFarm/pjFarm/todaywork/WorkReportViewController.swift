@@ -25,7 +25,7 @@ class WorkReportViewController: UIViewController {
         // Do any additional setup after loading the view.
         let db = appDelegate.db
         works = db.workList
-        detail = db.details
+        detail = db.workInfo
         print("inited")
         
     }

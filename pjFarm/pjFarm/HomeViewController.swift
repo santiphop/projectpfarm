@@ -28,7 +28,8 @@ class HomeViewController: UIViewController {
         
         let db = appDelegate.db
         db.getAllWorkFrom(date: Date())
-        
+        db.getAllPig(date: Date())
+
         
     }
 

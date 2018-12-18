@@ -32,8 +32,6 @@ class KlodViewController: UIViewController {
         db.getMaepunCurrentStateFrom(id: momString)
     }
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 

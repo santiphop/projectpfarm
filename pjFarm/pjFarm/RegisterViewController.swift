@@ -14,24 +14,21 @@ class RegisterViewController: UIViewController {
     let datePicker = UIDatePicker()
     let dateFormatForTextField = DateFormatter()
     let dadArray = ["Large White", "Duroc", "Landrace"]
-    let genderArray = ["Male", "Female"]
     
     @IBOutlet weak var momTextField: NumpadTextField!
     @IBOutlet weak var dad: UISegmentedControl!
-    @IBOutlet weak var gender: UISegmentedControl!
     @IBOutlet weak var dateTextField: UITextField!
     
     @IBAction func registerButton(_ sender: Any) {
         let db = self.appDelegate.db
         let momString:String = momTextField.text!
         let dadString:String = dadArray[dad.selectedSegmentIndex]
-        let genderString:String = genderArray[gender.selectedSegmentIndex]
         
         if momString.isEmpty {
             showMomExceptionAlert()
         }
         else {
-            let currentID = db.regisMS(dad: dadString, mom: momString, gender: genderString, date:datePicker.date)
+            let currentID = db.regisMS(dad: dadString, mom: momString, date:datePicker.date)
             showOptionsAlert(id: currentID)
         }
     }

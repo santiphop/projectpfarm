@@ -22,6 +22,8 @@
 		8F295DD121C7971B0017D376 /* KlodAmountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F295DD021C7971B0017D376 /* KlodAmountViewController.swift */; };
 		8F295DD521C7B1760017D376 /* NumpadTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F295DD421C7B1760017D376 /* NumpadTextField.swift */; };
 		8F47B53E21B3DF2E00A1F25F /* WorkData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F47B53D21B3DF2E00A1F25F /* WorkData.swift */; };
+		8F5E30E421C8D4030035DD97 /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F5E30E321C8D4030035DD97 /* RoundButton.swift */; };
+		8F5E30E621C9177B0035DD97 /* SearchByIDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F5E30E521C9177B0035DD97 /* SearchByIDViewController.swift */; };
 		8F8E845021C8121E00CE8CAF /* InvoiceComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F8E844F21C8121E00CE8CAF /* InvoiceComposer.swift */; };
 		8F8E845421C814B700CE8CAF /* CustomPrintPageRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F8E845321C814B700CE8CAF /* CustomPrintPageRenderer.swift */; };
 		8F8E845621C81D5800CE8CAF /* invoice.html in Resources */ = {isa = PBXBuildFile; fileRef = 8F8E845521C81D5800CE8CAF /* invoice.html */; };
@@ -82,6 +84,8 @@
 		8F295DD021C7971B0017D376 /* KlodAmountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KlodAmountViewController.swift; sourceTree = "<group>"; };
 		8F295DD421C7B1760017D376 /* NumpadTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumpadTextField.swift; sourceTree = "<group>"; };
 		8F47B53D21B3DF2E00A1F25F /* WorkData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkData.swift; sourceTree = "<group>"; };
+		8F5E30E321C8D4030035DD97 /* RoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
+		8F5E30E521C9177B0035DD97 /* SearchByIDViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchByIDViewController.swift; sourceTree = "<group>"; };
 		8F8E844F21C8121E00CE8CAF /* InvoiceComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceComposer.swift; sourceTree = "<group>"; };
 		8F8E845321C814B700CE8CAF /* CustomPrintPageRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPrintPageRenderer.swift; sourceTree = "<group>"; };
 		8F8E845521C81D5800CE8CAF /* invoice.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = invoice.html; sourceTree = "<group>"; };
@@ -179,6 +183,7 @@
 				8F295DD821C7BC290017D376 /* todaywork */,
 				8FDC8B1021AD487700060F65 /* RegisterViewController.swift */,
 				8FEC468B21B0FE4300B2CB47 /* SearchViewController.swift */,
+				8F5E30E521C9177B0035DD97 /* SearchByIDViewController.swift */,
 				6A57B67421427E53004DE381 /* Main.storyboard */,
 				8F18C6F6216DCFD9001BBF0F /* PigMusao.swift */,
 				6A57B67721427E53004DE381 /* Assets.xcassets */,
@@ -186,8 +191,8 @@
 				6A57B67C21427E53004DE381 /* Info.plist */,
 				8FAD343321A2CAB70048A3EC /* GoogleService-Info.plist */,
 				8FAD344921A2CD570048A3EC /* pjFarm-Bridging-Header.h */,
-				8F295DD421C7B1760017D376 /* NumpadTextField.swift */,
 				8F47B53D21B3DF2E00A1F25F /* WorkData.swift */,
+				8F5E30E721C917880035DD97 /* UIObject */,
 				8FAD343521A2CC370048A3EC /* Framework */,
 			);
 			path = pjFarm;
@@ -224,6 +229,15 @@
 				8F295DCE21C794340017D376 /* WeanViewController.swift */,
 			);
 			path = todaywork;
+			sourceTree = "<group>";
+		};
+		8F5E30E721C917880035DD97 /* UIObject */ = {
+			isa = PBXGroup;
+			children = (
+				8F295DD421C7B1760017D376 /* NumpadTextField.swift */,
+				8F5E30E321C8D4030035DD97 /* RoundButton.swift */,
+			);
+			path = UIObject;
 			sourceTree = "<group>";
 		};
 		8F8E845721C8221600CE8CAF /* reportsheet */ = {
@@ -433,12 +447,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8F5E30E421C8D4030035DD97 /* RoundButton.swift in Sources */,
 				8F0EECE221BA30A4003885BE /* WorkDetailReportViewController.swift in Sources */,
 				8F18C6F7216DCFD9001BBF0F /* PigMusao.swift in Sources */,
 				8FEC468C21B0FE4300B2CB47 /* SearchViewController.swift in Sources */,
 				8F8E845021C8121E00CE8CAF /* InvoiceComposer.swift in Sources */,
 				8F295DD121C7971B0017D376 /* KlodAmountViewController.swift in Sources */,
 				8F295DCF21C794340017D376 /* WeanViewController.swift in Sources */,
+				8F5E30E621C9177B0035DD97 /* SearchByIDViewController.swift in Sources */,
 				8F295DD521C7B1760017D376 /* NumpadTextField.swift in Sources */,
 				8F0EECE021BA2DC4003885BE /* WorkReportViewController.swift in Sources */,
 				8FEDCBED21B4D5CE00F935EA /* WorkViewController.swift in Sources */,
@@ -619,6 +635,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 79J6NX5GF8;
@@ -645,6 +662,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 79J6NX5GF8;

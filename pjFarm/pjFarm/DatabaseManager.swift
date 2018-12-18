@@ -40,17 +40,47 @@ class DatabaseManager {
         "วัคซีนอหิวาห์รอบที่1", "วัคซีนพิษสุนัขบ้าเทียมรอบที่1", "วัคซีนอหิวาห์รอบที่2", "วัคซีนพิษสุนัขบ้าเทียมรอบที่2"
     ]
     
+    var pigList = [String]()
+    var pigInfo = [String:[String]]()
     
     var currentWork:String = ""
     
     var workList = [String]()
-    var details = [String:[Int]]()
+    var workInfo = [String:[Int]]()
     
     var tmrWorkIDCount:Int = 0
     
-    var pri:Int = 0
-    var sec:Int = 0
+    var primaryState:Int = 0
+    var secondaryState:Int = 0
     
+    func getAllPig(date:Date) {
+        ref.child("หมูสาว").observeSingleEvent(of: .value, with: { snapshot in
+            let data = snapshot.value as? NSDictionary
+            for (key, _) in data! {
+                if "\(key as! String)" != "currentID" {
+                    self.pigList.append("\(key as! String)")
+                }
+            }
+            print(self.pigList)
+            print(self.pigList.count)
+            
+            for id in self.pigList {
+                let path = "หมูสาว/\(id)/ประวัติ"
+                self.ref.child(path).observeSingleEvent(of: .value, with: { snapshot in
+                    let data = snapshot.value as? NSDictionary
+                    let momID = data?["แม่พันธุ์"] as! String
+                    let dadBreed = data?["พ่อพันธุ์"] as! String
+                    let dateIn = data?["วันแรกเข้า"] as! String
+                    self.pigInfo[id] = []
+                    self.pigInfo[id]?.append(momID)
+                    self.pigInfo[id]?.append(dadBreed)
+                    self.pigInfo[id]?.append(dateIn)
+                    print(self.pigInfo[id]! as [String])
+                })
+            }
+        })
+        
+    }
     
     
     init() {
@@ -133,17 +163,18 @@ class DatabaseManager {
         if dateFormat.string(from: date).elementsEqual(dateFormat.string(from: Date())) {
             if !workList.contains(work) {
                 workList.append(work)
-                details[work] = []
-                details[work]?.append(pigID)
+                workInfo[work] = []
+                workInfo[work]?.append(pigID)
             } else {
-                details[work]?.append(pigID)
+                workInfo[work]?.append(pigID)
             }
         }
         return IDCount + 1
     }
     
     func initcheck()  {
-        print(self.details)
+        print(self.workInfo)
+        print(self.pigInfo)
     }
     
     private func addDateComponent(date:Date, intAdding:Int) -> Date {
@@ -157,8 +188,8 @@ class DatabaseManager {
 /////     รายงาน    /////
 extension DatabaseManager {
     func getAllWorkFrom(date:Date) {
-        //  append WorkList
-        //  change details
+        //  append workList
+        //  append workInfo
         ref.child("งาน/\(dateFormat.string(from: date))W/ทั้งหมด").observeSingleEvent(of: .value, with: { snapshot in
             let data = snapshot.value as? NSDictionary
             
@@ -175,7 +206,7 @@ extension DatabaseManager {
                         self.ref.child("\(path)/\(i)").observeSingleEvent(of: .value, with: { snapshot in
                             let id = snapshot.value
                             array.append(id as! Int)
-                            self.details[workName] = array
+                            self.workInfo[workName] = array
                         })
                     }
                 })
@@ -197,8 +228,8 @@ extension DatabaseManager {
         ref.child("แม่พันธุ์/\(id)/currentState").observeSingleEvent(of: .value, with: { snapshot in
             let data = snapshot.value as? NSDictionary
             if data != nil {
-                self.pri = data?["primary"] as! Int
-                self.sec = data?["secondary"] as! Int
+                self.primaryState = data?["primary"] as! Int
+                self.secondaryState = data?["secondary"] as! Int
             }
         })
     }
@@ -224,8 +255,8 @@ extension DatabaseManager {
     func regisKK(id:String, date:Date) {
         self.generateWorkDateForKokKlod(date: date)
         
-        ref.child("คอกคลอด/\(id)/\(pri)").setValue([
-            "secondary":sec,
+        ref.child("คอกคลอด/\(id)/\(primaryState)").setValue([
+            "secondary":secondaryState,
             "วันคลอด":dateFormat.string(from: date),
             "\(kokklodWorkString[0])":dateFormat.string(from: kokklodWorkDate[0]),
             "\(kokklodWorkString[1])":dateFormat.string(from: kokklodWorkDate[1]),
@@ -239,7 +270,7 @@ extension DatabaseManager {
     }
     
     func writeKlodHistory(id:String, dad:String, date:Date, all:Int, dead:Int, mummy:Int, male:Int, female:Int) {
-        ref.child("แม่พันธุ์/\(id)/\(pri)/\(sec)/ประวัติการทำคลอด").setValue([
+        ref.child("แม่พันธุ์/\(id)/\(primaryState)/\(secondaryState)/ประวัติการทำคลอด").setValue([
             "วันคลอด":dateFormat.string(from: date),
             "จำนวนลูกทั้งหมด":all,
             "จำนวนลูกที่ตาย":dead,
@@ -328,7 +359,7 @@ extension DatabaseManager {
     }
     
     
-    func regisMS(dad:String, mom:String, gender:String, date:Date) -> Int {
+    func regisMS(dad:String, mom:String, date:Date) -> Int {
         self.currentIDMS += 1
         ref.child("หมูสาว/currentID").setValue(self.currentIDMS)
         
@@ -338,7 +369,6 @@ extension DatabaseManager {
             "ประวัติ":[
                 "แม่พันธุ์":mom,
                 "พ่อพันธุ์":dad,
-                "เพศ":gender,
                 "วันแรกเข้า":dateFormat.string(from: date)
             ],
             "งาน":[

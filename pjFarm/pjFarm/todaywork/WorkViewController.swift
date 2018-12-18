@@ -12,11 +12,7 @@ class WorkViewController: UIViewController {
 
     var appDelegate = UIApplication.shared.delegate as! AppDelegate
     let dateFormatForReportHTML = DateFormatter()
-
-    var invoiceInfo: [String: AnyObject]!
-    
     var invoiceComposer: InvoiceComposer!
-    
     var HTMLContent: String!
     
     var documentController : UIDocumentInteractionController!
