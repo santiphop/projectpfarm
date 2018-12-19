@@ -13,6 +13,7 @@ class FirstRutViewController: UIViewController {
     var appDelegate = UIApplication.shared.delegate as! AppDelegate
     var datePicker = UIDatePicker()
     let dateFormatForTextField = DateFormatter()
+    var currentPigList = [String]()
     
 
     @IBOutlet weak var idTextField: NumpadTextField!
@@ -21,8 +22,11 @@ class FirstRutViewController: UIViewController {
     @IBAction func saveButton(_ sender: Any) {
         let db = self.appDelegate.db
         let idString = idTextField.text!
+        currentPigList = db.pigList
         if idString.isEmpty {
             showEmptyTextExceptionAlert()
+        } else if !currentPigList.contains(idString) {
+            showNoDataExceptionAlert(id: idString)
         }
         else {
             db.regisMP(date: datePicker.date, id: idString)
@@ -78,6 +82,18 @@ class FirstRutViewController: UIViewController {
     
     func showEmptyTextExceptionAlert() {
         let alertController = UIAlertController(title: "ลงทะเบียนไม่สำเร็จ", message: "ข้อมูลไม่ถูกต้อง กรุณาใส่ ID แม่พันธุ์", preferredStyle: UIAlertController.Style.alert)
+        
+        let actionNothing = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) { (action) in }
+        
+        alertController.addAction(actionNothing)
+        
+        present(alertController, animated: true, completion: nil)
+        
+        
+    }
+    
+    func showNoDataExceptionAlert(id:String) {
+        let alertController = UIAlertController(title: "ไม่พบข้อมูล", message: "ข้อมูลไม่ถูกต้อง\nID:\(id) ไม่มีอยู่ในระบบ", preferredStyle: UIAlertController.Style.alert)
         
         let actionNothing = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) { (action) in }
         

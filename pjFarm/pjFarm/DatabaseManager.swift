@@ -53,7 +53,8 @@ class DatabaseManager {
     var primaryState:Int = 0
     var secondaryState:Int = 0
     
-    func getAllPig(date:Date) {
+    //  เฉพาะหมูสาว
+    func getAllPig() {
         ref.child("หมูสาว").observeSingleEvent(of: .value, with: { snapshot in
             let data = snapshot.value as? NSDictionary
             for (key, _) in data! {
@@ -65,6 +66,7 @@ class DatabaseManager {
 //            print(self.pigList.count)
             
             for id in self.pigList {
+                ////////// "หมูสาว" + id + "ประวัติ"
                 let path = "หมูสาว/\(id)/ประวัติ"
                 self.ref.child(path).observeSingleEvent(of: .value, with: { snapshot in
                     let data = snapshot.value as? NSDictionary
@@ -105,20 +107,21 @@ class DatabaseManager {
         self.generateWorkIDCountForKindergarten()
     }
     
-    
-    
-    
+    //  เลื่อนงานไปทำพรุ่งนี้
     func reportWorkForTomorrow(ids:[Int], bools:[Bool], date:Date) {
         let todayPath = "งาน/\(dateFormat.string(from: date))W/งานค้าง/\(currentWork)"
         let tomorrowPath = "งาน/\(dateFormat.string(from: addDateComponent(date: date, intAdding: 1)))W/ทั้งหมด/\(currentWork)"
         var index = 1
-        for i in 0...bools.count-1 {
+        for j in 0...bools.count-1 {
+            var i = bools.count-1-j
             if bools[i] {
                 print(ids[i])
                 ref.child("\(todayPath)/\(index)").setValue(ids[i])
                 ref.child("\(tomorrowPath)/\(tmrWorkIDCount)").setValue(ids[i])
                 index += 1
                 tmrWorkIDCount += 1
+                print(workInfo[currentWork]?.count)
+                workInfo[currentWork]?.remove(at: i)
             }
         }
     }
@@ -157,11 +160,11 @@ extension DatabaseManager {
         //  append workInfo
         ref.child("งาน/\(dateFormat.string(from: date))W/ทั้งหมด").observeSingleEvent(of: .value, with: { snapshot in
             let data = snapshot.value as? NSDictionary
-            
+
             for (key, _) in data! {
                 self.workList.append("\(key as! String)")
             }
-            
+
             for workName in self.workList {
                 let path = "งาน/\(self.dateFormat.string(from: date))W/ทั้งหมด/\(workName)"
                 self.ref.child(path).observeSingleEvent(of: .value, with: { snapshot in
@@ -325,7 +328,7 @@ extension DatabaseManager {
                 "secondary":1
             ]
         ])
-        
+        ref.child("หมูสาว/\(id)/ประวัติ/สถานะ").setValue("แม่พันธุ์")
         maepunWorkIDCount = assignWork(date: maepunWorkDate[0], work: maepunWorkString[0], IDCount: maepunWorkIDCount, pigID: Int(id)!)
     }
 }

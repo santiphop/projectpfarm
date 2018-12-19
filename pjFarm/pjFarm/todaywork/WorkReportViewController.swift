@@ -11,12 +11,15 @@ import UIKit
 class WorkReportViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
-    var works = [String]()
-    var detail = [String:[Int]]()
+    var currentWorkList = [String]()
+    var currentWorkInfo = [String:[Int]]()
+    var isBackToHome:Bool = false
+    
     
     var appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     @IBAction func confirmButton(_ sender: Any) {
+        isBackToHome = true
     }
     
     override func viewDidLoad() {
@@ -24,12 +27,26 @@ class WorkReportViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         let db = appDelegate.db
-        works = db.workList
-        detail = db.workInfo
-        print("inited")
-        
+        currentWorkList = db.workList
+        currentWorkInfo = db.workInfo        
     }
     
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if !isBackToHome {
+            let db = appDelegate.db
+            currentWorkInfo = db.workInfo
+            let controller = segue.destination as! WorkDetailReportViewController
+            if let indexPath = tableView.indexPathForSelectedRow {
+                controller.idSelect = self.currentWorkInfo[currentWorkList[indexPath.row]]!
+                controller.titleBar.title = self.currentWorkList[indexPath.row]
+                print(currentWorkInfo)
+            }
+        }
+    }
+    
+    @IBAction func unwindToWorkTable(_ unwindSegue: UIStoryboardSegue) { }
+
 
     /*
     // MARK: - Navigation
@@ -45,30 +62,21 @@ class WorkReportViewController: UIViewController {
 
 extension WorkReportViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return works.count
+        return currentWorkList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "workcell", for: indexPath)
-        cell.textLabel?.text = works[indexPath.row]
+        cell.textLabel?.text = currentWorkList[indexPath.row]
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let db = appDelegate.db
-        db.currentWork = works[indexPath.row]
+        db.currentWork = currentWorkList[indexPath.row]
         db.generateIDCountForTomorrowWork()
         print(db.currentWork)
     }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let controller = segue.destination as! WorkDetailReportViewController
-        if let indexPath = tableView.indexPathForSelectedRow {
-            controller.idSelect = self.detail[works[indexPath.row]]!
-            controller.titleBar.title = self.works[indexPath.row]
-        }
-    }
-    
-    @IBAction func unwindToWorkTable(_ unwindSegue: UIStoryboardSegue) { }
+
     
 }

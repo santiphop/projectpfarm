@@ -56,11 +56,14 @@ class SearchViewController: UIViewController {
             
             self.captureSession.addOutput(captureMetadataOutput)
             captureMetadataOutput.metadataObjectTypes = captureMetadataOutput.availableMetadataObjectTypes
+            
+            //  get text
             self.outputText = captureMetadataOutput.availableMetadataObjectTypes.description
+            
             captureMetadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
             self.captureSession.startRunning()
         } else {
-            showMessage(msgTitle: "Cannot Access Camera", msgText: "Please Allow pjFarm to access your camera")
+            showMessage(msgTitle: "Cannot Access Camera", msgText: "Please Allow the App to access your camera")
         }
         return true
     }
@@ -70,6 +73,7 @@ class SearchViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let controller = segue.destination as! SearchByIDViewController
         if isScanned {
@@ -96,7 +100,7 @@ extension SearchViewController:AVCaptureMetadataOutputObjectsDelegate {
         self.captureSession.stopRunning()
         self.captureSession = nil
         self.videoPreviewLayer.removeFromSuperlayer()
-        isScanned = true
+        self.isScanned = true
         performSegue(withIdentifier: "QRtoSearchID", sender: self)
         
     }

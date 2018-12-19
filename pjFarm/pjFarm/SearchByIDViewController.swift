@@ -35,7 +35,6 @@ class SearchByIDViewController: UIViewController {
     func search() {
         let db = appDelegate.db
         
-        currentPigList = db.pigList
         currentPigInfo = db.pigInfo
         if currentPigInfo[id] != nil {
             pigInfoView.text = "ID: \(id)\nรหัสของแม่พันธุ์: \(currentPigInfo[id]![0])\nพันธุ์ของพ่อ: \(currentPigInfo[id]![1])\nวันแรกเข้า: \(currentPigInfo[id]![2])"
@@ -47,7 +46,7 @@ class SearchByIDViewController: UIViewController {
     func showExceptionAlert() {
         let alertController = UIAlertController(title: "ค้นหาไม่สำเร็จ", message: "ข้อมูลไม่ถูกต้อง กรุณาตรวจสอบ ID ที่ต้องการค้นหา", preferredStyle: UIAlertController.Style.alert)
         
-        let actionNothing = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) { (action) in }
+        let actionNothing = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) { action in }
         
         alertController.addAction(actionNothing)
         

@@ -16,7 +16,11 @@ class WorkDetailReportViewController: UIViewController {
 
     @IBOutlet weak var titleBar: UINavigationItem!
     @IBAction func reportButton(_ sender: Any) {
-        let db = appDelegate.db
+        showOptionsAlert()
+    }
+    
+    func report() {
+        let db = self.appDelegate.db
         db.reportWorkForTomorrow(ids: idSelect, bools: detailSelect, date:Date())
         performSegue(withIdentifier: "detailToReportSegue", sender: self)
     }
@@ -26,13 +30,34 @@ class WorkDetailReportViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         
-        for _ in 0...idSelect.count - 1 {
+        for _ in idSelect {
             detailSelect.append(false)
         }
+    }
+    
+    func showOptionsAlert() {
+        let alertController = UIAlertController(title: "Are you sure?", message: "Make sure you make your report correctly", preferredStyle: UIAlertController.Style.alert)
+        
+        let actionNothing = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default) { action in }
+        
+        let actionReport = UIAlertAction(title: "Report", style: UIAlertAction.Style.destructive) { action in
+            self.report()
+        }
+        
+        alertController.addAction(actionNothing)
+        alertController.addAction(actionReport)
+
+        present(alertController, animated: true, completion: nil)
         
         
     }
-    
+//
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        let db = appDelegate.db
+//        let controller = segue.destination as! WorkReportViewController
+//        controller.currentWorkList = db.workList
+//        controller.viewDidLoad()
+//    }
     
     
 
@@ -60,12 +85,12 @@ extension WorkDetailReportViewController: UITableViewDataSource, UITableViewDele
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if tableView.cellForRow(at: indexPath)?.accessoryType == UITableViewCell.AccessoryType.checkmark {
-            tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCell.AccessoryType.none
-            detailSelect[indexPath.row] = false
-        } else {
+        if tableView.cellForRow(at: indexPath)?.accessoryType != UITableViewCell.AccessoryType.checkmark {
             tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCell.AccessoryType.checkmark
             detailSelect[indexPath.row] = true
+        } else {
+            tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCell.AccessoryType.none
+            detailSelect[indexPath.row] = false
         }
     }
 }
