@@ -160,9 +160,11 @@ extension DatabaseManager {
         //  append workInfo
         ref.child("งาน/\(dateFormat.string(from: date))W/ทั้งหมด").observeSingleEvent(of: .value, with: { snapshot in
             let data = snapshot.value as? NSDictionary
-
-            for (key, _) in data! {
-                self.workList.append("\(key as! String)")
+            
+            if data != nil {
+                for (key, _) in data! {
+                    self.workList.append("\(key as! String)")
+                }
             }
 
             for workName in self.workList {
@@ -410,7 +412,8 @@ extension DatabaseManager {
             musaoWorkIDCount[i] = assignWork(date: musaoWorkDate[i], work: musaoWorkString[i], IDCount: musaoWorkIDCount[i], pigID: self.currentIDMS)
             
         }
-        
+        pigList.append("\(self.currentIDMS)")
+        pigInfo["\(self.currentIDMS)"] = [mom, dad, dateFormat.string(from: date)]
         return self.currentIDMS
     }
 }

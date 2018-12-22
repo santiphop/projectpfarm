@@ -194,7 +194,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="ID" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LNH-eI-HDI" customClass="NumpadTextField" customModule="pjFarm" customModuleProvider="target">
-                                <rect key="frame" x="102.33333333333333" y="148" width="238.66666666666669" height="30"/>
+                                <rect key="frame" x="102.66666666666667" y="148" width="238.33333333333331" height="30"/>
                                 <color key="backgroundColor" red="1" green="0.9843560804" blue="0.98237671140000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -208,7 +208,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ID" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l0J-7m-pmR">
-                                <rect key="frame" x="59.000000000000007" y="153" width="16.333333333333336" height="20.333333333333343"/>
+                                <rect key="frame" x="58.999999999999993" y="153" width="16.666666666666664" height="20.666666666666657"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -563,9 +563,11 @@
                     <connections>
                         <outlet property="dateTextField" destination="E0a-lG-z1J" id="dv2-ZR-hRn"/>
                         <outlet property="momTextField" destination="6Xp-Te-7us" id="Azp-hE-AQ8"/>
+                        <segue destination="Cz7-Nd-lNK" kind="unwind" identifier="weanToHome" unwindAction="unwindToHome:" id="yWd-II-FNz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qvh-Wt-f9y" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="Cz7-Nd-lNK" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="4704.8000000000002" y="-1839.1625615763548"/>
         </scene>
@@ -719,7 +721,7 @@
         <!--Farrow-->
         <scene sceneID="nQi-iC-K1L">
             <objects>
-                <viewController id="lOQ-fV-oK9" customClass="KlodViewController" customModule="pjFarm" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="lOQ-fV-oK9" customClass="FarrowViewController" customModule="pjFarm" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ARD-mk-Obm">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -825,7 +827,7 @@
         <!--ID-->
         <scene sceneID="Z8F-c5-Phz">
             <objects>
-                <viewController id="N2q-oG-91M" customClass="KlodAmountViewController" customModule="pjFarm" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="N2q-oG-91M" customClass="FarrowDetailViewController" customModule="pjFarm" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2yc-sm-i4u">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -874,7 +876,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="111" translatesAutoresizingMaskIntoConstraints="NO" id="h3S-ba-vOd">
                                 <rect key="frame" x="96.999999999999986" y="383" width="186.66666666666663" height="20.333333333333314"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="ตัวผู้" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GDE-Pb-6jB">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="ตัวผู้" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GDE-Pb-6jB">
                                         <rect key="frame" x="0.0" y="0.0" width="29.666666666666668" height="20.333333333333332"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
@@ -929,7 +931,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e3n-kh-wDf" customClass="RoundButton" customModule="pjFarm" customModuleProvider="target">
                                 <rect key="frame" x="112" y="500" width="150" height="49"/>
                                 <color key="backgroundColor" red="1" green="0.6705882353" blue="0.68235294120000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Save to Database">
+                                <state key="normal" title="Register">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>

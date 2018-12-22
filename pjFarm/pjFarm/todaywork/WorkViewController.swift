@@ -12,7 +12,7 @@ class WorkViewController: UIViewController {
 
     var appDelegate = UIApplication.shared.delegate as! AppDelegate
     let dateFormatForReportHTML = DateFormatter()
-    var invoiceComposer: InvoiceComposer!
+    var reportComposer: ReportComposer!
     var HTMLContent: String!
     
     var documentController : UIDocumentInteractionController!
@@ -28,17 +28,17 @@ class WorkViewController: UIViewController {
     
     @IBOutlet weak var exportButton: UIButton!
     @IBAction func export(_ sender: Any) {
-        let pdfFilename = invoiceComposer.exportHTMLContentToPDF(HTMLContent: self.HTMLContent)
+        let pdfFilename = reportComposer.exportHTMLContentToPDF(HTMLContent: self.HTMLContent)
         documentController = UIDocumentInteractionController.init(url: NSURL.init(fileURLWithPath: pdfFilename) as URL)
         documentController.presentOptionsMenu(from: self.exportButton.frame, in: self.view, animated: true)
     }
     @IBOutlet weak var webView: UIWebView!
     
     func createReportAsHTML() {
-        invoiceComposer = InvoiceComposer()
-        if let invoiceHTML = invoiceComposer.renderInvoice(invoiceDate: dateFormatForReportHTML.string(from: Date())) {
+        reportComposer = ReportComposer()
+        if let invoiceHTML = reportComposer.renderReport(reportDate: dateFormatForReportHTML.string(from: Date())) {
             
-            webView.loadHTMLString(invoiceHTML, baseURL: NSURL(string: invoiceComposer.pathToInvoiceHTMLTemplate!)! as URL)
+            webView.loadHTMLString(invoiceHTML, baseURL: NSURL(string: reportComposer.pathToInvoiceHTMLTemplate!)! as URL)
             HTMLContent = invoiceHTML
             
         }

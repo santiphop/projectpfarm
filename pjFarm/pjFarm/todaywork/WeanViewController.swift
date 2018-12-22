@@ -20,6 +20,7 @@ class WeanViewController: UIViewController {
         let db = appDelegate.db
         let momString = momTextField.text!
         db.regisKG(id: momString, date: datePicker.date)
+        showOptionsAlert()
     }
     
     override func viewDidLoad() {
@@ -51,6 +52,20 @@ class WeanViewController: UIViewController {
         db.generateWorkDateForKindergarten(date: datePicker.date)
         db.generateWorkIDCountForKindergarten()
         self.view.endEditing(true)
+    }
+    
+    func showOptionsAlert() {
+        let alertController = UIAlertController(title: "Yeah!", message: "Saved the history to database: \(momTextField.text!)", preferredStyle: UIAlertController.Style.alert)
+        
+        let actionBackHome = UIAlertAction(title: "Back to Home", style: UIAlertAction.Style.default) { action in
+            self.performSegue(withIdentifier: "weanToHome", sender: self)
+        }
+        
+        alertController.addAction(actionBackHome)
+        
+        present(alertController, animated: true, completion: nil)
+        
+        
     }
     
 

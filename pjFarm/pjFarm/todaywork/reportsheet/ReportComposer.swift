@@ -8,10 +8,10 @@
 
 import UIKit
 
-class InvoiceComposer: NSObject {
+class ReportComposer: NSObject {
     let dateFormat = DateFormatter()
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
-    let pathToInvoiceHTMLTemplate = Bundle.main.path(forResource: "invoice", ofType: "html")
+    let pathToInvoiceHTMLTemplate = Bundle.main.path(forResource: "report", ofType: "html")
     var pdfFilename: String!
     
     override init() {
@@ -19,11 +19,11 @@ class InvoiceComposer: NSObject {
         dateFormat.dateFormat = "yyyyMMdd"
     }
     
-    func renderInvoice(invoiceDate: String) -> String! {
+    func renderReport(reportDate: String) -> String! {
         do {
             // Load the invoice HTML template code into a String variable.
             var HTMLContent = try String(contentsOfFile: pathToInvoiceHTMLTemplate!)
-            HTMLContent = HTMLContent.replacingOccurrences(of: "#WORK_DATE#", with: invoiceDate)
+            HTMLContent = HTMLContent.replacingOccurrences(of: "#WORK_DATE#", with: reportDate)
             
             return HTMLContent
         }

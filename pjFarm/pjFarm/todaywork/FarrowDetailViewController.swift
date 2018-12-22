@@ -8,7 +8,7 @@
 
 import UIKit
 
-class KlodAmountViewController: UIViewController {
+class FarrowDetailViewController: UIViewController {
     var mom = String()
     var dad = String()
     var date = Date()

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class KlodViewController: UIViewController {
+class FarrowViewController: UIViewController {
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     let datePicker = UIDatePicker()
     let dateFormatForTextField = DateFormatter()
@@ -64,7 +64,7 @@ class KlodViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let controller = segue.destination as! KlodAmountViewController
+        let controller = segue.destination as! FarrowDetailViewController
         controller.mom = momString
         controller.dad = dadString
         controller.date = datePicker.date
