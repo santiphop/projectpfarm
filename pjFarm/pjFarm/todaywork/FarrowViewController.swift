@@ -13,6 +13,7 @@ class FarrowViewController: UIViewController {
     let datePicker = UIDatePicker()
     let dateFormatForTextField = DateFormatter()
     let dadArray = ["Large White", "Duroc", "Landrace"]
+    var currentPigList = [String]()
 
     //  for prepare()
     //  send data to next ViewController
@@ -27,9 +28,18 @@ class FarrowViewController: UIViewController {
     
     @IBAction func nextButton(_ sender: Any) {
         let db = appDelegate.db
+        currentPigList = db.pigList
+
         momString = momTextField.text!
         dadString = dadArray[dad.selectedSegmentIndex]
-        db.getMaepunCurrentStateFrom(id: momString)
+        if momString.isEmpty {
+            showEmptyTextExceptionAlert()
+        } else if !currentPigList.contains(momString) {
+            showNoDataExceptionAlert(id: momString)
+        }
+        else {
+            db.getMaepunCurrentStateFrom(id: momString)
+        }
     }
     
     override func viewDidLoad() {
@@ -58,8 +68,8 @@ class FarrowViewController: UIViewController {
     @objc func doneActionForDatePicker() {
         dateTextField.text = dateFormatForTextField.string(from: datePicker.date)
         let db = appDelegate.db
-        db.generateWorkDateForKokKlod(date: datePicker.date)
-        db.generateWorkIDCountForKokKlod()
+//        db.generateWorkDateForKokKlod(date: datePicker.date)
+//        db.generateWorkIDCountForKokKlod()
         self.view.endEditing(true)
     }
     
@@ -69,6 +79,30 @@ class FarrowViewController: UIViewController {
         controller.dad = dadString
         controller.date = datePicker.date
         controller.titleBar.title = momString
+    }
+    
+    func showEmptyTextExceptionAlert() {
+        let alertController = UIAlertController(title: "ลงทะเบียนไม่สำเร็จ", message: "ข้อมูลไม่ถูกต้อง กรุณาใส่ ID แม่พันธุ์", preferredStyle: UIAlertController.Style.alert)
+        
+        let actionNothing = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) { (action) in }
+        
+        alertController.addAction(actionNothing)
+        
+        present(alertController, animated: true, completion: nil)
+        
+        
+    }
+    
+    func showNoDataExceptionAlert(id:String) {
+        let alertController = UIAlertController(title: "ไม่พบข้อมูล", message: "ข้อมูลไม่ถูกต้อง\nID:\(id) ไม่มีอยู่ในระบบ", preferredStyle: UIAlertController.Style.alert)
+        
+        let actionNothing = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) { (action) in }
+        
+        alertController.addAction(actionNothing)
+        
+        present(alertController, animated: true, completion: nil)
+        
+        
     }
 
     /*

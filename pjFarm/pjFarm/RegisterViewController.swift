@@ -24,7 +24,7 @@ class RegisterViewController: UIViewController {
         let momString:String = momTextField.text!
         let dadString:String = dadArray[dad.selectedSegmentIndex]
         
-        if momString.isEmpty {
+        if momString.isEmpty || momString.count != 4 {
             showMomExceptionAlert()
         }
         else {
@@ -72,8 +72,7 @@ class RegisterViewController: UIViewController {
     @objc func doneActionForDatePicker() {
         dateTextField.text = dateFormatForTextField.string(from: datePicker.date)
         let db = self.appDelegate.db
-        db.generateWorkDateForMusao(date: datePicker.date)
-        db.generateWorkIDCountForMusao()
+//        db.generateWorkDateForMusao(date: datePicker.date)
         self.view.endEditing(true)
     }
     
@@ -95,7 +94,7 @@ class RegisterViewController: UIViewController {
     }
     
     func showMomExceptionAlert() {
-        let alertController = UIAlertController(title: "ลงทะเบียนไม่สำเร็จ", message: "ข้อมูลไม่ถูกต้อง กรุณาใส่ ID แม่พันธุ์ของหมู", preferredStyle: UIAlertController.Style.alert)
+        let alertController = UIAlertController(title: "ลงทะเบียนไม่สำเร็จ", message: "ข้อมูลไม่ถูกต้อง กรุณาใส่ ID แม่พันธุ์ของหมู\n(ข้อมูล ID ของแม่พันธุ์ 4 หลัก)", preferredStyle: UIAlertController.Style.alert)
         
         let actionNothing = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) { (action) in }
         

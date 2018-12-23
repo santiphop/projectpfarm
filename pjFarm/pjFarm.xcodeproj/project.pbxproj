@@ -21,6 +21,12 @@
 		8F295DCF21C794340017D376 /* WeanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F295DCE21C794340017D376 /* WeanViewController.swift */; };
 		8F295DD121C7971B0017D376 /* FarrowDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F295DD021C7971B0017D376 /* FarrowDetailViewController.swift */; };
 		8F295DD521C7B1760017D376 /* NumpadTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F295DD421C7B1760017D376 /* NumpadTextField.swift */; };
+		8F2DB06E21CF7DE000927134 /* PigData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F2DB06D21CF7DE000927134 /* PigData.swift */; };
+		8F2DB07021CF861E00927134 /* PigMaepun.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F2DB06F21CF861E00927134 /* PigMaepun.swift */; };
+		8F2DB07221CF8AB600927134 /* PigKokklod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F2DB07121CF8AB600927134 /* PigKokklod.swift */; };
+		8F2DB07421CF8CFE00927134 /* PigKinderGarten.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F2DB07321CF8CFE00927134 /* PigKinderGarten.swift */; };
+		8F2DB07621CFA28E00927134 /* Pig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F2DB07521CFA28E00927134 /* Pig.swift */; };
+		8F2DB07921CFAAD800927134 /* PigRound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F2DB07821CFAAD800927134 /* PigRound.swift */; };
 		8F47B53E21B3DF2E00A1F25F /* WorkData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F47B53D21B3DF2E00A1F25F /* WorkData.swift */; };
 		8F5E30E421C8D4030035DD97 /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F5E30E321C8D4030035DD97 /* RoundButton.swift */; };
 		8F5E30E621C9177B0035DD97 /* SearchByIDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F5E30E521C9177B0035DD97 /* SearchByIDViewController.swift */; };
@@ -83,6 +89,12 @@
 		8F295DCE21C794340017D376 /* WeanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeanViewController.swift; sourceTree = "<group>"; };
 		8F295DD021C7971B0017D376 /* FarrowDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FarrowDetailViewController.swift; sourceTree = "<group>"; };
 		8F295DD421C7B1760017D376 /* NumpadTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumpadTextField.swift; sourceTree = "<group>"; };
+		8F2DB06D21CF7DE000927134 /* PigData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PigData.swift; sourceTree = "<group>"; };
+		8F2DB06F21CF861E00927134 /* PigMaepun.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PigMaepun.swift; sourceTree = "<group>"; };
+		8F2DB07121CF8AB600927134 /* PigKokklod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PigKokklod.swift; sourceTree = "<group>"; };
+		8F2DB07321CF8CFE00927134 /* PigKinderGarten.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PigKinderGarten.swift; sourceTree = "<group>"; };
+		8F2DB07521CFA28E00927134 /* Pig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pig.swift; sourceTree = "<group>"; };
+		8F2DB07821CFAAD800927134 /* PigRound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PigRound.swift; sourceTree = "<group>"; };
 		8F47B53D21B3DF2E00A1F25F /* WorkData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkData.swift; sourceTree = "<group>"; };
 		8F5E30E321C8D4030035DD97 /* RoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
 		8F5E30E521C9177B0035DD97 /* SearchByIDViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchByIDViewController.swift; sourceTree = "<group>"; };
@@ -185,7 +197,8 @@
 				8FEC468B21B0FE4300B2CB47 /* SearchViewController.swift */,
 				8F5E30E521C9177B0035DD97 /* SearchByIDViewController.swift */,
 				6A57B67421427E53004DE381 /* Main.storyboard */,
-				8F18C6F6216DCFD9001BBF0F /* PigMusao.swift */,
+				8F2DB06D21CF7DE000927134 /* PigData.swift */,
+				8F2DB07721CFA29800927134 /* PigType */,
 				6A57B67721427E53004DE381 /* Assets.xcassets */,
 				6A57B67921427E53004DE381 /* LaunchScreen.storyboard */,
 				6A57B67C21427E53004DE381 /* Info.plist */,
@@ -229,6 +242,19 @@
 				8F295DCE21C794340017D376 /* WeanViewController.swift */,
 			);
 			path = todaywork;
+			sourceTree = "<group>";
+		};
+		8F2DB07721CFA29800927134 /* PigType */ = {
+			isa = PBXGroup;
+			children = (
+				8F2DB07521CFA28E00927134 /* Pig.swift */,
+				8F18C6F6216DCFD9001BBF0F /* PigMusao.swift */,
+				8F2DB07821CFAAD800927134 /* PigRound.swift */,
+				8F2DB06F21CF861E00927134 /* PigMaepun.swift */,
+				8F2DB07121CF8AB600927134 /* PigKokklod.swift */,
+				8F2DB07321CF8CFE00927134 /* PigKinderGarten.swift */,
+			);
+			path = PigType;
 			sourceTree = "<group>";
 		};
 		8F5E30E721C917880035DD97 /* UIObject */ = {
@@ -452,11 +478,15 @@
 				8F18C6F7216DCFD9001BBF0F /* PigMusao.swift in Sources */,
 				8FEC468C21B0FE4300B2CB47 /* SearchViewController.swift in Sources */,
 				8F8E845021C8121E00CE8CAF /* ReportComposer.swift in Sources */,
+				8F2DB07921CFAAD800927134 /* PigRound.swift in Sources */,
 				8F295DD121C7971B0017D376 /* FarrowDetailViewController.swift in Sources */,
+				8F2DB07421CF8CFE00927134 /* PigKinderGarten.swift in Sources */,
 				8F295DCF21C794340017D376 /* WeanViewController.swift in Sources */,
 				8F5E30E621C9177B0035DD97 /* SearchByIDViewController.swift in Sources */,
+				8F2DB07221CF8AB600927134 /* PigKokklod.swift in Sources */,
 				8F295DD521C7B1760017D376 /* NumpadTextField.swift in Sources */,
 				8F0EECE021BA2DC4003885BE /* WorkReportViewController.swift in Sources */,
+				8F2DB07621CFA28E00927134 /* Pig.swift in Sources */,
 				8FEDCBED21B4D5CE00F935EA /* WorkViewController.swift in Sources */,
 				8F8E845421C814B700CE8CAF /* CustomPrintPageRenderer.swift in Sources */,
 				8FDC8B1121AD487700060F65 /* RegisterViewController.swift in Sources */,
@@ -465,7 +495,9 @@
 				8F295DCD21C792940017D376 /* FarrowViewController.swift in Sources */,
 				8F47B53E21B3DF2E00A1F25F /* WorkData.swift in Sources */,
 				6A57B67121427E53004DE381 /* AppDelegate.swift in Sources */,
+				8F2DB06E21CF7DE000927134 /* PigData.swift in Sources */,
 				8FEDCBEF21B6620700F935EA /* FirstRutViewController.swift in Sources */,
+				8F2DB07021CF861E00927134 /* PigMaepun.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

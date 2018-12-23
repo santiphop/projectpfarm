@@ -9,7 +9,7 @@
 import UIKit
 
 class WorkDetailReportViewController: UIViewController {
-    
+    var workName = String()
     var idSelect = [Int]()
     var detailSelect = [Bool]()
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -21,7 +21,7 @@ class WorkDetailReportViewController: UIViewController {
     
     func report() {
         let db = self.appDelegate.db
-        db.reportWorkForTomorrow(ids: idSelect, bools: detailSelect, date:Date())
+        db.reportWorkForTomorrow(work: workName, ids: idSelect, bools: detailSelect, date:Date())
         performSegue(withIdentifier: "detailToReportSegue", sender: self)
     }
     
@@ -29,7 +29,7 @@ class WorkDetailReportViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        
+        print(workName)
         for _ in idSelect {
             detailSelect.append(false)
         }

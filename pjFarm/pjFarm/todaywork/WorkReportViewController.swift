@@ -14,6 +14,7 @@ class WorkReportViewController: UIViewController {
     var currentWorkList = [String]()
     var currentWorkInfo = [String:[Int]]()
     var isBackToHome:Bool = false
+    var selectedWork = String()
     
     
     var appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -38,6 +39,7 @@ class WorkReportViewController: UIViewController {
             currentWorkInfo = db.workInfo
             let controller = segue.destination as! WorkDetailReportViewController
             if let indexPath = tableView.indexPathForSelectedRow {
+                controller.workName = self.selectedWork
                 controller.idSelect = self.currentWorkInfo[currentWorkList[indexPath.row]]!
                 controller.titleBar.title = self.currentWorkList[indexPath.row]
                 print(currentWorkInfo)
@@ -74,7 +76,8 @@ extension WorkReportViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let db = appDelegate.db
         db.currentWork = currentWorkList[indexPath.row]
-        db.generateIDCountForTomorrowWork()
+        selectedWork = currentWorkList[indexPath.row]
+//        db.generateIDCountForTomorrowWork()
         print(db.currentWork)
     }
 

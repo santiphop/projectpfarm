@@ -17,7 +17,6 @@ class SearchByIDViewController: UIViewController {
     var currentPigList = [String]()
     var currentPigInfo = [String:[String]]()
 
-    
     @IBOutlet weak var idTextField: NumpadTextField!
     @IBAction func searchButton(_ sender: Any) {
         id = idTextField.text!
@@ -28,13 +27,18 @@ class SearchByIDViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        let db = appDelegate.db
+        print(db.pigInfo)
         // Do any additional setup after loading the view.
         if autoSearch { search() }
     }
     
     func search() {
         let db = appDelegate.db
-        
+        let ref = Database.database().reference()
+//        ref.child("หมู/currentID").observeSingleEvent(of: .value, with: { snapshot in
+//            print(snapshot.value)
+//        })
         currentPigInfo = db.pigInfo
         if currentPigInfo[id] != nil {
             pigInfoView.text = "ID: \(id)\nรหัสของแม่พันธุ์: \(currentPigInfo[id]![0])\nพันธุ์ของพ่อ: \(currentPigInfo[id]![1])\nวันแรกเข้า: \(currentPigInfo[id]![2])"

@@ -27,19 +27,45 @@ class FarrowDetailViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         let db = appDelegate.db
-        db.generateWorkIDCountForKokKlod()
+//        db.generateWorkIDCountForKokKlod()
     }
     
     @IBAction func save(_ sender: Any) {
-        let intAll = Int(all.text!)!
-        let intDead = Int(dead.text!)!
-        let intMummy = Int(mummy.text!)!
-        let intMale = Int(maleLeft.text!)!
-        let intFemale = Int(femaleLeft.text!)!
+        var intAll:Int = 0
+        var intDead:Int = 0
+        var intMummy:Int = 0
+        var intMale:Int = 0
+        var intFemale:Int = 0
         
-        if intDead + intMummy + intMale + intFemale == intAll {
+        if (dead.text?.isEmpty)! {
+            dead.text! = "0"
+        }
+        
+        if (mummy.text?.isEmpty)! {
+            mummy.text! = "0"
+        }
+
+        
+        if !(all.text?.isEmpty)! {
+            intAll = Int(all.text!)!
+        }
+        if !(dead.text?.isEmpty)! {
+            intDead = Int(dead.text!)!
+        }
+        if !(mummy.text?.isEmpty)! {
+            intMummy = Int(mummy.text!)!
+        }
+        if !(mummy.text?.isEmpty)! {
+            intMale = Int(maleLeft.text!)!
+        }
+        if !(mummy.text?.isEmpty)! {
+            intFemale = Int(femaleLeft.text!)!
+        }
+        
+        
+        if intDead + intMummy + intMale + intFemale == intAll && intAll != 0 {
             let db = appDelegate.db
-            db.writeKlodHistory(id: mom, dad: dad, date: date, all: intAll, dead: intDead, mummy: intMummy, male: intMale, female: intFemale)
+            db.regisKK(id: mom, dad: dad, date: date, all: intAll, dead: intDead, mummy: intMummy, male: intMale, female: intFemale)
             showOptionsAlert()
         } else {
             showExceptionAlert()
