@@ -11,7 +11,7 @@ import UIKit
 class ReportComposer: NSObject {
     let dateFormat = DateFormatter()
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
-    let pathToInvoiceHTMLTemplate = Bundle.main.path(forResource: "report", ofType: "html")
+    let pathToReportHTMLTemplate = Bundle.main.path(forResource: "report", ofType: "html")
     var pdfFilename: String!
     
     override init() {
@@ -22,7 +22,7 @@ class ReportComposer: NSObject {
     func renderReport(reportDate: String) -> String! {
         do {
             // Load the invoice HTML template code into a String variable.
-            var HTMLContent = try String(contentsOfFile: pathToInvoiceHTMLTemplate!)
+            var HTMLContent = try String(contentsOfFile: pathToReportHTMLTemplate!)
             HTMLContent = HTMLContent.replacingOccurrences(of: "#WORK_DATE#", with: reportDate)
             
             return HTMLContent

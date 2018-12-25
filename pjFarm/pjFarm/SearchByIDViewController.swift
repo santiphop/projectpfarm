@@ -27,8 +27,8 @@ class SearchByIDViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let db = appDelegate.db
-        print(db.pigInfo)
+//        let db = appDelegate.db
+//        print(db.pigInfo)
         // Do any additional setup after loading the view.
         if autoSearch { search() }
     }

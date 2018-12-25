@@ -71,8 +71,6 @@ class RegisterViewController: UIViewController {
     
     @objc func doneActionForDatePicker() {
         dateTextField.text = dateFormatForTextField.string(from: datePicker.date)
-        let db = self.appDelegate.db
-//        db.generateWorkDateForMusao(date: datePicker.date)
         self.view.endEditing(true)
     }
     

@@ -13,16 +13,10 @@ class PigRound: Pig {
     var primaryRound = Int()
     var secondaryRound = Int()
 
-    init(id:Int, typeID:String, primary:Int, secondary:Int, date:Date, work:[String], addDate:[Int]) {
+    init(id:Int, primary:Int, secondary:Int, date:Date, work:Work) {
         self.primaryRound = primary
         self.secondaryRound = secondary
-        super.init(
-            id: id,
-            typeID: typeID,
-            date: date,
-            work: work,
-            addDate: addDate
-        )
+        super.init(id: id, date: date, work: work)
     }
 
 }

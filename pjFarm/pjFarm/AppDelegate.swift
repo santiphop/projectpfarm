@@ -8,6 +8,21 @@
 
 import UIKit
 
+func tomorrow(date:[Date]) -> [Date] {
+    var tmp = [Date]()
+    for d in date {
+        tmp.append(addDateComponent(date: d, intAdding: 1))
+    }
+    return tmp
+}
+
+func addDateComponent(date:Date, intAdding:Int) -> Date {
+    var dateComponent = DateComponents()
+    dateComponent.day = intAdding
+    let newDate = Calendar.current.date(byAdding: dateComponent, to: date)!
+    return newDate
+}
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 

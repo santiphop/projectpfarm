@@ -197,6 +197,7 @@
 				8FEC468B21B0FE4300B2CB47 /* SearchViewController.swift */,
 				8F5E30E521C9177B0035DD97 /* SearchByIDViewController.swift */,
 				6A57B67421427E53004DE381 /* Main.storyboard */,
+				8F47B53D21B3DF2E00A1F25F /* WorkData.swift */,
 				8F2DB06D21CF7DE000927134 /* PigData.swift */,
 				8F2DB07721CFA29800927134 /* PigType */,
 				6A57B67721427E53004DE381 /* Assets.xcassets */,
@@ -204,7 +205,6 @@
 				6A57B67C21427E53004DE381 /* Info.plist */,
 				8FAD343321A2CAB70048A3EC /* GoogleService-Info.plist */,
 				8FAD344921A2CD570048A3EC /* pjFarm-Bridging-Header.h */,
-				8F47B53D21B3DF2E00A1F25F /* WorkData.swift */,
 				8F5E30E721C917880035DD97 /* UIObject */,
 				8FAD343521A2CC370048A3EC /* Framework */,
 			);

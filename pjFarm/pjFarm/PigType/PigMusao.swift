@@ -13,18 +13,10 @@ class PigMusao: Pig {
     var mother:String
     var father:String
     
-    init(id:Int, mother:String, father:String, date:Date) {
+    init(id:Int, mother:String, father:String, date:Date, work:Work) {
         self.mother = mother
         self.father = father
-        super.init(
-            id: id,
-            typeID: "1",
-            date: date,
-            work: [
-                "ถ่ายพยาธิ", "วัคซีนอหิวาห์", "วัคซีนพาร์โว", "วัคซีนพิษสุนัขบ้าเทียม", "วัคซีนปากเท้าเทียม", "วัคซีน PRRS"
-            ],
-            addDate: [0, 7, 14, 21, 28, 32]
-        )
+        super.init(id: id, date: date, work: work)
     }
  
 }

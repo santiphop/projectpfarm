@@ -21,11 +21,9 @@ class HomeViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         dateFormat.dateFormat = "d MMMM YYYY"
         dateLabel.text! = dateFormat.string(from: Date())
-        let ref = Database.database().reference()
-        ref.child("หมู/6122/แม่พันธุ์/currentState/primary").observeSingleEvent(of: .value, with: { snapshot in
-            let data = snapshot.value as! Int
-            print(data)
-        })
+//        let ref = Database.database().reference()
+
+//        })
     }
 
     override func didReceiveMemoryWarning() {

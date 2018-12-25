@@ -39,7 +39,7 @@ class WorkReportViewController: UIViewController {
             currentWorkInfo = db.workInfo
             let controller = segue.destination as! WorkDetailReportViewController
             if let indexPath = tableView.indexPathForSelectedRow {
-                controller.workName = self.selectedWork
+//                controller.workName = self.selectedWork
                 controller.idSelect = self.currentWorkInfo[currentWorkList[indexPath.row]]!
                 controller.titleBar.title = self.currentWorkList[indexPath.row]
                 print(currentWorkInfo)
@@ -77,7 +77,6 @@ extension WorkReportViewController: UITableViewDataSource, UITableViewDelegate {
         let db = appDelegate.db
         db.currentWork = currentWorkList[indexPath.row]
         selectedWork = currentWorkList[indexPath.row]
-//        db.generateIDCountForTomorrowWork()
         print(db.currentWork)
     }
 

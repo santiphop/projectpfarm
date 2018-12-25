@@ -16,7 +16,7 @@ class PigKokklod: PigRound {
     var remainMale:Int
     var remainFemale:Int
     
-    init(all:Int, dead:Int, mummy:Int, remain:Int, male:Int, female:Int, id:Int, date:Date) {
+    init(all:Int, dead:Int, mummy:Int, remain:Int, male:Int, female:Int, id:Int, date:Date, work:Work) {
         self.all = all
         self.dead = dead
         self.mummy = mummy
@@ -24,17 +24,7 @@ class PigKokklod: PigRound {
         self.remainMale = male
         self.remainFemale = female
         
-        super.init(
-            id: id,
-            typeID: "3",
-            primary: 1,
-            secondary: 1,
-            date: date,
-            work: [
-                "ตอนตัวผู้-ตัดหูตัวเมีย", "ตัดเขี้ยวและหาง", "ถ่ายพยาธิ-กำหนดหย่านม"
-            ],
-            addDate: [3, 7, 24]
-        )
+        super.init(id: id, primary: 1, secondary: 1, date: date, work: work)
     }
     
     

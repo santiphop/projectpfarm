@@ -11,18 +11,20 @@ import UIKit
 class WorkViewController: UIViewController {
 
     var appDelegate = UIApplication.shared.delegate as! AppDelegate
+    @IBOutlet weak var webView: UIWebView!
+
     let dateFormatForReportHTML = DateFormatter()
     var reportComposer: ReportComposer!
     var HTMLContent: String!
-    
     var documentController : UIDocumentInteractionController!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         dateFormatForReportHTML.dateFormat = "MMM d, YYYY"
-        let db = appDelegate.db
-        db.initcheck()
+//        let db = appDelegate.db
+//        db.initcheck()
         createReportAsHTML()
     }
     
@@ -32,14 +34,13 @@ class WorkViewController: UIViewController {
         documentController = UIDocumentInteractionController.init(url: NSURL.init(fileURLWithPath: pdfFilename) as URL)
         documentController.presentOptionsMenu(from: self.exportButton.frame, in: self.view, animated: true)
     }
-    @IBOutlet weak var webView: UIWebView!
     
     func createReportAsHTML() {
         reportComposer = ReportComposer()
-        if let invoiceHTML = reportComposer.renderReport(reportDate: dateFormatForReportHTML.string(from: Date())) {
+        if let reportHTML = reportComposer.renderReport(reportDate: dateFormatForReportHTML.string(from: Date())) {
             
-            webView.loadHTMLString(invoiceHTML, baseURL: NSURL(string: reportComposer.pathToInvoiceHTMLTemplate!)! as URL)
-            HTMLContent = invoiceHTML
+            webView.loadHTMLString(reportHTML, baseURL: NSURL(string: reportComposer.pathToReportHTMLTemplate!)! as URL)
+            HTMLContent = reportHTML
             
         }
     }
