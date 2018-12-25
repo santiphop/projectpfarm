@@ -23,8 +23,6 @@ class WorkViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         dateFormatForReportHTML.dateFormat = "MMM d, YYYY"
-//        let db = appDelegate.db
-//        db.initcheck()
         createReportAsHTML()
     }
     

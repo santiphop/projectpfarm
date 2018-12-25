@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WorkReportViewController: UIViewController {
+class WorkReport1ViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     var currentWorkList = [String]()
@@ -37,7 +37,7 @@ class WorkReportViewController: UIViewController {
         if !isBackToHome {
             let db = appDelegate.db
             currentWorkInfo = db.workInfo
-            let controller = segue.destination as! WorkDetailReportViewController
+            let controller = segue.destination as! WorkReport2ViewController
             if let indexPath = tableView.indexPathForSelectedRow {
 //                controller.workName = self.selectedWork
                 controller.idSelect = self.currentWorkInfo[currentWorkList[indexPath.row]]!
@@ -62,7 +62,7 @@ class WorkReportViewController: UIViewController {
 
 }
 
-extension WorkReportViewController: UITableViewDataSource, UITableViewDelegate {
+extension WorkReport1ViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return currentWorkList.count
     }

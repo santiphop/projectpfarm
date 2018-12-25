@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WorkDetailReportViewController: UIViewController {
+class WorkReport2ViewController: UIViewController {
 //    var workName = String()
     var idSelect = [Int]()
     var detailSelect = [Bool]()
@@ -52,13 +52,6 @@ class WorkDetailReportViewController: UIViewController {
         
         
     }
-//
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        let db = appDelegate.db
-//        let controller = segue.destination as! WorkReportViewController
-//        controller.currentWorkList = db.workList
-//        controller.viewDidLoad()
-//    }
     
     
 
@@ -74,7 +67,7 @@ class WorkDetailReportViewController: UIViewController {
 
 }
 
-extension WorkDetailReportViewController: UITableViewDataSource, UITableViewDelegate {
+extension WorkReport2ViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return idSelect.count
     }

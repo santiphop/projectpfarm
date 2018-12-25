@@ -8,21 +8,6 @@
 
 import UIKit
 
-func tomorrow(date:[Date]) -> [Date] {
-    var tmp = [Date]()
-    for d in date {
-        tmp.append(addDateComponent(date: d, intAdding: 1))
-    }
-    return tmp
-}
-
-func addDateComponent(date:Date, intAdding:Int) -> Date {
-    var dateComponent = DateComponents()
-    dateComponent.day = intAdding
-    let newDate = Calendar.current.date(byAdding: dateComponent, to: date)!
-    return newDate
-}
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -36,6 +21,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         db.getAllWorkFrom(date: Date())
         db.getAllPig()
+        let ref = Database.database().reference()
+        ref.child("หมู/6111/หมูสาว/ประวัติ/แม่พันธุ์").observeSingleEvent(of: .value) { (snapshot) in
+            print(snapshot.value as! String)
+        }
+        ref.child("หมู/6111/หมูสาว/ประวัติ/พ่อพันธุ์").setValue("Duroc")
         
 
         return true
@@ -69,5 +59,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
     }
 
+}
+
+//  global
+
+func tomorrow(date:[Date]) -> [Date] {
+    var tmp = [Date]()
+    for d in date {
+        tmp.append(addDateComponent(date: d, intAdding: 1))
+    }
+    return tmp
+}
+
+func addDateComponent(date:Date, intAdding:Int) -> Date {
+    var dateComponent = DateComponents()
+    dateComponent.day = intAdding
+    let newDate = Calendar.current.date(byAdding: dateComponent, to: date)!
+    return newDate
 }
 

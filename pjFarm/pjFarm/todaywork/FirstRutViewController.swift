@@ -59,9 +59,6 @@ class FirstRutViewController: UIViewController {
     
     @objc func doneActionForDatePicker() {
         dateTextField.text = dateFormatForTextField.string(from: datePicker.date)
-        let db = self.appDelegate.db
-//        db.generateWorkDateForMaepun(date: datePicker.date)
-//        db.generateWorkIDCountForMaepun(index: 0)
         self.view.endEditing(true)
     }
     

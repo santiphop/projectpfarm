@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FarrowViewController: UIViewController {
+class Farrow1ViewController: UIViewController {
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     let datePicker = UIDatePicker()
     let dateFormatForTextField = DateFormatter()
@@ -74,7 +74,7 @@ class FarrowViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let controller = segue.destination as! FarrowDetailViewController
+        let controller = segue.destination as! Farrow2ViewController
         controller.mom = momString
         controller.dad = dadString
         controller.date = datePicker.date

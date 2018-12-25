@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FarrowDetailViewController: UIViewController {
+class Farrow2ViewController: UIViewController {
     var mom = String()
     var dad = String()
     var date = Date()

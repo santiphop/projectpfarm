@@ -13,7 +13,7 @@ class HomeViewController: UIViewController {
 //    var pig:Pig
     @IBOutlet weak var dateLabel: UILabel!
     let dateFormat = DateFormatter()
-    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    //let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
 
     override func viewDidLoad() {

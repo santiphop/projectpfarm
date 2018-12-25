@@ -130,105 +130,36 @@ class DatabaseManager {
         
             let pigtype = data["pigtype"] as! String
             let workstep = data["workstep"] as! Int
-            
-            print(pigtype)
-            print(workstep)
             let wName = self.workData.getAt(type: pigtype).name
-            print(wName)
             
             for i in 0...ids.count-1 {
                 if bools[i] {
                     //  setValue 2 is UNDONE
                     self.ref.child("\(todayPath)/\(ids[i])").setValue(2)
+                    
+                    //  assign tomorrow
+                    self.ref.child("งาน/\(self.dateFormat.string(from: addDateComponent(date: date, intAdding: 1)))W/\(self.currentWork)/\(ids[i])").setValue(0)
+                    self.ref.child("งาน/\(self.dateFormat.string(from: addDateComponent(date: date, intAdding: 1)))W/\(self.currentWork)/pigtype").setValue(pigtype)
+                    self.ref.child("งาน/\(self.dateFormat.string(from: addDateComponent(date: date, intAdding: 1)))W/\(self.currentWork)/workstep").setValue(workstep)
+                    
                     let wDateRemain = self.workData.getAt(type: pigtype).generateWorkDate(date: date, fromIndex: workstep + 1)
                     let wDate2morrow = tomorrow(date: wDateRemain)
+                    
                     
                     for j in 0...wDateRemain.count-1 {
                         //  remove
                         self.ref.child("งาน/\(self.dateFormat.string(from: wDateRemain[j]))W/\(wName[workstep+j+1])/\(ids[i])").removeValue()
-                        //  assign
+                        //  assign remain
                         self.ref.child("งาน/\(self.dateFormat.string(from: wDate2morrow[j]))W/\(wName[workstep+j+1])/\(ids[i])").setValue(0)
                         self.ref.child("งาน/\(self.dateFormat.string(from: wDate2morrow[j]))W/\(wName[workstep+j+1])/pigtype").setValue(pigtype)
                         self.ref.child("งาน/\(self.dateFormat.string(from: wDate2morrow[j]))W/\(wName[workstep+j+1])/workstep").setValue(workstep+j+1)
                     }
                 }
             }
-//            print(identifier)
-//            let pType = identifier.first!
-//            let pwState = identifier.last!
-//            let work = self.workData.getAt(type: pType)
-//            print(work.name)
-//            print(work.addDate)
-//            print(pwState)
-//            for i in 0...ids.count-1 {
-//                if bools[i] {
-//                    let wDateRemain = self.workData.getAt(type: pType).generateWorkDate(date: date, fromIndex: Int(pwState)!)
-//                }
-//            }
-            
+          
         })
-//        for i in 0...ids.count-1 {
-//            ref.child("\(todayPath)/")
-//
-//        }
-//        let todayPath = "งาน/\(dateFormat.string(from: date))W/\(work)"
-//        let tomorrowPath = "งาน/\(dateFormat.string(from: addDateComponent(date: date, intAdding: 1)))W/ทั้งหมด/\(currentWork)"
-//        var index = 1
-//        for j in 0...bools.count-1 {
-//            let i = bools.count-1-j
-//
-//            if bools[i] {
-//                print(ids[i])
-//                ref.child("\(todayPath)/\(index)").setValue(ids[i])
-//                ref.child("\(tomorrowPath)/\(tmrWorkIDCount)").setValue(ids[i])
-//                index += 1
-//                tmrWorkIDCount += 1
-//                print(workInfo[currentWork]?.count as Any)
-//                workInfo[currentWork]?.remove(at: i)
-//            }
-//        }
-//        var pig:Pig
-//        ref.child("งาน/\(dateFormat.string(from: date))W/\(work)/idenfier").observeSingleEvent(of: .value, with: { snapshot in
-//            let id = snapshot.value as! String
-//            let type = id.first!
-//            let state = id.last!
-//            var info : [Int:Pig]
-//            if type == "1" {
-//                info = self.pigData.pigGiltInfo
-//            }
-//            if type == "2" {
-//                info = self.pigData.pigBreederInfo
-//            }
-//            if type == "3" {
-//                info = self.pigData.pigFarrowInfo
-//            }
-//            if type == "4" {
-//                info = self.pigData.pigWeanInfo
-//            }
-//            for i in 0...ids.count-1 {
-//                if bools[i] {
-//                    self.ref.child("งาน/\(self.dateFormat.string(from: date))W/\(work)/\(ids[i])")
-//                } else {
-//                    self.ref.child("งาน/\(self.dateFormat.string(from: date))W/\(work)/\(ids[i])").setValue("0")
-//                }
-//            }
-//        })
-        
-
         
     }
-    
-    //
-    //  workID has 2 character
-    //
-    //  1st is pig's state
-    //      1 = gilt
-    //      2 = breeder
-    //      3 = farrowing
-    //      4 = weaning
-    //
-    //  2nd is pig's type work state
-    //
     
     //  value is status of work
     //      0 = assigned
@@ -261,12 +192,6 @@ class DatabaseManager {
         print(self.workInfo)
     }
     
-    private func addDateComponent(date:Date, intAdding:Int) -> Date {
-        var dateComponent = DateComponents()
-        dateComponent.day = intAdding
-        let newDate = Calendar.current.date(byAdding: dateComponent, to: date)!
-        return newDate
-    }
 }
 
 /////     รายงาน    /////
@@ -429,7 +354,6 @@ extension DatabaseManager {
         self.currentID += 1
         
         let musao = PigMusao(id: self.currentID, mother: mom, father: dad, date:date, work: workMusao)
-        
         pigData.add(pig: musao)
         
         ref.child("หมู/currentID").setValue(self.currentID)
