@@ -11,38 +11,26 @@ import UIKit
 class WorkReport1ViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
-    var currentWorkList = [String]()
-    var currentWorkInfo = [String:[Int]]()
     var isBackToHome:Bool = false
     var selectedWork = String()
     
     
-    var appDelegate = UIApplication.shared.delegate as! AppDelegate
     
-    @IBAction func confirmButton(_ sender: Any) {
-        isBackToHome = true
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        let db = appDelegate.db
-        currentWorkList = db.workList
-        currentWorkInfo = db.workInfo        
     }
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if !isBackToHome {
-            let db = appDelegate.db
-            currentWorkInfo = db.workInfo
-            let controller = segue.destination as! WorkReport2ViewController
             if let indexPath = tableView.indexPathForSelectedRow {
-//                controller.workName = self.selectedWork
-                controller.idSelect = self.currentWorkInfo[currentWorkList[indexPath.row]]!
-                controller.titleBar.title = self.currentWorkList[indexPath.row]
-                print(currentWorkInfo)
+                let controller = segue.destination as! WorkReport2ViewController
+                controller.idSelect = workInfo[workList[indexPath.row]]!
+                controller.titleBar.title = workList[indexPath.row]
+                print(workInfo)
             }
         }
     }
@@ -64,20 +52,18 @@ class WorkReport1ViewController: UIViewController {
 
 extension WorkReport1ViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return currentWorkList.count
+        return workList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "workcell", for: indexPath)
-        cell.textLabel?.text = currentWorkList[indexPath.row]
+        cell.textLabel?.text = workList[indexPath.row]
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let db = appDelegate.db
-        db.currentWork = currentWorkList[indexPath.row]
-        selectedWork = currentWorkList[indexPath.row]
-        print(db.currentWork)
+        currentWork = workList[indexPath.row]
+        print(currentWork)
     }
 
     

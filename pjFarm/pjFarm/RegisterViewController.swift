@@ -20,15 +20,15 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var dateTextField: UITextField!
     
     @IBAction func registerButton(_ sender: Any) {
-        let db = self.appDelegate.db
+//        let db = self.appDelegate.db
         let momString:String = momTextField.text!
         let dadString:String = dadArray[dad.selectedSegmentIndex]
         
         if momString.isEmpty || momString.count != 4 {
-            showMomExceptionAlert()
+            showMessage(title: "ลงทะเบียนไม่สำเร็จ", message: "ข้อมูลไม่ถูกต้อง กรุณาใส่ ID แม่พันธุ์ของหมู\n(ข้อมูล ID ของแม่พันธุ์ 4 หลัก)")
         }
         else {
-            let currentID = db.regisMS(dad: dadString, mom: momString, date:datePicker.date)
+            regisMS(dad: dadString, mom: momString, date:datePicker.date)
             showOptionsAlert(id: currentID)
         }
     }
@@ -91,15 +91,31 @@ class RegisterViewController: UIViewController {
         
     }
     
-    func showMomExceptionAlert() {
-        let alertController = UIAlertController(title: "ลงทะเบียนไม่สำเร็จ", message: "ข้อมูลไม่ถูกต้อง กรุณาใส่ ID แม่พันธุ์ของหมู\n(ข้อมูล ID ของแม่พันธุ์ 4 หลัก)", preferredStyle: UIAlertController.Style.alert)
+    func showMessage(title:String, message:String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default))
+        self.present(alertController, animated: true)
+    }
+    
+    //  firebase
+    func regisMS(dad:String, mom:String, date:Date) {
+        currentID += 1
         
-        let actionNothing = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) { (action) in }
+//        let musao = PigMusao(id: currentID, mother: mom, father: dad, date:date, work: workMusao)
+        workMusao.generateSelf(date: date)
         
-        alertController.addAction(actionNothing)
+        ref.child("หมู/currentID").setValue(currentID)
+        ref.child("หมู/\(currentID)/สถานะ").setValue("หมูสาว")
+        ref.child("หมู/\(currentID)/หมูสาว/ประวัติ").setValue([
+            "แม่พันธุ์":mom,
+            "พ่อพันธุ์":dad,
+            "วันแรกเข้า":dateFormat.string(from: date)
+        ])
+        for i in 0...workMusao.name.count-1 {
+            ref.child("หมู/\(currentID)/หมูสาว/งาน/\(workMusao.name[i])").setValue(dateFormat.string(from: workMusao.date[i]))
+        }
         
-        present(alertController, animated: true, completion: nil)
-        
+        assignWork(id: currentID, work: workMusao)
         
     }
 

@@ -201,7 +201,6 @@
 				6A57B67421427E53004DE381 /* Main.storyboard */,
 				8F47B53D21B3DF2E00A1F25F /* WorkData.swift */,
 				8FD19BAF21D2123D0027FCEC /* Work.swift */,
-				8F2DB06D21CF7DE000927134 /* PigData.swift */,
 				8F2DB07721CFA29800927134 /* PigType */,
 				6A57B67721427E53004DE381 /* Assets.xcassets */,
 				6A57B67921427E53004DE381 /* LaunchScreen.storyboard */,
@@ -238,11 +237,11 @@
 				8FEDCBEC21B4D5CE00F935EA /* WorkViewController.swift */,
 				8F8E845721C8221600CE8CAF /* reportsheet */,
 				8FEDCBEE21B6620700F935EA /* FirstRutViewController.swift */,
-				8F0EECDF21BA2DC4003885BE /* WorkReport1ViewController.swift */,
-				8F0EECE121BA30A4003885BE /* WorkReport2ViewController.swift */,
 				8F295DCC21C792940017D376 /* Farrow1ViewController.swift */,
 				8F295DD021C7971B0017D376 /* Farrow2ViewController.swift */,
 				8F295DCE21C794340017D376 /* WeanViewController.swift */,
+				8F0EECDF21BA2DC4003885BE /* WorkReport1ViewController.swift */,
+				8F0EECE121BA30A4003885BE /* WorkReport2ViewController.swift */,
 			);
 			path = todaywork;
 			sourceTree = "<group>";
@@ -250,6 +249,7 @@
 		8F2DB07721CFA29800927134 /* PigType */ = {
 			isa = PBXGroup;
 			children = (
+				8F2DB06D21CF7DE000927134 /* PigData.swift */,
 				8F2DB07521CFA28E00927134 /* Pig.swift */,
 				8F18C6F6216DCFD9001BBF0F /* PigMusao.swift */,
 				8F2DB07821CFAAD800927134 /* PigRound.swift */,

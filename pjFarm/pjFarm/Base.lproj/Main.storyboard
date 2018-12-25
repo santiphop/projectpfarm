@@ -460,7 +460,7 @@
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="confirmButton:" destination="71f-hW-CiI" eventType="touchUpInside" id="yUp-7G-YJB"/>
+                                    <action selector="confirmButton:" destination="71f-hW-CiI" eventType="touchUpInside" id="MPG-Fd-uee"/>
                                     <segue destination="oWH-qd-WEe" kind="unwind" unwindAction="unwindToHome:" id="8Km-Xb-gpK"/>
                                 </connections>
                             </button>
@@ -790,8 +790,7 @@
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="nextButton:" destination="lOQ-fV-oK9" eventType="touchUpInside" id="eJK-Sd-CrO"/>
-                                    <segue destination="N2q-oG-91M" kind="show" id="1So-sA-HvU"/>
+                                    <action selector="nextButton:" destination="lOQ-fV-oK9" eventType="touchUpInside" id="auF-Pu-dby"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -818,6 +817,7 @@
                         <outlet property="dad" destination="tft-sa-MBi" id="Dby-9M-Z2k"/>
                         <outlet property="dateTextField" destination="qtV-Gz-MB0" id="vfX-nb-7y5"/>
                         <outlet property="momTextField" destination="F2N-dk-4di" id="tzO-YA-xfn"/>
+                        <segue destination="N2q-oG-91M" kind="show" identifier="farrow1to2" id="R0q-lt-Z82"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rbx-w3-ti7" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -975,6 +975,7 @@
                         <outlet property="mummy" destination="a4D-PD-GaT" id="a46-JC-Svn"/>
                         <outlet property="titleBar" destination="M7L-ha-bnf" id="2nQ-pR-Ref"/>
                         <segue destination="T6d-Kq-gAC" kind="unwind" identifier="KlodDoneToHome" unwindAction="unwindToHome:" id="IL8-yH-Dhe"/>
+                        <segue destination="T6d-Kq-gAC" kind="unwind" identifier="farrow2to1" unwindAction="unwindToFarrow:" id="ApK-ny-AhA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UFm-VZ-xgo" userLabel="First Responder" sceneMemberID="firstResponder"/>

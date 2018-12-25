@@ -10,27 +10,28 @@ import UIKit
 
 class FirstRutViewController: UIViewController {
 
-    var appDelegate = UIApplication.shared.delegate as! AppDelegate
-    var datePicker = UIDatePicker()
-    let dateFormatForTextField = DateFormatter()
-    var currentPigList = [String]()
-    
+    var datePicker = UIDatePicker()    
 
     @IBOutlet weak var idTextField: NumpadTextField!
     @IBOutlet weak var dateTextField: UITextField!
     
     @IBAction func saveButton(_ sender: Any) {
-        let db = self.appDelegate.db
+        //  success
         let idString = idTextField.text!
-        currentPigList = db.pigList
-        if idString.isEmpty {
-            showEmptyTextExceptionAlert()
-        } else if !currentPigList.contains(idString) {
-            showNoDataExceptionAlert(id: idString)
-        }
-        else {
-            db.regisMP(date: datePicker.date, id: idString)
-            showOptionsAlert()
+        ref.child("หมู/\(idString)").observeSingleEvent(of: .value) { (snapshot) in
+            if idString.isEmpty {
+                self.showMessage(title: "ลงทะเบียนไม่สำเร็จ", message: "ข้อมูลไม่ถูกต้อง กรุณาใส่ ID แม่พันธุ์")
+            } else if let data = snapshot.value as? NSDictionary {
+                if (data["สถานะ"] as! String).elementsEqual("หมูสาว") {
+                    regisMP(date: self.datePicker.date, id: idString, primary: 1, secondary: 1)
+                    self.showOptionsAlert()
+                } else {
+                    self.showMessage(title: "สถานะผิดพลาด", message: "ID:\(idString) มีสถานะที่ไม่ใช่หมูสาว")
+                }
+            }
+            else {
+                self.showMessage(title: "ไม่พบข้อมูล", message: "ข้อมูลไม่ถูกต้อง\nID:\(idString) ไม่มีอยู่ในระบบ")
+            }
         }
     }
     
@@ -77,28 +78,13 @@ class FirstRutViewController: UIViewController {
         present(alertController, animated: true, completion: nil)
     }
     
-    func showEmptyTextExceptionAlert() {
-        let alertController = UIAlertController(title: "ลงทะเบียนไม่สำเร็จ", message: "ข้อมูลไม่ถูกต้อง กรุณาใส่ ID แม่พันธุ์", preferredStyle: UIAlertController.Style.alert)
-        
-        let actionNothing = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) { (action) in }
-        
-        alertController.addAction(actionNothing)
-        
-        present(alertController, animated: true, completion: nil)
-        
-        
-    }
     
-    func showNoDataExceptionAlert(id:String) {
-        let alertController = UIAlertController(title: "ไม่พบข้อมูล", message: "ข้อมูลไม่ถูกต้อง\nID:\(id) ไม่มีอยู่ในระบบ", preferredStyle: UIAlertController.Style.alert)
-        
-        let actionNothing = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) { (action) in }
-        
-        alertController.addAction(actionNothing)
-        
-        present(alertController, animated: true, completion: nil)
-        
-        
+    
+    
+    func showMessage(title:String, message:String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default))
+        present(alertController, animated: true)
     }
     
     

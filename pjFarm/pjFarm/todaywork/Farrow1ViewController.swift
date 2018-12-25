@@ -9,36 +9,32 @@
 import UIKit
 
 class Farrow1ViewController: UIViewController {
-    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     let datePicker = UIDatePicker()
-    let dateFormatForTextField = DateFormatter()
-    let dadArray = ["Large White", "Duroc", "Landrace"]
-    var currentPigList = [String]()
 
     //  for prepare()
     //  send data to next ViewController
-    var momString = ""
-    var dadString = ""
+    var momString = String()
+    var dadString = String()
     
     @IBOutlet weak var momTextField: NumpadTextField!
-    
     @IBOutlet weak var dad: UISegmentedControl!
-    
     @IBOutlet weak var dateTextField: UITextField!
     
     @IBAction func nextButton(_ sender: Any) {
-        let db = appDelegate.db
-        currentPigList = db.pigList
-
         momString = momTextField.text!
         dadString = dadArray[dad.selectedSegmentIndex]
-        if momString.isEmpty {
-            showEmptyTextExceptionAlert()
-        } else if !currentPigList.contains(momString) {
-            showNoDataExceptionAlert(id: momString)
-        }
-        else {
-            db.getMaepunCurrentStateFrom(id: momString)
+        ref.child("หมู/\(momString)").observeSingleEvent(of: .value) { (snapshot) in
+            if self.momTextField.text!.isEmpty {
+                self.showMessage(title: "ลงทะเบียนไม่สำเร็จ", message: "ข้อมูลไม่ถูกต้อง กรุณาใส่ ID แม่พันธุ์")
+            } else if let data = snapshot.value as? NSDictionary {
+                if (data["สถานะ"] as! String).elementsEqual("แม่พันธุ์") {
+                    self.performSegue(withIdentifier: "farrow1to2", sender: self)
+                } else {
+                    self.showMessage(title: "สถานะผิดพลาด", message: "ID:\(self.momString) มีสถานะที่ไม่ใช่แม่พันธุ์")
+                }
+            } else {
+                self.showMessage(title: "ไม่พบข้อมูล", message: "ข้อมูลไม่ถูกต้อง\nID:\(self.momString) ไม่มีอยู่ในระบบ")
+            }
         }
     }
     
@@ -47,7 +43,6 @@ class Farrow1ViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         createDatePicker()
-        dateFormatForTextField.dateFormat = "MMMM d, yyyy"
         dateTextField.text! = dateFormatForTextField.string(from: Date())
     }
     
@@ -67,9 +62,6 @@ class Farrow1ViewController: UIViewController {
     
     @objc func doneActionForDatePicker() {
         dateTextField.text = dateFormatForTextField.string(from: datePicker.date)
-        let db = appDelegate.db
-//        db.generateWorkDateForKokKlod(date: datePicker.date)
-//        db.generateWorkIDCountForKokKlod()
         self.view.endEditing(true)
     }
     
@@ -81,30 +73,14 @@ class Farrow1ViewController: UIViewController {
         controller.titleBar.title = momString
     }
     
-    func showEmptyTextExceptionAlert() {
-        let alertController = UIAlertController(title: "ลงทะเบียนไม่สำเร็จ", message: "ข้อมูลไม่ถูกต้อง กรุณาใส่ ID แม่พันธุ์", preferredStyle: UIAlertController.Style.alert)
-        
-        let actionNothing = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) { (action) in }
-        
-        alertController.addAction(actionNothing)
-        
-        present(alertController, animated: true, completion: nil)
-        
-        
+    func showMessage(title:String, message:String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default))
+        present(alertController, animated: true)
     }
     
-    func showNoDataExceptionAlert(id:String) {
-        let alertController = UIAlertController(title: "ไม่พบข้อมูล", message: "ข้อมูลไม่ถูกต้อง\nID:\(id) ไม่มีอยู่ในระบบ", preferredStyle: UIAlertController.Style.alert)
-        
-        let actionNothing = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) { (action) in }
-        
-        alertController.addAction(actionNothing)
-        
-        present(alertController, animated: true, completion: nil)
-        
-        
-    }
-
+    @IBAction func unwindToFarrow(_ unwindSegue: UIStoryboardSegue) { }
+    
     /*
     // MARK: - Navigation
 

@@ -45,7 +45,7 @@ class SearchViewController: UIViewController {
                 self.captureSession = AVCaptureSession()
                 self.captureSession.addInput(input)
             } catch let error as NSError {
-                showMessage(msgTitle: error.localizedDescription, msgText: error.localizedFailureReason ?? "-")
+                showMessage(title: error.localizedDescription, message: error.localizedFailureReason ?? "-")
                 return false
             }
             
@@ -63,15 +63,15 @@ class SearchViewController: UIViewController {
             captureMetadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
             self.captureSession.startRunning()
         } else {
-            showMessage(msgTitle: "Cannot Access Camera", msgText: "Please Allow the App to access your camera")
+            showMessage(title: "Cannot Access Camera", message: "Please Allow the App to access your camera")
         }
         return true
     }
     
-    func showMessage(msgTitle:String, msgText:String) {
-        let alert = UIAlertController(title: msgTitle, message: msgText, preferredStyle: UIAlertController.Style.alert)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
+    func showMessage(title:String, message:String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default))
+        present(alertController, animated: true)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

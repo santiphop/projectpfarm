@@ -9,7 +9,6 @@
 import UIKit
 
 class SearchByIDViewController: UIViewController {
-    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     var id = String()
     var autoSearch = Bool()
     
@@ -34,12 +33,6 @@ class SearchByIDViewController: UIViewController {
     }
     
     func search() {
-        let db = appDelegate.db
-        let ref = Database.database().reference()
-//        ref.child("หมู/currentID").observeSingleEvent(of: .value, with: { snapshot in
-//            print(snapshot.value)
-//        })
-        currentPigInfo = db.pigInfo
         if currentPigInfo[id] != nil {
             pigInfoView.text = "ID: \(id)\nรหัสของแม่พันธุ์: \(currentPigInfo[id]![0])\nพันธุ์ของพ่อ: \(currentPigInfo[id]![1])\nวันแรกเข้า: \(currentPigInfo[id]![2])"
         } else {

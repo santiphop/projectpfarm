@@ -13,8 +13,6 @@ class Farrow2ViewController: UIViewController {
     var dad = String()
     var date = Date()
     
-    let appDelegate = UIApplication.shared.delegate as! AppDelegate
-
     @IBOutlet weak var titleBar: UINavigationItem!
     @IBOutlet weak var all: NumpadTextField!
     @IBOutlet weak var dead: NumpadTextField!
@@ -26,8 +24,6 @@ class Farrow2ViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        let db = appDelegate.db
-//        db.generateWorkIDCountForKokKlod()
     }
     
     @IBAction func save(_ sender: Any) {
@@ -63,39 +59,69 @@ class Farrow2ViewController: UIViewController {
         }
         
         
-        if intDead + intMummy + intMale + intFemale == intAll && intAll != 0 {
-            let db = appDelegate.db
-            db.regisKK(id: mom, dad: dad, date: date, all: intAll, dead: intDead, mummy: intMummy, male: intMale, female: intFemale)
+        if intDead + intMummy + intMale + intFemale == intAll && intAll > 0 {
+//            ref.child("หมู/\(mom)/แม่พันธุ์/currentState").observeSingleEvent(of: .value) { (snapshot) in
+//                let data = snapshot.value as! NSDictionary
+//                let primary = data["primary"] as! Int
+//                let secondary = data["secondary"] as! Int
+//            }
+            regisKK(id: mom, dad: dad, date: date, all: intAll, dead: intDead, mummy: intMummy, male: intMale, female: intFemale)
             showOptionsAlert()
         } else {
-            showExceptionAlert()
+            showMessage(title: "ลงทะเบียนไม่สำเร็จ", message: "ข้อมูลไม่ถูกต้อง")
         }
     }
     
     func showOptionsAlert() {
         let alertController = UIAlertController(title: "Yeah!", message: "Saved the history to database: \(mom)", preferredStyle: UIAlertController.Style.alert)
         
-        let actionBackHome = UIAlertAction(title: "Back to Home", style: UIAlertAction.Style.default) { action in
+        let actionBackHome = UIAlertAction(title: "Home", style: UIAlertAction.Style.default) { action in
             self.performSegue(withIdentifier: "KlodDoneToHome", sender: self)
         }
         
+        let actionBackFarrow = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) { action in
+            self.performSegue(withIdentifier: "farrow2to1", sender: self)
+        }
         alertController.addAction(actionBackHome)
-        
-        present(alertController, animated: true, completion: nil)
+        alertController.addAction(actionBackFarrow)
+
+        present(alertController, animated: true)
         
         
     }
     
-    func showExceptionAlert() {
-        let alertController = UIAlertController(title: "ลงทะเบียนไม่สำเร็จ", message: "ข้อมูลไม่ถูกต้อง", preferredStyle: UIAlertController.Style.alert)
+    func regisKK(id:String, dad:String, date:Date, all:Int, dead:Int, mummy:Int, male:Int, female:Int) {
+        let remain = all-(dead+mummy)
         
-        let actionNothing = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) { (action) in }
+        ref.child("หมู/\(id)/แม่พันธุ์/currentState").observeSingleEvent(of: .value, with: { snapshot in
+            let data = snapshot.value as? NSDictionary
+            let primary = data?["primary"] as! Int
+            let secondary = data?["secondary"] as! Int
+            
+            ref.child("หมู/\(id)/สถานะ").setValue("คอกคลอด")
+            let kokklodPath = "หมู/\(id)/แม่พันธุ์/\(primary)/\(secondary)/คอกคลอด"
+            ref.child("\(kokklodPath)/ประวัติการทำคลอด").setValue([
+                "วันคลอด":dateFormat.string(from: date),
+                "จำนวนลูกทั้งหมด":all,
+                "จำนวนลูกที่ตาย":dead,
+                "จำนวนลูกที่พิการ":mummy,
+                "จำนวนลูกที่เหลือ":remain,
+                "จำนวนลูกที่เหลือเพศผู้":male,
+                "จำนวนลูกที่เหลือเพศเมีย":female
+            ])
+            for i in 0...workKokklod.name.count-1 {
+                ref.child("\(kokklodPath)/งาน/\(workKokklod.name[i])").setValue(dateFormat.string(from: workKokklod.date[i]))
+            }
+            
+        })
         
-        alertController.addAction(actionNothing)
-        
-        present(alertController, animated: true, completion: nil)
-        
-        
+        assignWork(id: Int(id)!, work: workKokklod)
+    }
+    
+    func showMessage(title:String, message:String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default))
+        present(alertController, animated: true)
     }
     
     /*
