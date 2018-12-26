@@ -89,6 +89,20 @@
                                     <action selector="registerButton:" destination="kDe-MF-0ot" eventType="touchUpInside" id="hJQ-Pr-DGk"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="ID ของหมูตัวใหม่ :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fzd-q5-QnD">
+                                <rect key="frame" x="83" y="121" width="129" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iqX-l2-13C">
+                                <rect key="frame" x="245" y="120" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.93372752569999995" blue="0.90592893839999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
@@ -113,6 +127,7 @@
                         <outlet property="dad" destination="pL6-WK-mFW" id="HfL-6u-rgx"/>
                         <outlet property="dateTextField" destination="0MY-E2-hTN" id="XDk-2J-MZb"/>
                         <outlet property="momTextField" destination="Jy4-38-07W" id="2eg-gN-sWI"/>
+                        <outlet property="newIDlabel" destination="iqX-l2-13C" id="7VF-Pe-Iyg"/>
                         <segue destination="Vs4-Gx-Owb" kind="unwind" identifier="unwindRegisterToHome" unwindAction="unwindToHome:" id="afd-mP-xdp"/>
                     </connections>
                 </viewController>

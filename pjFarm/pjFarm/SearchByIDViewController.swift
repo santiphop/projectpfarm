@@ -33,23 +33,44 @@ class SearchByIDViewController: UIViewController {
     }
     
     func search() {
-        if currentPigInfo[id] != nil {
-            pigInfoView.text = "ID: \(id)\nรหัสของแม่พันธุ์: \(currentPigInfo[id]![0])\nพันธุ์ของพ่อ: \(currentPigInfo[id]![1])\nวันแรกเข้า: \(currentPigInfo[id]![2])"
-        } else {
-            showExceptionAlert()
+        let id = self.id
+        var output = "ID : \(id)\n"
+        ref.child("หมู/\(id)").observeSingleEvent(of: .value) { (snapshot) in
+            if let data = snapshot.value as? NSDictionary {
+//                ref.child("หมู/\(id)/ประวัติ").observeSingleEvent(of: .value, with: { (intersnapshot) in
+//                    let musao = intersnapshot.value as! NSDictionary
+//                    output += musao["พ่อพันธุ์"] as! String
+//                })
+                output += "สถานะ: \(data["สถานะ"] as! String)\n"
+                
+                let ms = data["หมูสาว"] as! NSDictionary
+                let hist = ms["ประวัติ"] as! NSDictionary
+                output += "พ่อพันธุ์: \(hist["พ่อพันธุ์"] as! String)\n"
+                output += "แม่พันธุ์: \(hist["แม่พันธุ์"] as! String)\n"
+                output += "วันแรกเข้า: \(hist["วันแรกเข้า"] as! String)\n"
+                
+                //  แม่พันธุ์
+                //  คอกคลอด
+                //  คอกอนุบาล
+                //  เพิ่มเติมได้ในภายหลัง
+                
+                self.pigInfoView.text = output
+            } else {
+                self.showMessage(title: "ค้นหาไม่สำเร็จ", message: "ข้อมูลไม่ถูกต้อง กรุณาตรวจสอบ ID ที่ต้องการค้นหา")
+            }
         }
+//        if currentPigInfo[id] != nil {
+//            pigInfoView.text = "ID: \(id)\nรหัสของแม่พันธุ์: \(currentPigInfo[id]![0])\nพันธุ์ของพ่อ: \(currentPigInfo[id]![1])\nวันแรกเข้า: \(currentPigInfo[id]![2])"
+//        } else {
+//            showExceptionAlert()
+//        }
     }
     
-    func showExceptionAlert() {
-        let alertController = UIAlertController(title: "ค้นหาไม่สำเร็จ", message: "ข้อมูลไม่ถูกต้อง กรุณาตรวจสอบ ID ที่ต้องการค้นหา", preferredStyle: UIAlertController.Style.alert)
-        
-        let actionNothing = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) { action in }
-        
-        alertController.addAction(actionNothing)
-        
-        present(alertController, animated: true, completion: nil)
-        
-        
+
+    func showMessage(title:String, message:String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default))
+        self.present(alertController, animated: true)
     }
     
 

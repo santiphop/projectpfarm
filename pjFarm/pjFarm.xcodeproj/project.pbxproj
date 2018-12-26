@@ -16,17 +16,10 @@
 		6A57B69121427E53004DE381 /* pjFarmUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A57B69021427E53004DE381 /* pjFarmUITests.swift */; };
 		8F0EECE021BA2DC4003885BE /* WorkReport1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F0EECDF21BA2DC4003885BE /* WorkReport1ViewController.swift */; };
 		8F0EECE221BA30A4003885BE /* WorkReport2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F0EECE121BA30A4003885BE /* WorkReport2ViewController.swift */; };
-		8F18C6F7216DCFD9001BBF0F /* PigMusao.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F18C6F6216DCFD9001BBF0F /* PigMusao.swift */; };
 		8F295DCD21C792940017D376 /* Farrow1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F295DCC21C792940017D376 /* Farrow1ViewController.swift */; };
 		8F295DCF21C794340017D376 /* WeanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F295DCE21C794340017D376 /* WeanViewController.swift */; };
 		8F295DD121C7971B0017D376 /* Farrow2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F295DD021C7971B0017D376 /* Farrow2ViewController.swift */; };
 		8F295DD521C7B1760017D376 /* NumpadTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F295DD421C7B1760017D376 /* NumpadTextField.swift */; };
-		8F2DB06E21CF7DE000927134 /* PigData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F2DB06D21CF7DE000927134 /* PigData.swift */; };
-		8F2DB07021CF861E00927134 /* PigMaepun.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F2DB06F21CF861E00927134 /* PigMaepun.swift */; };
-		8F2DB07221CF8AB600927134 /* PigKokklod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F2DB07121CF8AB600927134 /* PigKokklod.swift */; };
-		8F2DB07421CF8CFE00927134 /* PigKinderGarten.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F2DB07321CF8CFE00927134 /* PigKinderGarten.swift */; };
-		8F2DB07621CFA28E00927134 /* Pig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F2DB07521CFA28E00927134 /* Pig.swift */; };
-		8F2DB07921CFAAD800927134 /* PigRound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F2DB07821CFAAD800927134 /* PigRound.swift */; };
 		8F47B53E21B3DF2E00A1F25F /* WorkData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F47B53D21B3DF2E00A1F25F /* WorkData.swift */; };
 		8F5E30E421C8D4030035DD97 /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F5E30E321C8D4030035DD97 /* RoundButton.swift */; };
 		8F5E30E621C9177B0035DD97 /* SearchByIDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F5E30E521C9177B0035DD97 /* SearchByIDViewController.swift */; };
@@ -45,7 +38,6 @@
 		8FAD346121A2D1160048A3EC /* leveldb-library.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FAD345F21A2D1160048A3EC /* leveldb-library.framework */; };
 		8FAD346221A2D1160048A3EC /* FirebaseDatabase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FAD346021A2D1160048A3EC /* FirebaseDatabase.framework */; };
 		8FD19BB021D2123D0027FCEC /* Work.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD19BAF21D2123D0027FCEC /* Work.swift */; };
-		8FD4864921AE60B400A2C7A1 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD4864821AE60B400A2C7A1 /* DatabaseManager.swift */; };
 		8FDC8B1121AD487700060F65 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FDC8B1021AD487700060F65 /* RegisterViewController.swift */; };
 		8FEC468C21B0FE4300B2CB47 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FEC468B21B0FE4300B2CB47 /* SearchViewController.swift */; };
 		8FEDCBED21B4D5CE00F935EA /* WorkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FEDCBEC21B4D5CE00F935EA /* WorkViewController.swift */; };
@@ -85,17 +77,10 @@
 		6A57B69221427E53004DE381 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8F0EECDF21BA2DC4003885BE /* WorkReport1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkReport1ViewController.swift; sourceTree = "<group>"; };
 		8F0EECE121BA30A4003885BE /* WorkReport2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkReport2ViewController.swift; sourceTree = "<group>"; };
-		8F18C6F6216DCFD9001BBF0F /* PigMusao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PigMusao.swift; sourceTree = "<group>"; };
 		8F295DCC21C792940017D376 /* Farrow1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Farrow1ViewController.swift; sourceTree = "<group>"; };
 		8F295DCE21C794340017D376 /* WeanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeanViewController.swift; sourceTree = "<group>"; };
 		8F295DD021C7971B0017D376 /* Farrow2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Farrow2ViewController.swift; sourceTree = "<group>"; };
 		8F295DD421C7B1760017D376 /* NumpadTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumpadTextField.swift; sourceTree = "<group>"; };
-		8F2DB06D21CF7DE000927134 /* PigData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PigData.swift; sourceTree = "<group>"; };
-		8F2DB06F21CF861E00927134 /* PigMaepun.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PigMaepun.swift; sourceTree = "<group>"; };
-		8F2DB07121CF8AB600927134 /* PigKokklod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PigKokklod.swift; sourceTree = "<group>"; };
-		8F2DB07321CF8CFE00927134 /* PigKinderGarten.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PigKinderGarten.swift; sourceTree = "<group>"; };
-		8F2DB07521CFA28E00927134 /* Pig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pig.swift; sourceTree = "<group>"; };
-		8F2DB07821CFAAD800927134 /* PigRound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PigRound.swift; sourceTree = "<group>"; };
 		8F47B53D21B3DF2E00A1F25F /* WorkData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkData.swift; sourceTree = "<group>"; };
 		8F5E30E321C8D4030035DD97 /* RoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
 		8F5E30E521C9177B0035DD97 /* SearchByIDViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchByIDViewController.swift; sourceTree = "<group>"; };
@@ -125,7 +110,6 @@
 		8FAD345F21A2D1160048A3EC /* leveldb-library.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = "leveldb-library.framework"; sourceTree = "<group>"; };
 		8FAD346021A2D1160048A3EC /* FirebaseDatabase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseDatabase.framework; sourceTree = "<group>"; };
 		8FD19BAF21D2123D0027FCEC /* Work.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Work.swift; sourceTree = "<group>"; };
-		8FD4864821AE60B400A2C7A1 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		8FDC8B1021AD487700060F65 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		8FEC468B21B0FE4300B2CB47 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		8FEDCBEC21B4D5CE00F935EA /* WorkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkViewController.swift; sourceTree = "<group>"; };
@@ -192,7 +176,6 @@
 			isa = PBXGroup;
 			children = (
 				6A57B67021427E53004DE381 /* AppDelegate.swift */,
-				8FD4864821AE60B400A2C7A1 /* DatabaseManager.swift */,
 				6A57B67221427E53004DE381 /* HomeViewController.swift */,
 				8F295DD821C7BC290017D376 /* todaywork */,
 				8FDC8B1021AD487700060F65 /* RegisterViewController.swift */,
@@ -201,14 +184,13 @@
 				6A57B67421427E53004DE381 /* Main.storyboard */,
 				8F47B53D21B3DF2E00A1F25F /* WorkData.swift */,
 				8FD19BAF21D2123D0027FCEC /* Work.swift */,
-				8F2DB07721CFA29800927134 /* PigType */,
+				8F5E30E721C917880035DD97 /* UIObject */,
 				6A57B67721427E53004DE381 /* Assets.xcassets */,
 				6A57B67921427E53004DE381 /* LaunchScreen.storyboard */,
 				6A57B67C21427E53004DE381 /* Info.plist */,
+				8FAD343521A2CC370048A3EC /* Framework */,
 				8FAD343321A2CAB70048A3EC /* GoogleService-Info.plist */,
 				8FAD344921A2CD570048A3EC /* pjFarm-Bridging-Header.h */,
-				8F5E30E721C917880035DD97 /* UIObject */,
-				8FAD343521A2CC370048A3EC /* Framework */,
 			);
 			path = pjFarm;
 			sourceTree = "<group>";
@@ -244,20 +226,6 @@
 				8F0EECE121BA30A4003885BE /* WorkReport2ViewController.swift */,
 			);
 			path = todaywork;
-			sourceTree = "<group>";
-		};
-		8F2DB07721CFA29800927134 /* PigType */ = {
-			isa = PBXGroup;
-			children = (
-				8F2DB06D21CF7DE000927134 /* PigData.swift */,
-				8F2DB07521CFA28E00927134 /* Pig.swift */,
-				8F18C6F6216DCFD9001BBF0F /* PigMusao.swift */,
-				8F2DB07821CFAAD800927134 /* PigRound.swift */,
-				8F2DB06F21CF861E00927134 /* PigMaepun.swift */,
-				8F2DB07121CF8AB600927134 /* PigKokklod.swift */,
-				8F2DB07321CF8CFE00927134 /* PigKinderGarten.swift */,
-			);
-			path = PigType;
 			sourceTree = "<group>";
 		};
 		8F5E30E721C917880035DD97 /* UIObject */ = {
@@ -479,29 +447,21 @@
 				8F5E30E421C8D4030035DD97 /* RoundButton.swift in Sources */,
 				8F0EECE221BA30A4003885BE /* WorkReport2ViewController.swift in Sources */,
 				8FD19BB021D2123D0027FCEC /* Work.swift in Sources */,
-				8F18C6F7216DCFD9001BBF0F /* PigMusao.swift in Sources */,
 				8FEC468C21B0FE4300B2CB47 /* SearchViewController.swift in Sources */,
 				8F8E845021C8121E00CE8CAF /* ReportComposer.swift in Sources */,
-				8F2DB07921CFAAD800927134 /* PigRound.swift in Sources */,
 				8F295DD121C7971B0017D376 /* Farrow2ViewController.swift in Sources */,
-				8F2DB07421CF8CFE00927134 /* PigKinderGarten.swift in Sources */,
 				8F295DCF21C794340017D376 /* WeanViewController.swift in Sources */,
 				8F5E30E621C9177B0035DD97 /* SearchByIDViewController.swift in Sources */,
-				8F2DB07221CF8AB600927134 /* PigKokklod.swift in Sources */,
 				8F295DD521C7B1760017D376 /* NumpadTextField.swift in Sources */,
 				8F0EECE021BA2DC4003885BE /* WorkReport1ViewController.swift in Sources */,
-				8F2DB07621CFA28E00927134 /* Pig.swift in Sources */,
 				8FEDCBED21B4D5CE00F935EA /* WorkViewController.swift in Sources */,
 				8F8E845421C814B700CE8CAF /* CustomPrintPageRenderer.swift in Sources */,
 				8FDC8B1121AD487700060F65 /* RegisterViewController.swift in Sources */,
-				8FD4864921AE60B400A2C7A1 /* DatabaseManager.swift in Sources */,
 				6A57B67321427E53004DE381 /* HomeViewController.swift in Sources */,
 				8F295DCD21C792940017D376 /* Farrow1ViewController.swift in Sources */,
 				8F47B53E21B3DF2E00A1F25F /* WorkData.swift in Sources */,
 				6A57B67121427E53004DE381 /* AppDelegate.swift in Sources */,
-				8F2DB06E21CF7DE000927134 /* PigData.swift in Sources */,
 				8FEDCBEF21B6620700F935EA /* FirstRutViewController.swift in Sources */,
-				8F2DB07021CF861E00927134 /* PigMaepun.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

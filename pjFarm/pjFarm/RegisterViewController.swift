@@ -15,6 +15,7 @@ class RegisterViewController: UIViewController {
     let dateFormatForTextField = DateFormatter()
     let dadArray = ["Large White", "Duroc", "Landrace"]
     
+    @IBOutlet weak var newIDlabel: UILabel!
     @IBOutlet weak var momTextField: NumpadTextField!
     @IBOutlet weak var dad: UISegmentedControl!
     @IBOutlet weak var dateTextField: UITextField!
@@ -28,7 +29,7 @@ class RegisterViewController: UIViewController {
             showMessage(title: "ลงทะเบียนไม่สำเร็จ", message: "ข้อมูลไม่ถูกต้อง กรุณาใส่ ID แม่พันธุ์ของหมู\n(ข้อมูล ID ของแม่พันธุ์ 4 หลัก)")
         }
         else {
-            regisMS(dad: dadString, mom: momString, date:datePicker.date)
+            regisMS(mom: momString, dad: dadString, date:datePicker.date)
             showOptionsAlert(id: currentID)
         }
     }
@@ -38,6 +39,7 @@ class RegisterViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        newIDlabel.text! = "\(currentID + 1)"
         createDatePicker()
         dateFormatForTextField.dateFormat = "MMMM d, yyyy"
         dateTextField.text! = dateFormatForTextField.string(from: Date())
@@ -87,8 +89,6 @@ class RegisterViewController: UIViewController {
         alertController.addAction(actionNothing)
 
         present(alertController, animated: true, completion: nil)
-        
-        
     }
     
     func showMessage(title:String, message:String) {
@@ -98,7 +98,7 @@ class RegisterViewController: UIViewController {
     }
     
     //  firebase
-    func regisMS(dad:String, mom:String, date:Date) {
+    func regisMS(mom:String, dad:String, date:Date) {
         currentID += 1
         
 //        let musao = PigMusao(id: currentID, mother: mom, father: dad, date:date, work: workMusao)

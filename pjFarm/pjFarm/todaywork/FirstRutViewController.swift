@@ -23,7 +23,7 @@ class FirstRutViewController: UIViewController {
                 self.showMessage(title: "ลงทะเบียนไม่สำเร็จ", message: "ข้อมูลไม่ถูกต้อง กรุณาใส่ ID แม่พันธุ์")
             } else if let data = snapshot.value as? NSDictionary {
                 if (data["สถานะ"] as! String).elementsEqual("หมูสาว") {
-                    regisMP(date: self.datePicker.date, id: idString, primary: 1, secondary: 1)
+                    regisMP(id: idString, date: self.datePicker.date, primary: 1, secondary: 1)
                     self.showOptionsAlert()
                 } else {
                     self.showMessage(title: "สถานะผิดพลาด", message: "ID:\(idString) มีสถานะที่ไม่ใช่หมูสาว")

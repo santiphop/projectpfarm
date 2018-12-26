@@ -91,13 +91,13 @@ class Farrow2ViewController: UIViewController {
     }
     
     func regisKK(id:String, dad:String, date:Date, all:Int, dead:Int, mummy:Int, male:Int, female:Int) {
-        let remain = all-(dead+mummy)
-        
+        workKokklod.generateSelf(date: date)
         ref.child("หมู/\(id)/แม่พันธุ์/currentState").observeSingleEvent(of: .value, with: { snapshot in
             let data = snapshot.value as? NSDictionary
             let primary = data?["primary"] as! Int
             let secondary = data?["secondary"] as! Int
-            
+            let remain = all-(dead+mummy)
+
             ref.child("หมู/\(id)/สถานะ").setValue("คอกคลอด")
             let kokklodPath = "หมู/\(id)/แม่พันธุ์/\(primary)/\(secondary)/คอกคลอด"
             ref.child("\(kokklodPath)/ประวัติการทำคลอด").setValue([

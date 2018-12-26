@@ -22,7 +22,7 @@ class WeanViewController: UIViewController {
                 self.showMessage(title: "ลงทะเบียนไม่สำเร็จ", message: "ข้อมูลไม่ถูกต้อง กรุณาใส่ ID แม่พันธุ์")
             } else if let data = snapshot.value as? NSDictionary {
                 if (data["สถานะ"] as! String).elementsEqual("คอกคลอด") {
-//                    self.regisKG(date: self.datePicker.date, id: momString)
+                    self.regisKG(id: momString, date: self.datePicker.date)
                     print("regis")
                     self.showOptionsAlert()
                 } else {
@@ -97,23 +97,32 @@ class WeanViewController: UIViewController {
     }
     
     func regisKG(id:String, date:Date) {
+        workKinderg.generateSelf(date: date)
         ref.child("หมู/\(id)/แม่พันธุ์").observeSingleEvent(of: .value, with: { snapshot in
             let data = snapshot.value as? NSDictionary
             let currentState = data?["currentState"] as? NSDictionary
             let primary = currentState?["primary"] as! Int
             let secondary = currentState?["secondary"] as! Int
-            let remain = data?["\(primary)/\(secondary)/คอกคลอด/ประวัติการทำคลอด/จำนวนลูกที่เหลือ"] as! Int
+            let kinderPath = "หมู/\(id)/แม่พันธุ์/\(primary)/\(secondary)/คอกอนุบาล"
+
+            ref.child("หมู/\(id)/แม่พันธุ์/\(primary)/\(secondary)/คอกคลอด/ประวัติการทำคลอด/จำนวนลูกที่เหลือ").observeSingleEvent(of: .value, with: { (intersnapshot) in
+                let remain = intersnapshot.value as? Int
+                ref.child("\(kinderPath)/จำนวนหมู").setValue(remain)
+            })
+//            let remain = data?["\(primary)/\(secondary)/คอกคลอด/ประวัติการทำคลอด/จำนวนลูกที่เหลือ"] as! Int
             
             ref.child("หมู/\(id)/สถานะ").setValue("แม่พันธุ์")
-            let kinderPath = "หมู/\(id)/แม่พันธุ์/\(primary)/\(secondary)/คอกอนุบาล"
-            ref.child("\(kinderPath)/จำนวนหมู").setValue(remain)
             for i in 0...workKinderg.name.count-1 {
                 ref.child("\(kinderPath)/งาน/\(workKinderg.name[i])").setValue(dateFormat.string(from: workKinderg.date[i]))
             }
-            regisMP(date: date, id: id, primary: primary+1, secondary: 1)
+            regisMP(id: id, date: date, primary: primary+1, secondary: 1)
         })
-        
         assignWork(id: Int(id)!, work: workKinderg)
+        
+        /*
+        // assignWorkMaepun is in regisMP above
+        // assignWork(id: Int(id)!, work: workMaepun)
+        */
     }
 
     /*

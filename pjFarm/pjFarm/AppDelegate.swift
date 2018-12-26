@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Foundation
+import FirebaseDatabase
 
 var ref = Database.database().reference()
 let dateFormat = DateFormatter()
@@ -61,10 +63,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
-    let db = DatabaseManager()
-    let pigData = PigData()
-    
-    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         // Override point for customization after application launch.
@@ -76,8 +74,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setUpCurrentID()
 
         getAllWorkFrom(date: Date())
-//        db.getAllPig()
-//        let ref = Database.database().reference()
 
         return true
     }
@@ -149,16 +145,17 @@ func assignWork(id:Int, work:Work) {
         ref.child("งาน/\(dateFormat.string(from: work.date[i]))W/\(work.name[i])/pigtype").setValue(work.typeID)
         ref.child("งาน/\(dateFormat.string(from: work.date[i]))W/\(work.name[i])/workstep").setValue(i)
         ref.child("งาน/\(dateFormat.string(from: work.date[i]))W/\(work.name[i])/\(id)").setValue(0)
-//        
-//        if dateFormat.string(from: work.date[i]).elementsEqual(dateFormat.string(from: Date())) {
-//            if !workList.contains(work.name[i]) {
-//                workList.append(work.name[i])
-//                workInfo[work.name[i]] = []
-//                workInfo[work.name[i]]?.append(id)
-//            } else {
-//                workInfo[work.name[i]]?.append(id)
-//            }
-//        }
+        
+        //  if assignedWork is on today
+        if dateFormat.string(from: work.date[i]).elementsEqual(dateFormat.string(from: Date())) {
+            if !workList.contains(work.name[i]) {
+                workList.append(work.name[i])
+                workInfo[work.name[i]] = []
+                workInfo[work.name[i]]?.append(id)
+            } else {
+                workInfo[work.name[i]]?.append(id)
+            }
+        }
     }
 }
 
@@ -183,10 +180,6 @@ func reportWorkForTomorrow(ids:[Int], bools:[Bool], date:Date) {
                 //  setValue 2 is UNDONE
                 ref.child("\(todayPath)/\(ids[i])").setValue(2)
                 
-                //  assign tomorrow
-                ref.child("งาน/\(dateFormat.string(from: addDateComponent(date: date, intAdding: 1)))W/\(currentWork)/\(ids[i])").setValue(0)
-                ref.child("งาน/\(dateFormat.string(from: addDateComponent(date: date, intAdding: 1)))W/\(currentWork)/pigtype").setValue(pigtype)
-                ref.child("งาน/\(dateFormat.string(from: addDateComponent(date: date, intAdding: 1)))W/\(currentWork)/workstep").setValue(workstep)
                 
                 let wDateRemain = workData.getAt(type: pigtype).generateWorkDate(date: date, fromIndex: workstep + 1)
                 let wDate2morrow = tomorrow(date: wDateRemain)
@@ -200,6 +193,12 @@ func reportWorkForTomorrow(ids:[Int], bools:[Bool], date:Date) {
                     ref.child("งาน/\(dateFormat.string(from: wDate2morrow[j]))W/\(wName[workstep+j+1])/pigtype").setValue(pigtype)
                     ref.child("งาน/\(dateFormat.string(from: wDate2morrow[j]))W/\(wName[workstep+j+1])/workstep").setValue(workstep+j+1)
                 }
+                
+                //  assign tomorrow
+                ref.child("งาน/\(dateFormat.string(from: tomorrow(date: date)))W/\(currentWork)/\(ids[i])").setValue(0)
+                ref.child("งาน/\(dateFormat.string(from: tomorrow(date: date)))W/\(currentWork)/pigtype").setValue(pigtype)
+                ref.child("งาน/\(dateFormat.string(from: tomorrow(date: date)))W/\(currentWork)/workstep").setValue(workstep)
+                
             }
         }
         
@@ -231,24 +230,27 @@ func getAllWorkFrom(date:Date) {
                         workInfo[workName]?.append(Int(key as! String)!)
                     }
                 }
+                print(workInfo)
+
             })
         }
     })
 }
 
-func regisMP(date:Date, id:String, primary:Int, secondary:Int) {
+func regisMP(id:String, date:Date, primary:Int, secondary:Int) {
+    workMaepun.generateSelf(date: date)
     ref.child("หมู/\(id)/สถานะ").setValue("แม่พันธุ์")
     ref.child("หมู/\(id)/แม่พันธุ์").setValue([
         "currentState":[
             "primary":primary,
-            "secondary":1
+            "secondary":secondary
         ],
         "\(primary)":[
             "\(secondary)":[
                 "เป็นสัดรอบแรก":dateFormat.string(from: date),
             ]
         ]
-        ])
+    ])
     for i in 0...workMaepun.name.count-1 {
         ref.child("หมู/\(currentID)/แม่พันธุ์/\(primary)/\(secondary)/งาน/\(workMaepun.name[i])").setValue(dateFormat.string(from: workMaepun.date[i]))
     }
