@@ -460,7 +460,6 @@
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="confirmButton:" destination="71f-hW-CiI" eventType="touchUpInside" id="MPG-Fd-uee"/>
                                     <segue destination="oWH-qd-WEe" kind="unwind" unwindAction="unwindToHome:" id="8Km-Xb-gpK"/>
                                 </connections>
                             </button>

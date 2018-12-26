@@ -10,18 +10,8 @@ import UIKit
 
 class PigKinderGarten: PigRound {
     
-    init(id:Int, date:Date) {
-        super.init(
-            id: id,
-            typeID: "4",
-            primary: 1,
-            secondary: 1,
-            date: date,
-            work: [
-                "วัคซีนอหิวาห์รอบที่1", "วัคซีนพิษสุนัขบ้าเทียมรอบที่1", "วัคซีนอหิวาห์รอบที่2", "วัคซีนพิษสุนัขบ้าเทียมรอบที่2"
-            ],
-            addDate: [7, 14, 21, 28]
-        )
+    init(id:Int, date:Date, work:Work) {
+        super.init(id: id, primary: 1, secondary: 1, date: date, work: work)
     }
     
     

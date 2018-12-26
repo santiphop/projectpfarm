@@ -11,11 +11,6 @@ import UIKit
 class WorkReport1ViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
-    var isBackToHome:Bool = false
-    var selectedWork = String()
-    
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,13 +20,12 @@ class WorkReport1ViewController: UIViewController {
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if !isBackToHome {
-            if let indexPath = tableView.indexPathForSelectedRow {
-                let controller = segue.destination as! WorkReport2ViewController
-                controller.idSelect = workInfo[workList[indexPath.row]]!
-                controller.titleBar.title = workList[indexPath.row]
-                print(workInfo)
-            }
+        
+        if let controller = segue.destination as? WorkReport2ViewController,
+            let indexPath = tableView.indexPathForSelectedRow {
+            controller.idSelect = workInfo[workList[indexPath.row]]!
+            controller.titleBar.title = workList[indexPath.row]
+            print(workInfo)
         }
     }
     
@@ -63,7 +57,7 @@ extension WorkReport1ViewController: UITableViewDataSource, UITableViewDelegate 
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         currentWork = workList[indexPath.row]
-        print(currentWork)
+        print("chosen: \(currentWork)")
     }
 
     
