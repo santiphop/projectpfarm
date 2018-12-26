@@ -27,32 +27,28 @@ let workMusao = Work(
     name: [
         "ถ่ายพยาธิ", "วัคซีนอหิวาห์", "วัคซีนพาร์โว", "วัคซีนพิษสุนัขบ้าเทียม", "วัคซีนปากเท้าเทียม", "วัคซีน PRRS"
     ],
-    addDate: [0, 7, 14, 21, 28, 32],
-    data: workData
+    addDate: [0, 7, 14, 21, 28, 32]
 )
 let workMaepun = Work(
     typeID: "2",
     name: [
         "ตรวจสัดครั้งที่1", "ตรวจสัดครั้งที่2", "ตรวจสัดครั้งที่3", "ตรวจท้อง", "ขึ้นคลอด", "กำหนดคลอด"
     ],
-    addDate: [21, 42, 63, 84, 109, 114],
-    data: workData
+    addDate: [21, 42, 63, 84, 109, 114]
 )
 let workKokklod = Work(
     typeID: "3",
     name: [
         "ตอนตัวผู้-ตัดหูตัวเมีย", "ตัดเขี้ยวและหาง", "ถ่ายพยาธิ-กำหนดหย่านม"
     ],
-    addDate: [3, 7, 24],
-    data: workData
+    addDate: [3, 7, 24]
 )
 let workKinderg = Work(
     typeID: "4",
     name: [
         "วัคซีนอหิวาห์รอบที่1", "วัคซีนพิษสุนัขบ้าเทียมรอบที่1", "วัคซีนอหิวาห์รอบที่2", "วัคซีนพิษสุนัขบ้าเทียมรอบที่2"
     ],
-    addDate: [7, 14, 21, 28],
-    data: workData
+    addDate: [7, 14, 21, 28]
 )
 
 let dadArray = ["Large White", "Duroc", "Landrace"]
@@ -68,13 +64,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         FirebaseApp.configure()
         
+        setUpCurrentID()
+        
+        workData.add(work: workMusao)
+        workData.add(work: workMaepun)
+        workData.add(work: workKokklod)
+        workData.add(work: workKinderg)
+        
         dateFormat.dateFormat = "yyyyMMdd"
         dateFormatForTextField.dateFormat = "MMMM d, yyyy"
-
-        setUpCurrentID()
-
+        
         getAllWorkFrom(date: Date())
-
+        
         return true
     }
 
@@ -110,8 +111,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
-//  global
-
 func tomorrow(date:[Date]) -> [Date] {
     var tmp = [Date]()
     for d in date {
@@ -132,7 +131,7 @@ func addDateComponent(date:Date, intAdding:Int) -> Date {
 }
 
 func setUpCurrentID() {
-    ref.child("หมู/currentID").observeSingleEvent(of: .value, with: { snapshot in
+    ref.child("หมู/currentID").observeSingleEvent(of: .value, with: { (snapshot) in
         // Get data
         let id = snapshot.value as? Int
         currentID = id!
@@ -159,16 +158,10 @@ func assignWork(id:Int, work:Work) {
     }
 }
 
-//func assignWork(pig:Pig) {
-//    assignWork(id: pig.id, work: pig.work)
-//}
-
 func reportWorkForTomorrow(ids:[Int], bools:[Bool], date:Date) {
-    //        print("this\(currentWork)")
     let todayPath = "งาน/\(dateFormat.string(from: date))W/\(currentWork)"
-    //        print(todayPath)
     
-    ref.child("\(todayPath)").observeSingleEvent(of: .value, with: { snapshot in
+    ref.child("\(todayPath)").observeSingleEvent(of: .value, with: { (snapshot) in
         let data = snapshot.value as! NSDictionary
         
         let pigtype = data["pigtype"] as! String
@@ -186,9 +179,10 @@ func reportWorkForTomorrow(ids:[Int], bools:[Bool], date:Date) {
                 
                 
                 for j in 0...wDateRemain.count-1 {
-                    //  remove
+                    //  remove and reassign remain
+                    
                     ref.child("งาน/\(dateFormat.string(from: wDateRemain[j]))W/\(wName[workstep+j+1])/\(ids[i])").removeValue()
-                    //  assign remain
+
                     ref.child("งาน/\(dateFormat.string(from: wDate2morrow[j]))W/\(wName[workstep+j+1])/\(ids[i])").setValue(0)
                     ref.child("งาน/\(dateFormat.string(from: wDate2morrow[j]))W/\(wName[workstep+j+1])/pigtype").setValue(pigtype)
                     ref.child("งาน/\(dateFormat.string(from: wDate2morrow[j]))W/\(wName[workstep+j+1])/workstep").setValue(workstep+j+1)
@@ -201,40 +195,61 @@ func reportWorkForTomorrow(ids:[Int], bools:[Bool], date:Date) {
                 
             }
         }
-        
+        getAllWorkFrom(date: Date())
     })
-    
+}
+
+func markAsDone(date:Date) {
+    print("marked")
 }
 
 func getAllWorkFrom(date:Date) {
+    workList.removeAll()
+    workInfo.removeAll()
     //  append workList
     //  append workInfo
     let thisDate = dateFormat.string(from: date)
-    ref.child("งาน/\(thisDate)W").observeSingleEvent(of: .value, with: { snapshot in
-        let data = snapshot.value as? NSDictionary
-        
-        if data != nil {
-            for (key, _) in data! {
-                workList.append(key as! String)
-            }
-        }
-        
-        print(workList)
-        for workName in workList {
-            let path = "งาน/\(thisDate)W/\(workName)"
-            ref.child(path).observeSingleEvent(of: .value, with: { interSnapshot in
-                let thisWork = interSnapshot.value as? NSDictionary
-                workInfo[workName] = []
-                for (key, _) in thisWork! {
-                    if !(key as! String).elementsEqual("pigtype") && !(key as! String).elementsEqual("workstep") {
-                        workInfo[workName]?.append(Int(key as! String)!)
+    ref.child("งาน/\(thisDate)W").observeSingleEvent(of: .value) { (snapshot) in
+        if let today = snapshot.value as? NSDictionary {
+            for (work, ids) in today {
+                workList.append(work as! String)
+                workInfo[work as! String] = []
+                for (id, status) in (ids as? NSDictionary)! {
+                    //  no pigtype and workstep
+                    if let intID = Int(id as! String), (status as! Int) == 0 {
+                        workInfo[work as! String]?.append(intID)
                     }
                 }
-                print(workInfo)
-
-            })
+            }
         }
-    })
+        print(workInfo)
+
+    }
+//    ref.child("งาน/\(thisDate)W").observeSingleEvent(of: .value, with: { snapshot in
+//        let data = snapshot.value as? NSDictionary
+//
+//        if data != nil {
+//            for (key, _) in data! {
+//                workList.append(key as! String)
+//            }
+//        }
+//
+//        print(workList)
+//        for workName in workList {
+//            let path = "งาน/\(thisDate)W/\(workName)"
+//            ref.child(path).observeSingleEvent(of: .value, with: { interSnapshot in
+//                let thisWork = interSnapshot.value as? NSDictionary
+//                workInfo[workName] = []
+//                for (key, _) in thisWork! {
+//                    if !(key as! String).elementsEqual("pigtype") && !(key as! String).elementsEqual("workstep") {
+//                        workInfo[workName]?.append(Int(key as! String)!)
+//                    }
+//                }
+//                print(workInfo)
+//
+//            })
+//        }
+//    })
 }
 
 func regisMP(id:String, date:Date, primary:Int, secondary:Int) {
@@ -257,4 +272,40 @@ func regisMP(id:String, date:Date, primary:Int, secondary:Int) {
     assignWork(id: Int(id)!, work: workMaepun)
 }
 
+extension UIViewController /* DatePicker */ {
+    func createDatePicker(datePicker:UIDatePicker, textField:UITextField, done:UIBarButtonItem) {
+        datePicker.datePickerMode = .date
+        //  let onDone = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneActionForDatePicker))
+        let toolbar:UIToolbar = UIToolbar()
+        toolbar.barStyle = .default
+        toolbar.items = [
+            UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil),
+            UIBarButtonItem(title: "Done", style: .done, target: done.target, action: done.action)
+        ]
+        toolbar.sizeToFit()
+        textField.inputAccessoryView = toolbar
+        textField.inputView = datePicker
+    }
+}
 
+extension UIViewController /* alert */ {
+    func showMessage(title:String, message:String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default))
+        self.present(alertController, animated: true)
+    }
+    
+    func showHomeOKAlert(title:String, message:String, unwindToHome:String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+        
+        let actionNothing = UIAlertAction(title: "OK", style: UIAlertAction.Style.default)
+        let actionBackHome = UIAlertAction(title: "Home", style: UIAlertAction.Style.default) { action in
+            self.performSegue(withIdentifier: unwindToHome, sender: self)
+        }
+        
+        alertController.addAction(actionBackHome)
+        alertController.addAction(actionNothing)
+        
+        present(alertController, animated: true)
+    }
+}

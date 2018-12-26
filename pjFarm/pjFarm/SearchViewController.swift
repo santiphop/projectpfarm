@@ -68,15 +68,8 @@ class SearchViewController: UIViewController {
         return true
     }
     
-    func showMessage(title:String, message:String) {
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
-        alertController.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default))
-        present(alertController, animated: true)
-    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let controller = segue.destination as! SearchByIDViewController
-        if isScanned {
+        if isScanned, let controller = segue.destination as? SearchByIDViewController {
             controller.id = self.outputText
             controller.autoSearch = true
         }

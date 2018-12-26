@@ -127,7 +127,7 @@
                         <outlet property="dad" destination="pL6-WK-mFW" id="HfL-6u-rgx"/>
                         <outlet property="dateTextField" destination="0MY-E2-hTN" id="XDk-2J-MZb"/>
                         <outlet property="momTextField" destination="Jy4-38-07W" id="2eg-gN-sWI"/>
-                        <outlet property="newIDlabel" destination="iqX-l2-13C" id="7VF-Pe-Iyg"/>
+                        <outlet property="newID" destination="iqX-l2-13C" id="eWy-FZ-mXU"/>
                         <segue destination="Vs4-Gx-Owb" kind="unwind" identifier="unwindRegisterToHome" unwindAction="unwindToHome:" id="afd-mP-xdp"/>
                     </connections>
                 </viewController>
@@ -475,7 +475,7 @@
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <segue destination="oWH-qd-WEe" kind="unwind" unwindAction="unwindToHome:" id="8Km-Xb-gpK"/>
+                                    <action selector="confirmReport:" destination="71f-hW-CiI" eventType="touchUpInside" id="YPP-Oq-Hzf"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -495,6 +495,7 @@
                     <navigationItem key="navigationItem" title="Report" id="0sI-HY-cy1"/>
                     <connections>
                         <outlet property="tableView" destination="h0F-cU-L12" id="tme-hB-qCJ"/>
+                        <segue destination="oWH-qd-WEe" kind="unwind" identifier="reportToHome" unwindAction="unwindToHome:" id="lm4-H4-aW6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dh8-6n-XR0" userLabel="First Responder" sceneMemberID="firstResponder"/>

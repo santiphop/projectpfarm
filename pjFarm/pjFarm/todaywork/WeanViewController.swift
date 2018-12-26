@@ -23,8 +23,7 @@ class WeanViewController: UIViewController {
             } else if let data = snapshot.value as? NSDictionary {
                 if (data["สถานะ"] as! String).elementsEqual("คอกคลอด") {
                     self.regisKG(id: momString, date: self.datePicker.date)
-                    print("regis")
-                    self.showOptionsAlert()
+                    self.showHomeOKAlert(title: "การย้ายคอกสำเร็จ !", message: "ID ของคอกอนุบาล : \(momString)", unwindToHome: "weanToHome")
                 } else {
                     self.showMessage(title: "สถานะผิดพลาด", message: "ID:\(momString) ไม่ได้อยู่ในคอกคลอด")
                 }
@@ -49,51 +48,14 @@ class WeanViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        createDatePicker()
-        dateFormatForTextField.dateFormat = "MMMM d, yyyy"
+        createDatePicker(datePicker: datePicker, textField: dateTextField, done: UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneActionForDatePicker)))
         dateTextField.text! = dateFormatForTextField.string(from: Date())
     }
     
-    func createDatePicker() {
-        datePicker.datePickerMode = .date
-        let onDone = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneActionForDatePicker))
-        let toolbar:UIToolbar = UIToolbar()
-        toolbar.barStyle = .default
-        toolbar.items = [
-            UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil),
-            UIBarButtonItem(title: "Done", style: .done, target: onDone.target, action: onDone.action)
-        ]
-        toolbar.sizeToFit()
-        dateTextField.inputAccessoryView = toolbar
-        dateTextField.inputView = datePicker
-    }
     
     @objc func doneActionForDatePicker() {
         dateTextField.text = dateFormatForTextField.string(from: datePicker.date)
         self.view.endEditing(true)
-    }
-    
-    func showOptionsAlert() {
-        let alertController = UIAlertController(title: "Yeah!", message: "Saved the history to database: \(momTextField.text!)", preferredStyle: UIAlertController.Style.alert)
-        
-        let actionBackHome = UIAlertAction(title: "Home", style: UIAlertAction.Style.default) { action in
-            self.performSegue(withIdentifier: "weanToHome", sender: self)
-        }
-        
-        let actionNothing = UIAlertAction(title: "OK", style: UIAlertAction.Style.default)
-        
-        alertController.addAction(actionBackHome)
-        alertController.addAction(actionNothing)
-
-        present(alertController, animated: true)
-        
-        
-    }
-    
-    func showMessage(title:String, message:String) {
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
-        alertController.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default))
-        present(alertController, animated: true)
     }
     
     func regisKG(id:String, date:Date) {
@@ -109,7 +71,6 @@ class WeanViewController: UIViewController {
                 let remain = intersnapshot.value as? Int
                 ref.child("\(kinderPath)/จำนวนหมู").setValue(remain)
             })
-//            let remain = data?["\(primary)/\(secondary)/คอกคลอด/ประวัติการทำคลอด/จำนวนลูกที่เหลือ"] as! Int
             
             ref.child("หมู/\(id)/สถานะ").setValue("แม่พันธุ์")
             for i in 0...workKinderg.name.count-1 {
@@ -125,14 +86,5 @@ class WeanViewController: UIViewController {
         */
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

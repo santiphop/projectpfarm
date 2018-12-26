@@ -26,15 +26,13 @@ class WorkReport2ViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        for _ in idSelect {
-            detailSelect.append(false)
-        }
+        detailSelect = [Bool](repeating: false, count: idSelect.count)
     }
     
     func showOptionsAlert() {
-        let alertController = UIAlertController(title: "Are you sure?", message: "Make sure you make your report correctly", preferredStyle: UIAlertController.Style.alert)
+        let alertController = UIAlertController(title: "กรุณาตรวจสอบ ID หมู", message: "ID ของหมูที่เลือกทั้งหมด\nเป็นหมูตัวที่ยังทำงานไม่เสร็จ\nและจะเลื่อนงานไปทำต่อในวันพรุ่งนี้\nต้องการดำเนินการต่อหรือไม่", preferredStyle: UIAlertController.Style.alert)
         
-        let actionNothing = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default) { action in }
+        let actionNothing = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default)
         
         let actionReport = UIAlertAction(title: "Report", style: UIAlertAction.Style.destructive) { action in
             self.report()
@@ -43,22 +41,11 @@ class WorkReport2ViewController: UIViewController {
         alertController.addAction(actionNothing)
         alertController.addAction(actionReport)
 
-        present(alertController, animated: true, completion: nil)
+        present(alertController, animated: true)
         
         
     }
     
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
 

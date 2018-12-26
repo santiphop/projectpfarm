@@ -17,12 +17,11 @@ class Work: NSObject {
     
     let dateFormat = DateFormatter()
     
-    init(typeID:String, name:[String], addDate:[Int], data:WorkData) {
+    init(typeID:String, name:[String], addDate:[Int]) {
         self.typeID = typeID
         self.name = name
         self.addDate = addDate
         super.init()
-        data.add(work: self)
     }
     
     func generateSelf(date:Date) {

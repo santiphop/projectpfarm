@@ -18,6 +18,27 @@ class WorkReport1ViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    @IBAction func confirmReport(_ sender: Any) {
+        showOptionsAlert()
+    }
+    func showOptionsAlert() {
+        let alertController = UIAlertController(title: "กรุณาตรวจสอบงาน", message: "งานที่ไม่ได้ Report ทั้งหมด\nจะเปลี่ยนสถานะเป็น DONE\nต้องการดำเนินการต่อหรือไม่", preferredStyle: UIAlertController.Style.alert)
+        
+        let actionNothing = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default)
+        
+        let actionReport = UIAlertAction(title: "Mark As Done     ", style: UIAlertAction.Style.destructive) { action in
+            markAsDone(date: Date())
+            self.performSegue(withIdentifier: "reportToHome", sender: self)
+        }
+        
+        alertController.addAction(actionReport)
+        alertController.addAction(actionNothing)
+
+        present(alertController, animated: true)
+        
+        
+    }
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
@@ -30,17 +51,6 @@ class WorkReport1ViewController: UIViewController {
     }
     
     @IBAction func unwindToWorkTable(_ unwindSegue: UIStoryboardSegue) { }
-
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
 
