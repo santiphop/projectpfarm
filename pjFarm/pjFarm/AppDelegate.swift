@@ -14,7 +14,6 @@ var ref = Database.database().reference()
 let dateFormat = DateFormatter()
 let dateFormatForTextField = DateFormatter()
 
-
 var currentWork = String()
 var currentID = Int()
 
@@ -64,7 +63,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         FirebaseApp.configure()
         
-        setUpCurrentID()
         
         workData.add(work: workMusao)
         workData.add(work: workMaepun)
@@ -130,14 +128,7 @@ func addDateComponent(date:Date, intAdding:Int) -> Date {
     return newDate
 }
 
-func setUpCurrentID() {
-    ref.child("หมู/currentID").observeSingleEvent(of: .value, with: { (snapshot) in
-        // Get data
-        let id = snapshot.value as? Int
-        currentID = id!
-        print("init currentID: \(currentID)")
-    })
-}
+
 
 func assignWork(id:Int, work:Work) {
     for i in 0...(work.name.count) - 1 {
@@ -158,46 +149,7 @@ func assignWork(id:Int, work:Work) {
     }
 }
 
-func reportWorkForTomorrow(ids:[Int], bools:[Bool], date:Date) {
-    let todayPath = "งาน/\(dateFormat.string(from: date))W/\(currentWork)"
-    
-    ref.child("\(todayPath)").observeSingleEvent(of: .value, with: { (snapshot) in
-        let data = snapshot.value as! NSDictionary
-        
-        let pigtype = data["pigtype"] as! String
-        let workstep = data["workstep"] as! Int
-        let wName = workData.getAt(type: pigtype).name
-        
-        for i in 0...ids.count-1 {
-            if bools[i] {
-                //  setValue 2 is UNDONE
-                ref.child("\(todayPath)/\(ids[i])").setValue(2)
-                
-                
-                let wDateRemain = workData.getAt(type: pigtype).generateWorkDate(date: date, fromIndex: workstep + 1)
-                let wDate2morrow = tomorrow(date: wDateRemain)
-                
-                
-                for j in 0...wDateRemain.count-1 {
-                    //  remove and reassign remain
-                    
-                    ref.child("งาน/\(dateFormat.string(from: wDateRemain[j]))W/\(wName[workstep+j+1])/\(ids[i])").removeValue()
 
-                    ref.child("งาน/\(dateFormat.string(from: wDate2morrow[j]))W/\(wName[workstep+j+1])/\(ids[i])").setValue(0)
-                    ref.child("งาน/\(dateFormat.string(from: wDate2morrow[j]))W/\(wName[workstep+j+1])/pigtype").setValue(pigtype)
-                    ref.child("งาน/\(dateFormat.string(from: wDate2morrow[j]))W/\(wName[workstep+j+1])/workstep").setValue(workstep+j+1)
-                }
-                
-                //  assign tomorrow
-                ref.child("งาน/\(dateFormat.string(from: tomorrow(date: date)))W/\(currentWork)/\(ids[i])").setValue(0)
-                ref.child("งาน/\(dateFormat.string(from: tomorrow(date: date)))W/\(currentWork)/pigtype").setValue(pigtype)
-                ref.child("งาน/\(dateFormat.string(from: tomorrow(date: date)))W/\(currentWork)/workstep").setValue(workstep)
-                
-            }
-        }
-        getAllWorkFrom(date: Date())
-    })
-}
 
 //func markAsDone(date:Date) {
 //    print("marked")

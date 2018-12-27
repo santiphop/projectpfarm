@@ -46,6 +46,47 @@ class WorkReport2ViewController: UIViewController {
         
     }
     
+    func reportWorkForTomorrow(ids:[Int], bools:[Bool], date:Date) {
+        let todayPath = "งาน/\(dateFormat.string(from: date))W/\(currentWork)"
+        
+        ref.child("\(todayPath)").observeSingleEvent(of: .value, with: { (snapshot) in
+            let data = snapshot.value as! NSDictionary
+            
+            let pigtype = data["pigtype"] as! String
+            let workstep = data["workstep"] as! Int
+            let wName = workData.getAt(type: pigtype).name
+            
+            for i in 0...ids.count-1 {
+                if bools[i] {
+                    //  setValue 2 is UNDONE
+                    ref.child("\(todayPath)/\(ids[i])").setValue(2)
+                    
+                    
+                    let wDateRemain = workData.getAt(type: pigtype).generateWorkDate(date: date, fromIndex: workstep + 1)
+                    let wDate2morrow = tomorrow(date: wDateRemain)
+                    
+                    
+                    for j in 0...wDateRemain.count-1 {
+                        //  remove and reassign remain
+                        
+                        ref.child("งาน/\(dateFormat.string(from: wDateRemain[j]))W/\(wName[workstep+j+1])/\(ids[i])").removeValue()
+                        
+                        ref.child("งาน/\(dateFormat.string(from: wDate2morrow[j]))W/\(wName[workstep+j+1])/\(ids[i])").setValue(0)
+                        ref.child("งาน/\(dateFormat.string(from: wDate2morrow[j]))W/\(wName[workstep+j+1])/pigtype").setValue(pigtype)
+                        ref.child("งาน/\(dateFormat.string(from: wDate2morrow[j]))W/\(wName[workstep+j+1])/workstep").setValue(workstep+j+1)
+                    }
+                    
+                    //  assign tomorrow
+                    ref.child("งาน/\(dateFormat.string(from: tomorrow(date: date)))W/\(currentWork)/\(ids[i])").setValue(0)
+                    ref.child("งาน/\(dateFormat.string(from: tomorrow(date: date)))W/\(currentWork)/pigtype").setValue(pigtype)
+                    ref.child("งาน/\(dateFormat.string(from: tomorrow(date: date)))W/\(currentWork)/workstep").setValue(workstep)
+                    
+                }
+            }
+            getAllWorkFrom(date: Date())
+        })
+    }
+    
 
 }
 

@@ -22,8 +22,6 @@ class SearchByIDViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-//        let db = appDelegate.db
-//        print(db.pigInfo)
         // Do any additional setup after loading the view.
         if autoSearch { search() }
     }
@@ -33,10 +31,7 @@ class SearchByIDViewController: UIViewController {
         var output = "ID : \(id)\n"
         ref.child("หมู/\(id)").observeSingleEvent(of: .value) { (snapshot) in
             if let data = snapshot.value as? NSDictionary {
-//                ref.child("หมู/\(id)/ประวัติ").observeSingleEvent(of: .value, with: { (intersnapshot) in
-//                    let musao = intersnapshot.value as! NSDictionary
-//                    output += musao["พ่อพันธุ์"] as! String
-//                })
+                
                 output += "สถานะ: \(data["สถานะ"] as! String)\n"
                 
                 let ms = data["หมูสาว"] as! NSDictionary

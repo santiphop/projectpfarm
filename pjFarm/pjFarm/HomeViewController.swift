@@ -10,12 +10,23 @@ import UIKit
 
 class HomeViewController: UIViewController {
     
-//    var pig:Pig
     @IBOutlet weak var dateLabel: UILabel!
     let dateFormat = DateFormatter()
-    //let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
-
+    @IBAction func createButton(_ sender: Any) {
+        //  set up new ID
+        //  prevent setup as func
+        //  RegisterViewController can't get currentID if using app quickly
+        ref.child("หมู/currentID").observeSingleEvent(of: .value, with: { (snapshot) in
+            // Get data
+            let id = snapshot.value as? Int
+            currentID = id!
+            print("init currentID: \(currentID)")
+            self.performSegue(withIdentifier: "createID", sender: self)
+        })
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
