@@ -60,35 +60,12 @@ class Farrow2ViewController: UIViewController {
         
         
         if intDead + intMummy + intMale + intFemale == intAll && intAll > 0 {
-//            ref.child("หมู/\(mom)/แม่พันธุ์/currentState").observeSingleEvent(of: .value) { (snapshot) in
-//                let data = snapshot.value as! NSDictionary
-//                let primary = data["primary"] as! Int
-//                let secondary = data["secondary"] as! Int
-//            }
             regisKK(id: mom, dad: dad, date: date, all: intAll, dead: intDead, mummy: intMummy, male: intMale, female: intFemale)
             showHomeOKAlert(title: "แม่พันธุ์ทำการคลอด !", message: "ID ของแม่พันธุ์และคอกคลอด : \(mom)", unwindToHome: "KlodDoneToHome")
         } else {
             showMessage(title: "ลงทะเบียนไม่สำเร็จ", message: "ข้อมูลไม่ถูกต้อง")
         }
     }
-//    
-//    func showOptionsAlert() {
-//        let alertController = UIAlertController(title: "Yeah!", message: "Saved the history to database: \(mom)", preferredStyle: UIAlertController.Style.alert)
-//
-//        let actionBackHome = UIAlertAction(title: "Home", style: UIAlertAction.Style.default) { action in
-//            self.performSegue(withIdentifier: "KlodDoneToHome", sender: self)
-//        }
-//
-//        let actionBackFarrow = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) { action in
-//            self.performSegue(withIdentifier: "farrow2to1", sender: self)
-//        }
-//        alertController.addAction(actionBackHome)
-//        alertController.addAction(actionBackFarrow)
-//
-//        present(alertController, animated: true)
-//
-//
-//    }
     
     func regisKK(id:String, dad:String, date:Date, all:Int, dead:Int, mummy:Int, male:Int, female:Int) {
         workKokklod.generateSelf(date: date)
@@ -117,15 +94,5 @@ class Farrow2ViewController: UIViewController {
         
         assignWork(id: Int(id)!, work: workKokklod)
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

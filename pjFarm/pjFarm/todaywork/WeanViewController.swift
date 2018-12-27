@@ -32,16 +32,6 @@ class WeanViewController: UIViewController {
                 self.showMessage(title: "ไม่พบข้อมูล", message: "ข้อมูลไม่ถูกต้อง\nID:\(momString) ไม่มีอยู่ในระบบ")
             }
         }
-
-//        if momString.isEmpty {
-//            showEmptyTextExceptionAlert()
-//        } else if !currentPigList.contains(momString) {
-//            showNoDataExceptionAlert(id: momString)
-//        }
-//        else {
-//            regisKG(id: momString, date: datePicker.date)
-//            showOptionsAlert()
-//        }
     }
     
     override func viewDidLoad() {
@@ -80,10 +70,8 @@ class WeanViewController: UIViewController {
         })
         assignWork(id: Int(id)!, work: workKinderg)
         
-        /*
         // assignWorkMaepun is in regisMP above
         // assignWork(id: Int(id)!, work: workMaepun)
-        */
     }
 
 

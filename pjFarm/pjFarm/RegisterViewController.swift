@@ -60,7 +60,6 @@ class RegisterViewController: UIViewController {
         }
         
         assignWork(id: currentID, work: workMusao)
-        
     }
 
 }

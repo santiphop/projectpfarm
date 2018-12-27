@@ -42,8 +42,6 @@ class WorkReport2ViewController: UIViewController {
         alertController.addAction(actionReport)
 
         present(alertController, animated: true)
-        
-        
     }
     
     func reportWorkForTomorrow(ids:[Int], bools:[Bool], date:Date) {
@@ -56,8 +54,12 @@ class WorkReport2ViewController: UIViewController {
             let workstep = data["workstep"] as! Int
             let wName = workData.getAt(type: pigtype).name
             
+            var indexToRemove:[Int] = []
+
             for i in 0...ids.count-1 {
                 if bools[i] {
+                    indexToRemove.append(i)
+                    
                     //  setValue 2 is UNDONE
                     ref.child("\(todayPath)/\(ids[i])").setValue(2)
                     
@@ -71,6 +73,7 @@ class WorkReport2ViewController: UIViewController {
                         
                         ref.child("งาน/\(dateFormat.string(from: wDateRemain[j]))W/\(wName[workstep+j+1])/\(ids[i])").removeValue()
                         
+                        
                         ref.child("งาน/\(dateFormat.string(from: wDate2morrow[j]))W/\(wName[workstep+j+1])/\(ids[i])").setValue(0)
                         ref.child("งาน/\(dateFormat.string(from: wDate2morrow[j]))W/\(wName[workstep+j+1])/pigtype").setValue(pigtype)
                         ref.child("งาน/\(dateFormat.string(from: wDate2morrow[j]))W/\(wName[workstep+j+1])/workstep").setValue(workstep+j+1)
@@ -82,8 +85,14 @@ class WorkReport2ViewController: UIViewController {
                     ref.child("งาน/\(dateFormat.string(from: tomorrow(date: date)))W/\(currentWork)/workstep").setValue(workstep)
                     
                 }
+                
             }
-            getAllWorkFrom(date: Date())
+            
+            //  .reversed
+            //  prevent remove index out of range
+            for i in indexToRemove.reversed() {
+                workInfo[currentWork]?.remove(at: i)
+            }
         })
     }
     

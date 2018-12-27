@@ -10,7 +10,6 @@ import UIKit
 
 class WorkData: NSObject {
     var works = [String:Work]()
-    //[]
 
     func add(work:Work) {
         works[work.typeID] = work

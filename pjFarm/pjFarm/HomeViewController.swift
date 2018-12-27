@@ -11,7 +11,7 @@ import UIKit
 class HomeViewController: UIViewController {
     
     @IBOutlet weak var dateLabel: UILabel!
-    let dateFormat = DateFormatter()
+    let dateFormatForLabel = DateFormatter()
     
     @IBAction func createButton(_ sender: Any) {
         //  set up new ID
@@ -26,15 +26,11 @@ class HomeViewController: UIViewController {
         })
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        dateFormat.dateFormat = "d MMMM YYYY"
-        dateLabel.text! = dateFormat.string(from: Date())
-//        let ref = Database.database().reference()
-
-//        })
+        dateFormatForLabel.dateFormat = "d MMMM YYYY"
+        dateLabel.text! = dateFormatForLabel.string(from: Date())
     }
 
     override func didReceiveMemoryWarning() {

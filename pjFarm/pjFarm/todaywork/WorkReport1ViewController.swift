@@ -35,8 +35,6 @@ class WorkReport1ViewController: UIViewController {
         alertController.addAction(actionNothing)
 
         present(alertController, animated: true)
-        
-        
     }
     
     func markAsDone() {
@@ -46,6 +44,7 @@ class WorkReport1ViewController: UIViewController {
             if let data = snapshot.value as? NSDictionary {
                 for (work, ids) in data {
                     for (id, status) in ids as! NSDictionary {
+                        //  mark only code 0 : ASSIGNED
                         if let intID = Int(id as! String), (status as! Int) == 0 {
                             //  mark as done
                             //  code 1 : DONE
@@ -54,6 +53,8 @@ class WorkReport1ViewController: UIViewController {
                     }
                 }
             }
+            //  clear the work
+            //  prevent reporting today again
             workList.removeAll()
             workInfo.removeAll()
         }

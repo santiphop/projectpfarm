@@ -105,8 +105,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
     }
     
-    
-
+    func getAllWorkFrom(date:Date) {
+        workList.removeAll()
+        workInfo.removeAll()
+        //  append workList
+        //  append workInfo
+        let thisDate = dateFormat.string(from: date)
+        ref.child("งาน/\(thisDate)W").observeSingleEvent(of: .value) { (snapshot) in
+            if let today = snapshot.value as? NSDictionary {
+                for (work, ids) in today {
+                    workInfo[work as! String] = []
+                    for (id, status) in (ids as? NSDictionary)! {
+                        //  intID = no pigtype and workstep
+                        if let intID = Int(id as! String), (status as! Int) == 0 {
+                            workInfo[work as! String]?.append(intID)
+                        }
+                    }
+                    if !(workInfo[work as! String]?.isEmpty)! {
+                        workList.append(work as! String)
+                    }
+                }
+            }
+            print(workInfo)
+            
+        }
+    }
 }
 
 func tomorrow(date:[Date]) -> [Date] {
@@ -128,8 +151,6 @@ func addDateComponent(date:Date, intAdding:Int) -> Date {
     return newDate
 }
 
-
-
 func assignWork(id:Int, work:Work) {
     for i in 0...(work.name.count) - 1 {
         ref.child("งาน/\(dateFormat.string(from: work.date[i]))W/\(work.name[i])/pigtype").setValue(work.typeID)
@@ -149,61 +170,6 @@ func assignWork(id:Int, work:Work) {
     }
 }
 
-
-
-//func markAsDone(date:Date) {
-//    print("marked")
-//}
-
-func getAllWorkFrom(date:Date) {
-    workList.removeAll()
-    workInfo.removeAll()
-    //  append workList
-    //  append workInfo
-    let thisDate = dateFormat.string(from: date)
-    ref.child("งาน/\(thisDate)W").observeSingleEvent(of: .value) { (snapshot) in
-        if let today = snapshot.value as? NSDictionary {
-            for (work, ids) in today {
-                workList.append(work as! String)
-                workInfo[work as! String] = []
-                for (id, status) in (ids as? NSDictionary)! {
-                    //  intID = no pigtype and workstep
-                    if let intID = Int(id as! String), (status as! Int) == 0 {
-                        workInfo[work as! String]?.append(intID)
-                    }
-                }
-            }
-        }
-        print(workInfo)
-
-    }
-//    ref.child("งาน/\(thisDate)W").observeSingleEvent(of: .value, with: { snapshot in
-//        let data = snapshot.value as? NSDictionary
-//
-//        if data != nil {
-//            for (key, _) in data! {
-//                workList.append(key as! String)
-//            }
-//        }
-//
-//        print(workList)
-//        for workName in workList {
-//            let path = "งาน/\(thisDate)W/\(workName)"
-//            ref.child(path).observeSingleEvent(of: .value, with: { interSnapshot in
-//                let thisWork = interSnapshot.value as? NSDictionary
-//                workInfo[workName] = []
-//                for (key, _) in thisWork! {
-//                    if !(key as! String).elementsEqual("pigtype") && !(key as! String).elementsEqual("workstep") {
-//                        workInfo[workName]?.append(Int(key as! String)!)
-//                    }
-//                }
-//                print(workInfo)
-//
-//            })
-//        }
-//    })
-}
-
 func regisMP(id:String, date:Date, primary:Int, secondary:Int) {
     workMaepun.generateSelf(date: date)
     ref.child("หมู/\(id)/สถานะ").setValue("แม่พันธุ์")
@@ -219,8 +185,9 @@ func regisMP(id:String, date:Date, primary:Int, secondary:Int) {
         ]
     ])
     for i in 0...workMaepun.name.count-1 {
-        ref.child("หมู/\(currentID)/แม่พันธุ์/\(primary)/\(secondary)/งาน/\(workMaepun.name[i])").setValue(dateFormat.string(from: workMaepun.date[i]))
+        ref.child("หมู/\(id)/แม่พันธุ์/\(primary)/\(secondary)/งาน/\(workMaepun.name[i])").setValue(dateFormat.string(from: workMaepun.date[i]))
     }
+    
     assignWork(id: Int(id)!, work: workMaepun)
 }
 

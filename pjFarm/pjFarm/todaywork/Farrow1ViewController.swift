@@ -13,6 +13,7 @@ class Farrow1ViewController: UIViewController {
 
     //  for prepare()
     //  send data to next ViewController
+    //  : Farrow2ViewController
     var momString = String()
     var dadString = String()
     

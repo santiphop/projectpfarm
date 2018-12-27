@@ -15,8 +15,6 @@ class Work: NSObject {
     var date = [Date]()
     var addDate = [Int]()
     
-    let dateFormat = DateFormatter()
-    
     init(typeID:String, name:[String], addDate:[Int]) {
         self.typeID = typeID
         self.name = name
@@ -31,15 +29,16 @@ class Work: NSObject {
     
     func generateWorkDate(date:Date, fromIndex:Int) -> [Date] {
         var tmp = [Date]()
-        var new = date
-        //  if init from Pig
+        var dateOfPigRegister = date
+        //  minus date for reassignWork
+        //  fromIndex = 0 from pig registration
         if fromIndex != 0 {
             for i in 0...fromIndex-1 {
-                new = (addDateComponent(date: date, intAdding: -addDate[i]))
+                dateOfPigRegister = (addDateComponent(date: date, intAdding: -addDate[i]))
             }
         }
         for i in fromIndex...addDate.count - 1 {
-            tmp.append(addDateComponent(date: new, intAdding: addDate[i]))
+            tmp.append(addDateComponent(date: dateOfPigRegister, intAdding: addDate[i]))
         }
         return tmp
     }
