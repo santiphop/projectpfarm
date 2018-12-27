@@ -27,7 +27,7 @@ class WorkReport1ViewController: UIViewController {
         let actionNothing = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default)
         
         let actionReport = UIAlertAction(title: "Mark As Done     ", style: UIAlertAction.Style.destructive) { action in
-            markAsDone(date: Date())
+            self.markAsDone()
             self.performSegue(withIdentifier: "reportToHome", sender: self)
         }
         
@@ -37,6 +37,26 @@ class WorkReport1ViewController: UIViewController {
         present(alertController, animated: true)
         
         
+    }
+    
+    func markAsDone() {
+        //  today only
+        let todayWorkPath = "งาน/\(dateFormat.string(from: Date()))W"
+        ref.child(todayWorkPath).observeSingleEvent(of: .value) { (snapshot) in
+            if let data = snapshot.value as? NSDictionary {
+                for (work, ids) in data {
+                    for (id, status) in ids as! NSDictionary {
+                        if let intID = Int(id as! String), (status as! Int) == 0 {
+                            //  mark as done
+                            //  code 1 : DONE
+                            ref.child("\(todayWorkPath)/\(work as! String)/\(intID)").setValue(1)
+                        }
+                    }
+                }
+            }
+            workList.removeAll()
+            workInfo.removeAll()
+        }
     }
     
     

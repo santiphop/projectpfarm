@@ -35,7 +35,7 @@ class RegisterViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         newID.text! = "\(currentID + 1)"
-        createDatePicker(datePicker: datePicker, textField: dateTextField, done: UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneActionForDatePicker)))
+        createDatePicker(datePicker: datePicker, textField: dateTextField, button: UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneActionForDatePicker)))
         dateTextField.text! = dateFormatForTextField.string(from: Date())
     }
     

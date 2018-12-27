@@ -199,9 +199,9 @@ func reportWorkForTomorrow(ids:[Int], bools:[Bool], date:Date) {
     })
 }
 
-func markAsDone(date:Date) {
-    print("marked")
-}
+//func markAsDone(date:Date) {
+//    print("marked")
+//}
 
 func getAllWorkFrom(date:Date) {
     workList.removeAll()
@@ -215,7 +215,7 @@ func getAllWorkFrom(date:Date) {
                 workList.append(work as! String)
                 workInfo[work as! String] = []
                 for (id, status) in (ids as? NSDictionary)! {
-                    //  no pigtype and workstep
+                    //  intID = no pigtype and workstep
                     if let intID = Int(id as! String), (status as! Int) == 0 {
                         workInfo[work as! String]?.append(intID)
                     }
@@ -273,14 +273,14 @@ func regisMP(id:String, date:Date, primary:Int, secondary:Int) {
 }
 
 extension UIViewController /* DatePicker */ {
-    func createDatePicker(datePicker:UIDatePicker, textField:UITextField, done:UIBarButtonItem) {
+    func createDatePicker(datePicker:UIDatePicker, textField:UITextField, button:UIBarButtonItem) {
         datePicker.datePickerMode = .date
         //  let onDone = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneActionForDatePicker))
         let toolbar:UIToolbar = UIToolbar()
         toolbar.barStyle = .default
         toolbar.items = [
             UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil),
-            UIBarButtonItem(title: "Done", style: .done, target: done.target, action: done.action)
+            UIBarButtonItem(title: "Done", style: .done, target: button.target, action: button.action)
         ]
         toolbar.sizeToFit()
         textField.inputAccessoryView = toolbar

@@ -71,24 +71,24 @@ class Farrow2ViewController: UIViewController {
             showMessage(title: "ลงทะเบียนไม่สำเร็จ", message: "ข้อมูลไม่ถูกต้อง")
         }
     }
-    
-    func showOptionsAlert() {
-        let alertController = UIAlertController(title: "Yeah!", message: "Saved the history to database: \(mom)", preferredStyle: UIAlertController.Style.alert)
-        
-        let actionBackHome = UIAlertAction(title: "Home", style: UIAlertAction.Style.default) { action in
-            self.performSegue(withIdentifier: "KlodDoneToHome", sender: self)
-        }
-        
-        let actionBackFarrow = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) { action in
-            self.performSegue(withIdentifier: "farrow2to1", sender: self)
-        }
-        alertController.addAction(actionBackHome)
-        alertController.addAction(actionBackFarrow)
-
-        present(alertController, animated: true)
-        
-        
-    }
+//    
+//    func showOptionsAlert() {
+//        let alertController = UIAlertController(title: "Yeah!", message: "Saved the history to database: \(mom)", preferredStyle: UIAlertController.Style.alert)
+//
+//        let actionBackHome = UIAlertAction(title: "Home", style: UIAlertAction.Style.default) { action in
+//            self.performSegue(withIdentifier: "KlodDoneToHome", sender: self)
+//        }
+//
+//        let actionBackFarrow = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) { action in
+//            self.performSegue(withIdentifier: "farrow2to1", sender: self)
+//        }
+//        alertController.addAction(actionBackHome)
+//        alertController.addAction(actionBackFarrow)
+//
+//        present(alertController, animated: true)
+//
+//
+//    }
     
     func regisKK(id:String, dad:String, date:Date, all:Int, dead:Int, mummy:Int, male:Int, female:Int) {
         workKokklod.generateSelf(date: date)
