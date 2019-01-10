@@ -27,6 +27,8 @@ class PreFarrowTableViewController: UITableViewController {
 
         // Configure the cell...
         cell.textLabel?.text = pigs["แม่พันธุ์"]![indexPath.row]
+        cell.textLabel?.font = UIFont(name: "Helvetica", size: 25)
+        cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
         return cell
     }
     

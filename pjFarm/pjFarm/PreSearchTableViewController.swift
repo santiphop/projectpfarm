@@ -26,7 +26,8 @@ class PreSearchTableViewController: UITableViewController {
 
         // Configure the cell...
         cell.textLabel?.text = pigs["ทั้งหมด"]![indexPath.row]
-
+        cell.textLabel?.font = UIFont(name: "Helvetica", size: 25)
+        cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
         return cell
     }
 

@@ -18,7 +18,12 @@ class RegisterViewController: UIViewController {
     var maxAmount = Int()
     
     @IBOutlet weak var momLabel: UILabel!
-    @IBOutlet weak var dad: UISegmentedControl!
+    @IBOutlet weak var dad: UISegmentedControl!{
+        didSet {
+            let font = UIFont.systemFont(ofSize: 18)
+            dad.setTitleTextAttributes([NSAttributedString.Key.font : font], for: .normal)
+        }
+    }
     @IBOutlet weak var dateTextField: UITextField!
     @IBOutlet weak var amountLabel: UILabel!
     @IBOutlet weak var minusButton: RoundButton!

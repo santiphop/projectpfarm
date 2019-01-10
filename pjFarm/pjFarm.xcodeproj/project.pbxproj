@@ -44,6 +44,7 @@
 		8FE376D921E6020C009E1A65 /* PreFarrowTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE376D821E6020C009E1A65 /* PreFarrowTableViewController.swift */; };
 		8FE376DB21E60469009E1A65 /* PreWeanTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE376DA21E60469009E1A65 /* PreWeanTableViewController.swift */; };
 		8FE73F0921E71E4E00E9005B /* PreSearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE73F0821E71E4E00E9005B /* PreSearchTableViewController.swift */; };
+		8FE73F0B21E7445A00E9005B /* CustomFontTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE73F0A21E7445A00E9005B /* CustomFontTableViewCell.swift */; };
 		8FEC468C21B0FE4300B2CB47 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FEC468B21B0FE4300B2CB47 /* SearchViewController.swift */; };
 		8FEDCBED21B4D5CE00F935EA /* WorkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FEDCBEC21B4D5CE00F935EA /* WorkViewController.swift */; };
 		8FEDCBEF21B6620700F935EA /* FirstRutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FEDCBEE21B6620700F935EA /* FirstRutViewController.swift */; };
@@ -121,6 +122,7 @@
 		8FE376D821E6020C009E1A65 /* PreFarrowTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreFarrowTableViewController.swift; sourceTree = "<group>"; };
 		8FE376DA21E60469009E1A65 /* PreWeanTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreWeanTableViewController.swift; sourceTree = "<group>"; };
 		8FE73F0821E71E4E00E9005B /* PreSearchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreSearchTableViewController.swift; sourceTree = "<group>"; };
+		8FE73F0A21E7445A00E9005B /* CustomFontTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFontTableViewCell.swift; sourceTree = "<group>"; };
 		8FEC468B21B0FE4300B2CB47 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		8FEDCBEC21B4D5CE00F935EA /* WorkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkViewController.swift; sourceTree = "<group>"; };
 		8FEDCBEE21B6620700F935EA /* FirstRutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstRutViewController.swift; sourceTree = "<group>"; };
@@ -248,6 +250,7 @@
 			children = (
 				8F295DD421C7B1760017D376 /* NumpadTextField.swift */,
 				8F5E30E321C8D4030035DD97 /* RoundButton.swift */,
+				8FE73F0A21E7445A00E9005B /* CustomFontTableViewCell.swift */,
 			);
 			path = UIObject;
 			sourceTree = "<group>";
@@ -464,6 +467,7 @@
 				8FE73F0921E71E4E00E9005B /* PreSearchTableViewController.swift in Sources */,
 				8FE376D721E5FC10009E1A65 /* PreFirstRutTableViewController.swift in Sources */,
 				8FD19BB021D2123D0027FCEC /* Work.swift in Sources */,
+				8FE73F0B21E7445A00E9005B /* CustomFontTableViewCell.swift in Sources */,
 				8FEC468C21B0FE4300B2CB47 /* SearchViewController.swift in Sources */,
 				8F8E845021C8121E00CE8CAF /* ReportComposer.swift in Sources */,
 				8F295DD121C7971B0017D376 /* Farrow2ViewController.swift in Sources */,

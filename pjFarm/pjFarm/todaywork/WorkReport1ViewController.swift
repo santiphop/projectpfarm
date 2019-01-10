@@ -15,6 +15,11 @@ class WorkReport1ViewController: UIViewController {
     var intIDs = [[Int]]()
     var stringIDs = [[String]]()
     var boolIDs = [[Bool]]()
+    
+    //  send to WR2VC
+    var selectedSection = [String]()
+    var selectedRow = [[String]]()
+    var selectedID = [[Int]]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,29 +38,59 @@ class WorkReport1ViewController: UIViewController {
         print(stringIDs)
     }
     
-    @IBAction func confirmReport(_ sender: Any) {
-        showReportOptionsAlert()
+    @IBAction func next(_ sender: Any) {
+        setupTableForWR2VC()
+        performSegue(withIdentifier: "report1to2", sender: self)
+    }
+    
+    func setupTableForWR2VC() {
+        selectedSection = workList
+        selectedRow.removeAll()
+        selectedID.removeAll()
+        var indexToRemove = [Int]()
+        for section in 0...workList.count-1 {
+            selectedRow.append([])
+            selectedID.append([])
+            for row in 0...intIDs[section].count-1 {
+                if boolIDs[section][row] {
+                    selectedRow[section].append("\(intIDs[section][row])")
+                    selectedID[section].append(intIDs[section][row])
+                }
+            }
+            if selectedRow[section].isEmpty {
+                indexToRemove.append(section)
+            }
+        }
+        
+        //  .reversed
+        //  prevent remove index out of range
+        for index in indexToRemove.reversed() {
+            selectedID.remove(at: index)
+            selectedRow.remove(at: index)
+            selectedSection.remove(at: index)
+        }
     }
     
     @IBAction func markAsDone(_ sender: Any) {
         showMarkAsDoneOptionsAlert()
     }
     
-    func showReportOptionsAlert() {
-        let alertController = UIAlertController(title: "กรุณาตรวจสอบ ID หมู", message: "ID ของหมูที่เลือกทั้งหมด\nเป็นหมูตัวที่ยังทำงานไม่เสร็จ\nและจะเลื่อนงานไปทำต่อในวันพรุ่งนี้\nต้องการดำเนินการต่อหรือไม่", preferredStyle: UIAlertController.Style.alert)
-        
-        let actionNothing = UIAlertAction(title: "ยกเลิก", style: UIAlertAction.Style.cancel)
-        
-        let actionReport = UIAlertAction(title: "เลื่อนไปทำพรุ่งนี้     ", style: UIAlertAction.Style.destructive) { action in
-            self.report()
-            self.performSegue(withIdentifier: "reportToHome", sender: self)
-        }
-        
-        alertController.addAction(actionReport)
-        alertController.addAction(actionNothing)
-
-        present(alertController, animated: true)
-    }
+//    func showReportOptionsAlert() {
+//        let alertController = UIAlertController(title: "กรุณาตรวจสอบ ID หมู", message: "ID ของหมูที่เลือกทั้งหมด\nเป็นหมูตัวที่ยังทำงานไม่เสร็จ\nและจะเลื่อนงานไปทำต่อในวันพรุ่งนี้\nต้องการดำเนินการต่อหรือไม่", preferredStyle: UIAlertController.Style.alert)
+//
+//        let actionNothing = UIAlertAction(title: "ยกเลิก", style: UIAlertAction.Style.cancel)
+//
+//        let actionReport = UIAlertAction(title: "เลื่อนไปทำพรุ่งนี้     ", style: UIAlertAction.Style.destructive) { action in
+////            self.report()
+////            self.performSegue(withIdentifier: "reportToHome", sender: self)
+//
+//        }
+//
+//        alertController.addAction(actionReport)
+//        alertController.addAction(actionNothing)
+//
+//        present(alertController, animated: true)
+//    }
     
     func showMarkAsDoneOptionsAlert() {
         let alertController = UIAlertController(title: "กรุณาตรวจสอบ ID หมูที่เลือก", message: "งานที่เหลือทั้งหมด\nเมื่อเปลี่ยนสถานะแล้วจะไม่สามารถแก้ไขได้", preferredStyle: UIAlertController.Style.alert)
@@ -73,31 +108,31 @@ class WorkReport1ViewController: UIViewController {
         present(alertController, animated: true)
     }
     
-    func report() {
-        for i in 0...workList.count-1 {
-            print(workList[i])
-            print(intIDs[i])
-            print(boolIDs[i])
-            self.reportWorkForTomorrow(atIndex: i, currentWork: workList[i], ids: intIDs[i], bools: boolIDs[i], date: Date())
-        }
-    }
+//    func report() {
+//        for i in 0...workList.count-1 {
+//            print(workList[i])
+//            print(intIDs[i])
+//            print(boolIDs[i])
+//            self.reportWorkForTomorrow(atIndex: i, currentWork: workList[i], ids: intIDs[i], bools: boolIDs[i], date: Date())
+//        }
+//    }
     
-    func reportWorkForTomorrow(atIndex:Int, currentWork:String, ids:[Int], bools:[Bool], date:Date) {
-        let todayPath = "งาน/\(dateFormat.string(from: date))W/\(currentWork)"
-        
-        ref.child("\(todayPath)").observeSingleEvent(of: .value, with: { (snapshot) in
-            let data = snapshot.value as! NSDictionary
-            
-            let pigtype = data["pigtype"] as! String
-            let workstep = data["workstep"] as! Int
-            let wName = workData.getAt(type: pigtype).name
-            
-            var indexToRemove:[Int] = []
-            
-            for i in 0...ids.count-1 {
-                if bools[i] {
-                    indexToRemove.append(i)
-                    
+//    func reportWorkForTomorrow(atIndex:Int, currentWork:String, ids:[Int], bools:[Bool], date:Date) {
+//        let todayPath = "งาน/\(dateFormat.string(from: date))W/\(currentWork)"
+//
+//        ref.child("\(todayPath)").observeSingleEvent(of: .value, with: { (snapshot) in
+//            let data = snapshot.value as! NSDictionary
+//
+//            let pigtype = data["pigtype"] as! String
+//            let workstep = data["workstep"] as! Int
+//            let wName = workData.getAt(type: pigtype).name
+//
+//            var indexToRemove:[Int] = []
+//
+//            for i in 0...ids.count-1 {
+//                if bools[i] {
+//                    indexToRemove.append(i)
+//
 //                    //  setValue 2 is UNDONE
 //                    ref.child("\(todayPath)/\(ids[i])").setValue(2)
 //
@@ -121,22 +156,22 @@ class WorkReport1ViewController: UIViewController {
 //                    ref.child("งาน/\(dateFormat.string(from: tomorrow(date: date)))W/\(currentWork)/\(ids[i])").setValue(0)
 //                    ref.child("งาน/\(dateFormat.string(from: tomorrow(date: date)))W/\(currentWork)/pigtype").setValue(pigtype)
 //                    ref.child("งาน/\(dateFormat.string(from: tomorrow(date: date)))W/\(currentWork)/workstep").setValue(workstep)
-                    
-                }
-                
-            }
-            
-            //  .reversed
-            //  prevent remove index out of range
-            for i in indexToRemove.reversed() {
-                workInfo[currentWork]?.remove(at: i)
-            }
-            if (workInfo[currentWork]?.isEmpty)! {
-                workInfo.removeValue(forKey: currentWork)
-                workList.remove(at: atIndex)
-            }
-        })
-    }
+//
+//                }
+//
+//            }
+//
+//            //  .reversed
+//            //  prevent remove index out of range
+//            for i in indexToRemove.reversed() {
+//                workInfo[currentWork]?.remove(at: i)
+//            }
+//            if (workInfo[currentWork]?.isEmpty)! {
+//                workInfo.removeValue(forKey: currentWork)
+//                workList.remove(at: atIndex)
+//            }
+//        })
+//    }
     
     func markAsDone() {
         //  today only
@@ -161,19 +196,13 @@ class WorkReport1ViewController: UIViewController {
         }
     }
     
-//
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//
-//        if let controller = segue.destination as? WorkReport2ViewController,
-//            let indexPath = tableView.indexPathForSelectedRow {
-//            controller.idSelect = workInfo[workList[indexPath.row]]!
-//            controller.titleBar.title = workList[indexPath.row]
-//            print(workInfo)
-//        }
-//    }
-    
-//    @IBAction func unwindToWorkTable(_ unwindSegue: UIStoryboardSegue) { }
-
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let controller = segue.destination as? WorkReport2ViewController {
+            controller.selectedSection = self.selectedSection
+            controller.selectedRow = self.selectedRow
+            controller.selectedID = self.selectedID
+        }
+    }
 }
 
 extension WorkReport1ViewController: UITableViewDataSource, UITableViewDelegate {
@@ -188,6 +217,7 @@ extension WorkReport1ViewController: UITableViewDataSource, UITableViewDelegate 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "workcell", for: indexPath)
         cell.textLabel?.text = stringIDs[indexPath.section][indexPath.row]
+        cell.textLabel?.font = UIFont(name: "Helvetica", size: 25)
         return cell
     }
 
@@ -199,7 +229,6 @@ extension WorkReport1ViewController: UITableViewDataSource, UITableViewDelegate 
             tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCell.AccessoryType.none
             boolIDs[indexPath.section][indexPath.row] = false
         }
-        print(boolIDs)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {

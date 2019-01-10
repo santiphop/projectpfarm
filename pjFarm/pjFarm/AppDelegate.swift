@@ -77,10 +77,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         dateFormat.dateFormat = "yyyyMMdd"
         dateFormatForTextField.dateFormat = "MMMM d, yyyy"
-        
-        getAllWorkFrom(date: Date())
-        getAllPig()
-        
+                
         return true
     }
 
@@ -112,73 +109,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
     }
     
-    func getAllWorkFrom(date:Date) {
-        workList.removeAll()
-        workInfo.removeAll()
-        
-        //  append workList
-        //  append workInfo
-        
-        let thisDate = dateFormat.string(from: date)
-        ref.child("งาน/\(thisDate)W").observeSingleEvent(of: .value) { (snapshot) in
-            if let today = snapshot.value as? NSDictionary {
-                for (work, ids) in today {
-                    workInfo[work as! String] = []
-                    for (id, status) in (ids as? NSDictionary)! {
-                        //  intID = no pigtype and workstep
-                        //  status 0 = ASSIGNED
-                        //  status 1 = DONE
-                        //  status 2 = UNDONE
-                        if let intID = Int(id as! String), (status as! Int) == 0 {
-                            workInfo[work as! String]?.append(intID)
-                        }
-                    }
-                    if !(workInfo[work as! String]?.isEmpty)! {
-                        workList.append(work as! String)
-                        workInfo[work as! String]?.sort()
-                    } else {
-                        workInfo.removeValue(forKey: work as! String)
-                    }
-                }
-            }
-            print(workInfo)
-            print(workList)
-        }
-    }
     
-    func getAllPig() {
-        pigs["ทั้งหมด"] = []
-        pigs["หมูสาว"] = []
-        pigs["แม่พันธุ์"] = []
-        pigs["คอกคลอด"] = []
-        pigs["คอกอนุบาล"] = []
-        ref.child("หมู").observeSingleEvent(of: .value) { (snapshot) in
-            if let allpig = snapshot.value as? NSDictionary {
-                for (id, data) in allpig {
-                    if Int(id as! String) != nil {
-                        let status = (data as! NSDictionary)["สถานะ"] as! String
-                        pigs[status]?.append(id as! String)
-                        pigs["ทั้งหมด"]?.append(id as! String)
-                        if status.elementsEqual("แม่พันธุ์") {
-                            let maepunData = (data as! NSDictionary).value(forKey: "แม่พันธุ์") as! NSDictionary
-                            if let amount = maepunData.value(forKey: "จำนวนลูกหมูเพศเมีย") as? Int {
-                                pigs["คอกอนุบาล"]?.append(id as! String)
-                            }
-                        }
-                    }
-                }
-            }
-            print(pigs)
-            pigs["ทั้งหมด"]?.sort()
-            pigs["หมูสาว"]?.sort()
-            pigs["แม่พันธุ์"]?.sort()
-            pigs["คอกคลอด"]?.sort()
-            pigs["คอกอนุบาล"]?.sort()
-            print(pigs)
-            
-        }
-        
-    }
 }
 
 func tomorrow(date:[Date]) -> [Date] {

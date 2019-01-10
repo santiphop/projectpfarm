@@ -20,7 +20,12 @@ class Farrow1ViewController: UIViewController {
     
     @IBOutlet weak var momLabel: UILabel!
     @IBOutlet weak var momTextField: NumpadTextField!
-    @IBOutlet weak var dad: UISegmentedControl!
+    @IBOutlet weak var dad: UISegmentedControl!{
+        didSet {
+            let font = UIFont.systemFont(ofSize: 18)
+        dad.setTitleTextAttributes([NSAttributedString.Key.font : font], for: .normal)
+        }
+    }
     @IBOutlet weak var dateTextField: UITextField!
     
     @IBAction func nextButton(_ sender: Any) {

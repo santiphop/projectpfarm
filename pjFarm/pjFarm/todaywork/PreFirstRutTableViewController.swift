@@ -35,7 +35,8 @@ class PreFirstRutTableViewController: UITableViewController {
 
         // Configure the cell...
         cell.textLabel?.text = pigs["หมูสาว"]![indexPath.row]
-
+        cell.textLabel?.font = UIFont(name: "Helvetica", size: 25)
+        cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
         return cell
     }
     
