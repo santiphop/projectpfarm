@@ -12,6 +12,13 @@ import AVFoundation
 class SearchViewController: UIViewController {
     let captureMetadataOutput = AVCaptureMetadataOutput()
 
+    @IBOutlet weak var idTextField: NumpadTextField!
+    @IBAction func searchButton(_ sender: Any) {
+        outputText = idTextField.text!
+//        search()
+        idTextField.text! = ""
+        performSegue(withIdentifier: "QRtoSearchID", sender: self)
+    }
     @IBOutlet weak var camaraView: UIView!
     
     var outputText :String!
@@ -53,15 +60,14 @@ class SearchViewController: UIViewController {
             captureMetadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
             self.captureSession.startRunning()
         } else {
-            showMessage(title: "Cannot Access Camera", message: "Please Allow the App to access your camera")
+            showMessage(title: "ไม่สามารถเชื่อมต่อกล้องได้", message: "กรุณาอนุญาตให้ Pig's Plan เข้าถึงกล้องที่ \"การตั้งค่า\" บนอุปกรณ์ของคุณ")
         }
         return true
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if isScanned, let controller = segue.destination as? SearchByIDViewController {
+        if let controller = segue.destination as? SearchResultViewController {
             controller.id = self.outputText
-            controller.autoSearch = true
         }
     }
 }

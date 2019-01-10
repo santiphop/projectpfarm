@@ -14,18 +14,20 @@ class Farrow1ViewController: UIViewController {
     //  for prepare()
     //  send data to next ViewController
     //  : Farrow2ViewController
+    
     var momString = String()
     var dadString = String()
     
+    @IBOutlet weak var momLabel: UILabel!
     @IBOutlet weak var momTextField: NumpadTextField!
     @IBOutlet weak var dad: UISegmentedControl!
     @IBOutlet weak var dateTextField: UITextField!
     
     @IBAction func nextButton(_ sender: Any) {
-        momString = momTextField.text!
+        
         dadString = dadArray[dad.selectedSegmentIndex]
         ref.child("หมู/\(momString)").observeSingleEvent(of: .value) { (snapshot) in
-            if self.momTextField.text!.isEmpty {
+            if self.momString.isEmpty {
                 self.showMessage(title: "ลงทะเบียนไม่สำเร็จ", message: "ข้อมูลไม่ถูกต้อง กรุณาใส่ ID แม่พันธุ์")
             } else if let data = snapshot.value as? NSDictionary {
                 if (data["สถานะ"] as! String).elementsEqual("แม่พันธุ์") {
@@ -45,6 +47,7 @@ class Farrow1ViewController: UIViewController {
         // Do any additional setup after loading the view.
         createDatePicker(datePicker: datePicker, textField: dateTextField, button: UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneActionForDatePicker)))
         dateTextField.text! = dateFormatForTextField.string(from: Date())
+        momLabel.text! = momString
     }
     
     @objc func doneActionForDatePicker() {

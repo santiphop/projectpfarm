@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="C2k-zJ-gIP">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Pof-KO-1lm">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -10,6 +10,40 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--เลือก แม่พันธุ์-->
+        <scene sceneID="vc1-N9-FRP">
+            <objects>
+                <tableViewController id="HDl-F8-SR5" customClass="PreRegisterTableViewController" customModule="pjFarm" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="CkH-TM-8Lh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="preregis" id="UiG-Ph-IbZ">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="UiG-Ph-IbZ" id="6Jy-R6-SH1">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="kDe-MF-0ot" kind="show" id="Oyz-iF-xyC"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="HDl-F8-SR5" id="qor-Ki-xjP"/>
+                            <outlet property="delegate" destination="HDl-F8-SR5" id="SRh-YM-cnk"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="เลือก แม่พันธุ์" id="HDV-cc-Hcd">
+                        <barButtonItem key="backBarButtonItem" title="กลับ" id="J88-it-H8f"/>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="S8L-Od-YI2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6665" y="-3682"/>
+        </scene>
         <!--Register-->
         <scene sceneID="hyJ-m2-zgy">
             <objects>
@@ -19,25 +53,24 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="rh9-zj-sud">
-                                <rect key="frame" x="20" y="173.66666666666666" width="339" height="30"/>
+                                <rect key="frame" x="20" y="173.66666666666666" width="339" height="20.333333333333343"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="แม่พันธุ์" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q1a-VB-s7a">
-                                        <rect key="frame" x="0.0" y="0.0" width="52" height="30"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="แม่พันธุ์" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q1a-VB-s7a">
+                                        <rect key="frame" x="0.0" y="0.0" width="277.66666666666669" height="20.333333333333332"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="แม่พันธุ์" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Jy4-38-07W" customClass="NumpadTextField" customModule="pjFarm" customModuleProvider="target">
-                                        <rect key="frame" x="72" y="0.0" width="267" height="30"/>
-                                        <color key="backgroundColor" red="1" green="0.9843560804" blue="0.98237671140000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="0000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MOU-M0-31f">
+                                        <rect key="frame" x="297.66666666666669" y="0.0" width="41.333333333333314" height="20.333333333333332"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="HAL-Py-IHb">
-                                <rect key="frame" x="20" y="278.66666666666669" width="338.66666666666669" height="28"/>
+                                <rect key="frame" x="20" y="269" width="338.66666666666669" height="28"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="พ่อพันธุ์" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="edE-da-RGf">
                                         <rect key="frame" x="0.0" y="0.0" width="52.666666666666664" height="28"/>
@@ -79,38 +112,56 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xNn-X5-6hc" customClass="RoundButton" customModule="pjFarm" customModuleProvider="target">
-                                <rect key="frame" x="124" y="491" width="130" height="45"/>
+                                <rect key="frame" x="124" y="585" width="130" height="53"/>
                                 <color key="backgroundColor" red="1" green="0.6705882353" blue="0.68235294120000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Register">
+                                <state key="normal" title="ลงทะเบียนหมูสาว">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
                                     <action selector="registerButton:" destination="kDe-MF-0ot" eventType="touchUpInside" id="hJQ-Pr-DGk"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="ID ของหมูตัวใหม่ :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fzd-q5-QnD">
-                                <rect key="frame" x="83" y="121" width="129" height="21"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u34-V9-nAK" customClass="RoundButton" customModule="pjFarm" customModuleProvider="target">
+                                <rect key="frame" x="107" y="496" width="60" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="0.9843560804" blue="0.98237671140000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <state key="normal" title="-"/>
+                                <connections>
+                                    <action selector="minus:" destination="kDe-MF-0ot" eventType="touchUpInside" id="348-Tw-tGE"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="จำนวนตัว" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NMg-aT-1RG">
+                                <rect key="frame" x="20" y="500" width="67" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iqX-l2-13C">
-                                <rect key="frame" x="245" y="120" width="42" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sjI-Tp-a3Y">
+                                <rect key="frame" x="175" y="496" width="79" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y5S-w0-rSJ" customClass="RoundButton" customModule="pjFarm" customModuleProvider="target">
+                                <rect key="frame" x="262" y="496" width="60" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="+"/>
+                                <connections>
+                                    <action selector="plus:" destination="kDe-MF-0ot" eventType="touchUpInside" id="XFe-pQ-mn5"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.93372752569999995" blue="0.90592893839999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="FLm-HR-rft" firstAttribute="trailing" secondItem="HAL-Py-IHb" secondAttribute="trailing" constant="16.329999999999998" id="3bR-jV-p1i"/>
                             <constraint firstItem="2HS-U1-Cpg" firstAttribute="leading" secondItem="FLm-HR-rft" secondAttribute="leading" constant="20" id="4GU-zw-gEP"/>
-                            <constraint firstItem="xNn-X5-6hc" firstAttribute="top" secondItem="2HS-U1-Cpg" secondAttribute="bottom" constant="76" id="4y3-hA-5sx"/>
+                            <constraint firstItem="xNn-X5-6hc" firstAttribute="top" secondItem="2HS-U1-Cpg" secondAttribute="bottom" constant="170" id="4y3-hA-5sx"/>
                             <constraint firstItem="rh9-zj-sud" firstAttribute="top" secondItem="FLm-HR-rft" secondAttribute="top" constant="85.670000000000002" id="GoT-fg-OaO"/>
-                            <constraint firstItem="FLm-HR-rft" firstAttribute="bottom" secondItem="xNn-X5-6hc" secondAttribute="bottom" constant="242" id="KI5-pt-SgE"/>
+                            <constraint firstItem="FLm-HR-rft" firstAttribute="bottom" secondItem="xNn-X5-6hc" secondAttribute="bottom" constant="140" id="KI5-pt-SgE"/>
                             <constraint firstItem="FLm-HR-rft" firstAttribute="trailing" secondItem="2HS-U1-Cpg" secondAttribute="trailing" constant="16" id="PMs-NV-bRn"/>
                             <constraint firstItem="FLm-HR-rft" firstAttribute="trailing" secondItem="rh9-zj-sud" secondAttribute="trailing" constant="16" id="QbX-AJ-1ur"/>
                             <constraint firstItem="rh9-zj-sud" firstAttribute="leading" secondItem="FLm-HR-rft" secondAttribute="leading" constant="20" id="TU0-tE-c45"/>
@@ -122,19 +173,21 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="FLm-HR-rft"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Registration" id="3Tl-7I-9RB"/>
+                    <navigationItem key="navigationItem" title="หมูสาว" id="3Tl-7I-9RB"/>
                     <connections>
+                        <outlet property="amountLabel" destination="sjI-Tp-a3Y" id="leW-Z3-QsX"/>
                         <outlet property="dad" destination="pL6-WK-mFW" id="HfL-6u-rgx"/>
                         <outlet property="dateTextField" destination="0MY-E2-hTN" id="XDk-2J-MZb"/>
-                        <outlet property="momTextField" destination="Jy4-38-07W" id="2eg-gN-sWI"/>
-                        <outlet property="newID" destination="iqX-l2-13C" id="eWy-FZ-mXU"/>
+                        <outlet property="minusButton" destination="u34-V9-nAK" id="cjW-PH-aKq"/>
+                        <outlet property="momLabel" destination="MOU-M0-31f" id="qvH-KJ-m3x"/>
+                        <outlet property="plusButton" destination="Y5S-w0-rSJ" id="rly-Xf-jlr"/>
                         <segue destination="Vs4-Gx-Owb" kind="unwind" identifier="unwindRegisterToHome" unwindAction="unwindToHome:" id="afd-mP-xdp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3wM-xO-aMa" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="Vs4-Gx-Owb" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2661.5999999999999" y="-553.44827586206895"/>
+            <point key="canvasLocation" x="7729" y="-3682"/>
         </scene>
         <!--Scan-->
         <scene sceneID="hWt-mX-kDD">
@@ -144,47 +197,69 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tJr-Ss-c7W" userLabel="Camera View">
-                                <rect key="frame" x="16" y="138" width="343" height="474"/>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tJr-Ss-c7W" userLabel="Camera View">
+                                <rect key="frame" x="16" y="117" width="343" height="474"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hnJ-wW-REj" customClass="RoundButton" customModule="pjFarm" customModuleProvider="target">
-                                <rect key="frame" x="105" y="663" width="165" height="60"/>
-                                <color key="backgroundColor" red="1" green="0.6705882353" blue="0.68235294120000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Search by ID">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ruQ-Mi-voB">
+                                <rect key="frame" x="95" y="629" width="184" height="70"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="0.9843560804" blue="0.98237671140000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <state key="normal" title="ค้นหาโดยใช้ ID"/>
                                 <connections>
-                                    <segue destination="FJP-UE-OtU" kind="show" identifier="QRtoSearchID" id="I9v-EH-d8m"/>
+                                    <segue destination="ojS-4b-yGT" kind="show" id="BM3-Kd-ce2"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.93372752569999995" blue="0.90592893839999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                        <constraints>
-                            <constraint firstItem="hnJ-wW-REj" firstAttribute="leading" secondItem="SHb-YI-rrm" secondAttribute="leading" constant="105" id="200-az-8OJ"/>
-                            <constraint firstItem="tJr-Ss-c7W" firstAttribute="leading" secondItem="SHb-YI-rrm" secondAttribute="leading" constant="16" id="HzG-LO-UMQ"/>
-                            <constraint firstItem="SHb-YI-rrm" firstAttribute="bottom" secondItem="hnJ-wW-REj" secondAttribute="bottom" constant="55" id="J3q-4v-5RD"/>
-                            <constraint firstAttribute="bottom" secondItem="tJr-Ss-c7W" secondAttribute="bottom" constant="200" id="Kbv-fQ-lHh"/>
-                            <constraint firstItem="tJr-Ss-c7W" firstAttribute="top" secondItem="SHb-YI-rrm" secondAttribute="top" constant="50" id="hEQ-Nb-5xx"/>
-                            <constraint firstItem="SHb-YI-rrm" firstAttribute="trailing" secondItem="tJr-Ss-c7W" secondAttribute="trailing" constant="16" id="pAN-TY-47o"/>
-                            <constraint firstItem="SHb-YI-rrm" firstAttribute="trailing" secondItem="hnJ-wW-REj" secondAttribute="trailing" constant="105" id="vJC-Mq-ROf"/>
-                            <constraint firstItem="hnJ-wW-REj" firstAttribute="top" secondItem="tJr-Ss-c7W" secondAttribute="bottom" constant="51" id="x0S-u9-EmE"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="SHb-YI-rrm"/>
                     </view>
-                    <navigationItem key="navigationItem" title="QR Code" id="HHR-Ta-MiI"/>
+                    <navigationItem key="navigationItem" title="ค้นหา" id="HHR-Ta-MiI"/>
                     <connections>
                         <outlet property="camaraView" destination="tJr-Ss-c7W" id="wj1-dk-vDZ"/>
+                        <segue destination="FJP-UE-OtU" kind="show" identifier="QRtoSearchID" id="ua2-gD-qkk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tjK-K7-ab0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2108" y="213.54679802955667"/>
+            <point key="canvasLocation" x="3220" y="-3130"/>
         </scene>
-        <!--Search by ID-->
+        <!--Pre Search Table View Controller-->
+        <scene sceneID="NKd-YN-rno">
+            <objects>
+                <tableViewController id="ojS-4b-yGT" customClass="PreSearchTableViewController" customModule="pjFarm" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="lM4-Fg-RLS">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="preSearch" id="P35-uW-SCU">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="P35-uW-SCU" id="dEi-NK-Izn">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="FJP-UE-OtU" kind="show" id="VSi-a5-nk9"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="ojS-4b-yGT" id="fxf-kT-jch"/>
+                            <outlet property="delegate" destination="ojS-4b-yGT" id="HXX-fZ-cv8"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="v5M-8G-b4n" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4063" y="-3512"/>
+        </scene>
+        <!--ผลการค้นหา-->
         <scene sceneID="nlc-Uk-9Ls">
             <objects>
-                <viewController id="FJP-UE-OtU" customClass="SearchByIDViewController" customModule="pjFarm" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="FJP-UE-OtU" customClass="SearchResultViewController" customModule="pjFarm" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8Ho-Nn-qkO">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -195,7 +270,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="28o-2n-ueO"/>
                                 </constraints>
-                                <state key="normal" title="Back to Home">
+                                <state key="normal" title="กลับสู่หน้าแรก">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
@@ -208,56 +283,28 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="ID" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LNH-eI-HDI" customClass="NumpadTextField" customModule="pjFarm" customModuleProvider="target">
-                                <rect key="frame" x="102.66666666666667" y="148" width="238.33333333333331" height="30"/>
-                                <color key="backgroundColor" red="1" green="0.9843560804" blue="0.98237671140000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wLi-75-blK">
-                                <rect key="frame" x="316" y="152" width="18" height="22"/>
-                                <state key="normal" image="Search"/>
-                                <connections>
-                                    <action selector="searchButton:" destination="FJP-UE-OtU" eventType="touchUpInside" id="A7h-sz-2Fj"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ID" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l0J-7m-pmR">
-                                <rect key="frame" x="58.999999999999993" y="153" width="16.666666666666664" height="20.666666666666657"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.93372752569999995" blue="0.90592893839999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
-                            <constraint firstItem="LNH-eI-HDI" firstAttribute="top" secondItem="m3v-3c-NZb" secondAttribute="top" constant="60" id="1QX-zc-3Yu"/>
-                            <constraint firstItem="Obu-tQ-8qw" firstAttribute="top" secondItem="LNH-eI-HDI" secondAttribute="bottom" constant="40" id="4sI-67-dTR"/>
                             <constraint firstItem="Fal-1P-h5W" firstAttribute="leading" secondItem="m3v-3c-NZb" secondAttribute="leading" constant="121" id="65V-Yc-8oR"/>
-                            <constraint firstItem="l0J-7m-pmR" firstAttribute="top" secondItem="m3v-3c-NZb" secondAttribute="top" constant="65" id="7fy-T7-m5u"/>
-                            <constraint firstItem="l0J-7m-pmR" firstAttribute="leading" secondItem="m3v-3c-NZb" secondAttribute="leading" constant="59" id="GBB-SN-JPV"/>
                             <constraint firstItem="Fal-1P-h5W" firstAttribute="top" secondItem="Obu-tQ-8qw" secondAttribute="bottom" constant="80" id="Lhx-dh-uKC"/>
-                            <constraint firstItem="LNH-eI-HDI" firstAttribute="leading" secondItem="l0J-7m-pmR" secondAttribute="trailing" constant="27" id="WLA-Bm-d1g"/>
-                            <constraint firstItem="m3v-3c-NZb" firstAttribute="trailing" secondItem="wLi-75-blK" secondAttribute="trailing" constant="41" id="aSW-iJ-Pk0"/>
-                            <constraint firstItem="wLi-75-blK" firstAttribute="top" secondItem="m3v-3c-NZb" secondAttribute="top" constant="64" id="emv-Lz-83B"/>
+                            <constraint firstItem="Obu-tQ-8qw" firstAttribute="top" secondItem="m3v-3c-NZb" secondAttribute="top" constant="130" id="aZd-fg-XeT"/>
                             <constraint firstItem="m3v-3c-NZb" firstAttribute="trailing" secondItem="Obu-tQ-8qw" secondAttribute="trailing" constant="56" id="fPj-lv-bQb"/>
                             <constraint firstItem="m3v-3c-NZb" firstAttribute="trailing" secondItem="Fal-1P-h5W" secondAttribute="trailing" constant="121" id="u0M-Q6-6t4"/>
                             <constraint firstItem="Obu-tQ-8qw" firstAttribute="leading" secondItem="m3v-3c-NZb" secondAttribute="leading" constant="59" id="ut7-c4-OTQ"/>
                             <constraint firstItem="m3v-3c-NZb" firstAttribute="bottom" secondItem="Fal-1P-h5W" secondAttribute="bottom" constant="102" id="wnP-PC-Hd5"/>
-                            <constraint firstItem="m3v-3c-NZb" firstAttribute="trailing" secondItem="LNH-eI-HDI" secondAttribute="trailing" constant="34" id="x1E-zP-zIv"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="m3v-3c-NZb"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Search by ID" id="agk-HG-bbq"/>
+                    <navigationItem key="navigationItem" title="ผลการค้นหา" id="agk-HG-bbq"/>
                     <connections>
-                        <outlet property="idTextField" destination="LNH-eI-HDI" id="PIs-7h-Wx5"/>
                         <outlet property="pigInfoView" destination="Obu-tQ-8qw" id="va4-dN-btZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yuH-Zd-VJd" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="LZV-p6-KrR" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3160.8000000000002" y="213.54679802955667"/>
+            <point key="canvasLocation" x="4948" y="-3130"/>
         </scene>
         <!--Pig's Plan App-->
         <scene sceneID="NHL-Xu-6hi">
@@ -268,28 +315,25 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MMM d, yyyy" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JDQ-o0-pWT">
-                                <rect key="frame" x="10" y="178" width="355" height="21.666666666666657"/>
+                                <rect key="frame" x="10" y="134" width="355" height="21.666666666666657"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="80" translatesAutoresizingMaskIntoConstraints="NO" id="hT9-Db-16R">
-                                <rect key="frame" x="50" y="299.66666666666674" width="275" height="413.33333333333326"/>
+                                <rect key="frame" x="50" y="255.66666666666666" width="275" height="457.33333333333337"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w17-Fs-5wI" userLabel="View as HTML" customClass="RoundButton" customModule="pjFarm" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="275" height="84.333333333333329"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="275" height="99"/>
                                         <color key="backgroundColor" red="1" green="0.6705882352941176" blue="0.68235294117647061" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="Today's Work">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <color key="titleShadowColor" cocoaTouchSystemColor="darkTextColor"/>
                                         </state>
-                                        <connections>
-                                            <segue destination="MFU-TC-d6O" kind="show" id="JHS-0q-Nhb"/>
-                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NPx-Ka-16z" customClass="RoundButton" customModule="pjFarm" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="164.33333333333331" width="275" height="84.666666666666686"/>
-                                        <color key="backgroundColor" red="1" green="0.76439256984717707" blue="0.72189937347168087" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <rect key="frame" x="0.0" y="179.00000000000003" width="275" height="99.333333333333343"/>
+                                        <color key="backgroundColor" red="1" green="0.76470588235294112" blue="0.72156862745098038" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <state key="normal" title="Create New ID"/>
                                         <connections>
@@ -297,13 +341,10 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Inz-kr-TtR" customClass="RoundButton" customModule="pjFarm" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="328.99999999999994" width="275" height="84.333333333333314"/>
+                                        <rect key="frame" x="0.0" y="358.33333333333337" width="275" height="99"/>
                                         <color key="backgroundColor" red="1" green="0.8647013263513379" blue="0.75262397674526649" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title="Scan QR Code"/>
-                                        <connections>
-                                            <segue destination="PcZ-jY-LH0" kind="show" id="Sxr-MI-RCK"/>
-                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -325,14 +366,13 @@
                     </navigationItem>
                     <connections>
                         <outlet property="dateLabel" destination="JDQ-o0-pWT" id="Zpe-Rk-fEe"/>
-                        <segue destination="kDe-MF-0ot" kind="show" identifier="createID" id="57S-Ck-mAR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U0G-rl-9yn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1559.2" y="-818.7192118226601"/>
+            <point key="canvasLocation" x="2466" y="-1896"/>
         </scene>
-        <!--Today's Work-->
+        <!--Work View Controller-->
         <scene sceneID="gAh-hs-tEj">
             <objects>
                 <viewController id="MFU-TC-d6O" customClass="WorkViewController" customModule="pjFarm" customModuleProvider="target" sceneMemberID="viewController">
@@ -340,86 +380,49 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <webView contentMode="scaleToFill" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="V3J-gh-NCK">
-                                <rect key="frame" x="0.0" y="88" width="375" height="466"/>
+                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="V3J-gh-NCK">
+                                <rect key="frame" x="0.0" y="88" width="375" height="555"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="0.93372752569999995" blue="0.90592893839999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </webView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="29" translatesAutoresizingMaskIntoConstraints="NO" id="1kD-Pf-E6m">
-                                <rect key="frame" x="68" y="599" width="240" height="149"/>
-                                <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="xhZ-3r-PiO">
-                                        <rect key="frame" x="0.0" y="0.0" width="240" height="60"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bka-pw-rW0" customClass="RoundButton" customModule="pjFarm" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="95" height="60"/>
-                                                <color key="backgroundColor" red="1" green="0.87204793579999995" blue="0.80496259930000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                <state key="normal" title="First Rut">
-                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </state>
-                                                <connections>
-                                                    <segue destination="UaO-3F-3gM" kind="show" id="xPN-mX-E43"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ejv-My-qFY" customClass="RoundButton" customModule="pjFarm" customModuleProvider="target">
-                                                <rect key="frame" x="145" y="0.0" width="95" height="60"/>
-                                                <color key="backgroundColor" red="1" green="0.80630447869999999" blue="0.71527143029999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                <state key="normal" title="Farrow">
-                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </state>
-                                                <connections>
-                                                    <segue destination="lOQ-fV-oK9" kind="show" id="fPT-I1-Wnt"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="60" id="Wla-Sc-6w8"/>
-                                        </constraints>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="a0r-mf-73U">
-                                        <rect key="frame" x="0.0" y="89" width="240" height="60"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PPG-Eo-x8t" customClass="RoundButton" customModule="pjFarm" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="95" height="60"/>
-                                                <color key="backgroundColor" red="1" green="0.76439256980000003" blue="0.7218993735" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                <state key="normal" title="Wean">
-                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </state>
-                                                <connections>
-                                                    <segue destination="eh0-Hb-92t" kind="show" id="Wzx-FW-cVF"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kgM-mC-ybE" customClass="RoundButton" customModule="pjFarm" customModuleProvider="target">
-                                                <rect key="frame" x="145" y="0.0" width="95" height="60"/>
-                                                <color key="backgroundColor" red="1" green="0.6705882353" blue="0.68235294120000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <state key="normal" title="Report">
-                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </state>
-                                                <connections>
-                                                    <segue destination="71f-hW-CiI" kind="show" id="U7C-je-qb8"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="60" id="eVg-ys-k66"/>
-                                        </constraints>
-                                    </stackView>
-                                </subviews>
-                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kgM-mC-ybE" customClass="RoundButton" customModule="pjFarm" customModuleProvider="target">
+                                <rect key="frame" x="67" y="701" width="240" height="60"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="0.6705882353" blue="0.68235294120000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="บันทึกผล?">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <segue destination="71f-hW-CiI" kind="show" id="U7C-je-qb8"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iE5-EM-pd6" customClass="RoundButton" customModule="pjFarm" customModuleProvider="target">
+                                <rect key="frame" x="139" y="610" width="96" height="60"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="ลงทะเบียน">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="register:" destination="MFU-TC-d6O" eventType="touchUpInside" id="NOb-bv-bR1"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.93372752569999995" blue="0.90592893839999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                        <constraints>
-                            <constraint firstItem="V3J-gh-NCK" firstAttribute="leading" secondItem="1XD-j1-LO8" secondAttribute="leading" id="3aM-7b-y4e"/>
-                            <constraint firstItem="V3J-gh-NCK" firstAttribute="trailing" secondItem="1XD-j1-LO8" secondAttribute="trailing" id="Y5e-ny-mog"/>
-                            <constraint firstItem="1kD-Pf-E6m" firstAttribute="top" secondItem="V3J-gh-NCK" secondAttribute="bottom" constant="45" id="ZqQ-FY-0xV"/>
-                            <constraint firstItem="1XD-j1-LO8" firstAttribute="bottom" secondItem="1kD-Pf-E6m" secondAttribute="bottom" constant="30" id="bgW-IP-Kz6"/>
-                            <constraint firstItem="1XD-j1-LO8" firstAttribute="trailing" secondItem="1kD-Pf-E6m" secondAttribute="trailing" constant="67" id="gos-bg-43S"/>
-                            <constraint firstItem="V3J-gh-NCK" firstAttribute="top" secondItem="1XD-j1-LO8" secondAttribute="top" id="iCY-fJ-1DS"/>
-                            <constraint firstItem="1kD-Pf-E6m" firstAttribute="leading" secondItem="1XD-j1-LO8" secondAttribute="leading" constant="68" id="nxt-0S-SfJ"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="1XD-j1-LO8"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Today's Work" id="r1t-9K-dPc">
-                        <barButtonItem key="backBarButtonItem" title="Work" id="fKa-a0-dLR"/>
+                    <navigationItem key="navigationItem" id="r1t-9K-dPc">
+                        <barButtonItem key="backBarButtonItem" title="หน้าแรก" id="fKa-a0-dLR"/>
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="ng1-qs-zFV">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="MmV-Su-eDj" userLabel="Search Button">
+                                <rect key="frame" x="16" y="11" width="18" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="Search"/>
+                                <connections>
+                                    <segue destination="PcZ-jY-LH0" kind="show" id="f4a-e7-tqc"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" style="plain" id="PQn-Gy-K0u">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="9Yk-Hu-YTa">
                                 <rect key="frame" x="339" y="11" width="20" height="22"/>
@@ -434,13 +437,17 @@
                     <connections>
                         <outlet property="exportButton" destination="9Yk-Hu-YTa" id="pC8-F3-PJN"/>
                         <outlet property="webView" destination="V3J-gh-NCK" id="qvq-XN-yMY"/>
+                        <segue destination="HDl-F8-SR5" kind="show" identifier="goRegMS" id="fcC-ug-9P3"/>
+                        <segue destination="0Md-7p-2gf" kind="show" identifier="goRegMP" id="Ryk-hX-3yz"/>
+                        <segue destination="TGs-jj-1Rh" kind="show" identifier="goRegKK" id="j98-iC-p5f"/>
+                        <segue destination="k7p-eo-Sxb" kind="show" identifier="goRegKG" id="hkq-r0-f8L"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ptZ-iw-T5D" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3447.1999999999998" y="-1896.0591133004928"/>
+            <point key="canvasLocation" x="4389.6000000000004" y="-1896.0591133004928"/>
         </scene>
-        <!--Report-->
+        <!--บันทึกผล?-->
         <scene sceneID="NZv-8M-VDc">
             <objects>
                 <viewController id="71f-hW-CiI" customClass="WorkReport1ViewController" customModule="pjFarm" customModuleProvider="target" sceneMemberID="viewController">
@@ -459,9 +466,6 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="nMP-pn-WoH" kind="show" id="mHg-PB-DS8"/>
-                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -472,7 +476,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5j0-rc-sUW">
                                 <rect key="frame" x="0.0" y="678" width="375" height="100"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="Confirm Report">
+                                <state key="normal" title="เลื่อนไปทำพรุ่งนี้?">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
@@ -493,7 +497,19 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="MnQ-rg-kVo"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Report" id="0sI-HY-cy1"/>
+                    <navigationItem key="navigationItem" title="บันทึกผล?" id="0sI-HY-cy1">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="EDA-Zx-vV0">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="uGV-fY-TRP">
+                                <rect key="frame" x="276" y="5" width="83" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <state key="normal" title="สิ้นสุดวัน?"/>
+                                <connections>
+                                    <action selector="markAsDone:" destination="71f-hW-CiI" eventType="touchUpInside" id="to0-dz-rzQ"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="h0F-cU-L12" id="tme-hB-qCJ"/>
                         <segue destination="oWH-qd-WEe" kind="unwind" identifier="reportToHome" unwindAction="unwindToHome:" id="lm4-H4-aW6"/>
@@ -502,9 +518,43 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dh8-6n-XR0" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="oWH-qd-WEe" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="4117.6000000000004" y="-1037.4384236453202"/>
+            <point key="canvasLocation" x="4390" y="-934"/>
         </scene>
-        <!--Wean-->
+        <!--เลือก คอกคลอด-->
+        <scene sceneID="H7B-ct-4GY">
+            <objects>
+                <tableViewController id="k7p-eo-Sxb" customClass="PreWeanTableViewController" customModule="pjFarm" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="XH4-Qp-iYu">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="preWaen" id="oap-ip-XZW">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="oap-ip-XZW" id="ZzD-bK-Yqw">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="eh0-Hb-92t" kind="show" id="qy1-dl-o9G"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="k7p-eo-Sxb" id="TGk-bo-NyC"/>
+                            <outlet property="delegate" destination="k7p-eo-Sxb" id="dmf-CL-mpa"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="เลือก คอกคลอด" id="bWf-ug-gZW">
+                        <barButtonItem key="backBarButtonItem" title="กลับ" id="AG5-hN-RgN"/>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="m4i-ON-dcz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6665" y="-1316"/>
+        </scene>
+        <!--คอกอนุบาล-->
         <scene sceneID="Oec-hr-dsv">
             <objects>
                 <viewController id="eh0-Hb-92t" customClass="WeanViewController" customModule="pjFarm" customModuleProvider="target" sceneMemberID="viewController">
@@ -513,25 +563,24 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="sfC-Qe-Ekj">
-                                <rect key="frame" x="25" y="227" width="320" height="30"/>
+                                <rect key="frame" x="25" y="227" width="320" height="20.333333333333343"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="รหัสแม่" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KaO-Kl-52o">
-                                        <rect key="frame" x="0.0" y="0.0" width="157.66666666666666" height="30"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ID แม่พันธุ์" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KaO-Kl-52o">
+                                        <rect key="frame" x="0.0" y="0.0" width="157.66666666666666" height="20.333333333333332"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6Xp-Te-7us" customClass="NumpadTextField" customModule="pjFarm" customModuleProvider="target">
-                                        <rect key="frame" x="162.66666666666663" y="0.0" width="157.33333333333337" height="30"/>
-                                        <color key="backgroundColor" red="1" green="0.9843560804" blue="0.98237671140000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0000" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rst-jB-abu">
+                                        <rect key="frame" x="162.66666666666663" y="0.0" width="157.33333333333337" height="20.333333333333332"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="AWH-Cs-ccC">
-                                <rect key="frame" x="25" y="323" width="320" height="30"/>
+                                <rect key="frame" x="25" y="313.33333333333331" width="320" height="30"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="วันที่หย่านม" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3kd-xZ-eBk">
                                         <rect key="frame" x="0.0" y="0.0" width="157.66666666666666" height="30"/>
@@ -549,10 +598,10 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KDj-Vc-Vkt" customClass="RoundButton" customModule="pjFarm" customModuleProvider="target">
-                                <rect key="frame" x="127" y="430" width="120" height="45"/>
+                                <rect key="frame" x="127" y="420.33333333333331" width="120" height="54.666666666666686"/>
                                 <color key="backgroundColor" red="1" green="0.6705882353" blue="0.68235294120000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="tintColor" red="0.31372549019607843" green="0.52941176470588236" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <state key="normal" title="Register">
+                                <state key="normal" title="ลงทะเบียนคอกอนุบาล">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
@@ -575,17 +624,17 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Xut-hn-AXr"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Wean" id="adH-yy-TxK"/>
+                    <navigationItem key="navigationItem" title="คอกอนุบาล" id="adH-yy-TxK"/>
                     <connections>
                         <outlet property="dateTextField" destination="E0a-lG-z1J" id="dv2-ZR-hRn"/>
-                        <outlet property="momTextField" destination="6Xp-Te-7us" id="Azp-hE-AQ8"/>
+                        <outlet property="momLabel" destination="rst-jB-abu" id="ZHN-Jb-UFP"/>
                         <segue destination="Cz7-Nd-lNK" kind="unwind" identifier="weanToHome" unwindAction="unwindToHome:" id="yWd-II-FNz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qvh-Wt-f9y" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="Cz7-Nd-lNK" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="5647.1999999999998" y="-1839.1625615763548"/>
+            <point key="canvasLocation" x="7729" y="-1316"/>
         </scene>
         <!--Detail-->
         <scene sceneID="KER-HC-edV">
@@ -596,7 +645,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="P3w-O4-XPA">
-                                <rect key="frame" x="0.0" y="88" width="375" height="590"/>
+                                <rect key="frame" x="0.0" y="44" width="375" height="634"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="workdetailcell" id="Oua-Op-ihx">
@@ -650,9 +699,43 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pci-aX-i2K" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="PdR-Pv-Edv" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="5125.6000000000004" y="-1038.1773399014778"/>
+            <point key="canvasLocation" x="5326" y="-934"/>
         </scene>
-        <!--First Rut-->
+        <!--เลือก หมูสาว-->
+        <scene sceneID="OeE-ec-bOJ">
+            <objects>
+                <tableViewController id="0Md-7p-2gf" customClass="PreFirstRutTableViewController" customModule="pjFarm" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="I5b-ek-KIL">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="preMaepun" id="vck-Sf-jOa">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="vck-Sf-jOa" id="dhl-BC-YX5">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="UaO-3F-3gM" kind="show" id="MHN-eb-fIb"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="0Md-7p-2gf" id="EpZ-iK-lLs"/>
+                            <outlet property="delegate" destination="0Md-7p-2gf" id="WM6-bI-Q2V"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="เลือก หมูสาว" id="3Eu-ac-0Yr">
+                        <barButtonItem key="backBarButtonItem" title="กลับ" id="zzG-hx-xY2"/>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3eI-IS-bUP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6665" y="-2891"/>
+        </scene>
+        <!--แม่พันธุ์-->
         <scene sceneID="6dq-VR-YLN">
             <objects>
                 <viewController id="UaO-3F-3gM" customClass="FirstRutViewController" customModule="pjFarm" customModuleProvider="target" sceneMemberID="viewController">
@@ -661,7 +744,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Ddc-3u-yf1">
-                                <rect key="frame" x="25" y="323" width="320" height="30"/>
+                                <rect key="frame" x="25" y="313.33333333333331" width="320" height="30"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="วันเป็นสัดครั้งแรก" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yGe-5L-bEt">
                                         <rect key="frame" x="0.0" y="0.0" width="155" height="30"/>
@@ -679,9 +762,9 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sxw-wr-h41" customClass="RoundButton" customModule="pjFarm" customModuleProvider="target">
-                                <rect key="frame" x="137" y="430" width="100" height="45"/>
+                                <rect key="frame" x="137" y="420.33333333333331" width="100" height="54.666666666666686"/>
                                 <color key="backgroundColor" red="1" green="0.6705882353" blue="0.68235294120000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Turn">
+                                <state key="normal" title="ลงทะเบียนแม่พันธุ์">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
@@ -689,21 +772,20 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="QAl-w2-nKc">
-                                <rect key="frame" x="25" y="227" width="320" height="30"/>
+                                <rect key="frame" x="25" y="227" width="320" height="20.333333333333343"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ID" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c4D-3k-Gvj">
-                                        <rect key="frame" x="0.0" y="0.0" width="155" height="30"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ID หมูสาว" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c4D-3k-Gvj">
+                                        <rect key="frame" x="0.0" y="0.0" width="155" height="20.333333333333332"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cHP-DD-wfk" customClass="NumpadTextField" customModule="pjFarm" customModuleProvider="target">
-                                        <rect key="frame" x="165" y="0.0" width="155" height="30"/>
-                                        <color key="backgroundColor" red="1" green="0.9843560804" blue="0.98237671140000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0000" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0qk-Po-LfU">
+                                        <rect key="frame" x="165" y="0.0" width="155" height="20.333333333333332"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                             </stackView>
                         </subviews>
@@ -722,19 +804,53 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="0Kt-Ff-cOi"/>
                     </view>
-                    <navigationItem key="navigationItem" title="First Rut" id="pnA-Ap-MdD"/>
+                    <navigationItem key="navigationItem" title="แม่พันธุ์" id="pnA-Ap-MdD"/>
                     <connections>
                         <outlet property="dateTextField" destination="t7M-ac-en8" id="q4W-Et-npo"/>
-                        <outlet property="idTextField" destination="cHP-DD-wfk" id="9gX-AA-6eq"/>
+                        <outlet property="pigIdLabel" destination="0qk-Po-LfU" id="6Rh-x1-Hdi"/>
                         <segue destination="CGa-bi-ywg" kind="unwind" identifier="unwindRutToHome" unwindAction="unwindToHome:" id="0IZ-Bs-PfK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z41-nJ-iG5" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="CGa-bi-ywg" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="4086" y="-2619"/>
+            <point key="canvasLocation" x="7729" y="-2891"/>
         </scene>
-        <!--Farrow-->
+        <!--เลือก แม่พันธุ์-->
+        <scene sceneID="Opm-DB-iTI">
+            <objects>
+                <tableViewController id="TGs-jj-1Rh" customClass="PreFarrowTableViewController" customModule="pjFarm" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="1ni-Li-NKV">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="preFarrow" id="BlN-3i-7VJ">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="BlN-3i-7VJ" id="VaA-4k-zQ4">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="lOQ-fV-oK9" kind="show" id="XaR-nC-ZqV"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="TGs-jj-1Rh" id="hRb-6R-TNS"/>
+                            <outlet property="delegate" destination="TGs-jj-1Rh" id="Q6t-Lg-1Pr"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="เลือก แม่พันธุ์" id="gLs-dW-gag">
+                        <barButtonItem key="backBarButtonItem" title="กลับ" id="CKr-1A-e8m"/>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iC5-3M-pTl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6665" y="-2110"/>
+        </scene>
+        <!--คอกคลอด-->
         <scene sceneID="nQi-iC-K1L">
             <objects>
                 <viewController id="lOQ-fV-oK9" customClass="Farrow1ViewController" customModule="pjFarm" customModuleProvider="target" sceneMemberID="viewController">
@@ -743,27 +859,26 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="mSE-Uu-xIP">
-                                <rect key="frame" x="20" y="173" width="325" height="30"/>
+                                <rect key="frame" x="20" y="173" width="325" height="20.333333333333343"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="รหัสแม่" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vcc-24-izm">
-                                        <rect key="frame" x="0.0" y="0.0" width="160" height="30"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ID แม่พันธุ์" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vcc-24-izm">
+                                        <rect key="frame" x="0.0" y="0.0" width="160" height="20.333333333333332"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="F2N-dk-4di" customClass="NumpadTextField" customModule="pjFarm" customModuleProvider="target">
-                                        <rect key="frame" x="165" y="0.0" width="160" height="30"/>
-                                        <color key="backgroundColor" red="1" green="0.9843560804" blue="0.98237671140000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0000" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ABn-jP-IPA">
+                                        <rect key="frame" x="165" y="0.0" width="160" height="20.333333333333332"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="trH-D1-dgD">
-                                <rect key="frame" x="15" y="290" width="330" height="28"/>
+                                <rect key="frame" x="15" y="280.33333333333331" width="330" height="28"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="พันธุ์พ่อ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q09-JC-TWU">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="พ่อพันธุ์" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q09-JC-TWU">
                                         <rect key="frame" x="0.0" y="0.0" width="53" height="28"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
@@ -782,7 +897,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="mHL-16-xwa">
-                                <rect key="frame" x="20" y="396" width="325" height="30"/>
+                                <rect key="frame" x="20" y="386.33333333333331" width="325" height="30"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="วันคลอด" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dDK-U6-pEP">
                                         <rect key="frame" x="0.0" y="0.0" width="160" height="30"/>
@@ -800,9 +915,9 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HOR-ZJ-pyn" customClass="RoundButton" customModule="pjFarm" customModuleProvider="target">
-                                <rect key="frame" x="137" y="504" width="100" height="45"/>
+                                <rect key="frame" x="137" y="494.33333333333331" width="100" height="54.666666666666686"/>
                                 <color key="backgroundColor" red="1" green="0.6705882353" blue="0.68235294120000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Next">
+                                <state key="normal" title="ถัดไป">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
@@ -828,17 +943,17 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="4rj-DE-Lmw"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Farrow" id="FJc-03-buG"/>
+                    <navigationItem key="navigationItem" title="คอกคลอด" id="FJc-03-buG"/>
                     <connections>
                         <outlet property="dad" destination="tft-sa-MBi" id="Dby-9M-Z2k"/>
                         <outlet property="dateTextField" destination="qtV-Gz-MB0" id="vfX-nb-7y5"/>
-                        <outlet property="momTextField" destination="F2N-dk-4di" id="tzO-YA-xfn"/>
+                        <outlet property="momLabel" destination="ABn-jP-IPA" id="9Px-Az-sfs"/>
                         <segue destination="N2q-oG-91M" kind="show" identifier="farrow1to2" id="R0q-lt-Z82"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rbx-w3-ti7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5784.8000000000002" y="-2540.3940886699506"/>
+            <point key="canvasLocation" x="7729" y="-2110"/>
         </scene>
         <!--ID-->
         <scene sceneID="Z8F-c5-Phz">
@@ -947,7 +1062,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e3n-kh-wDf" customClass="RoundButton" customModule="pjFarm" customModuleProvider="target">
                                 <rect key="frame" x="112" y="500" width="150" height="49"/>
                                 <color key="backgroundColor" red="1" green="0.6705882353" blue="0.68235294120000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Register">
+                                <state key="normal" title="ลงทะเบียนคอกคลอด">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
@@ -997,30 +1112,32 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UFm-VZ-xgo" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="T6d-Kq-gAC" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="6616.8000000000002" y="-2540.3940886699506"/>
+            <point key="canvasLocation" x="8767" y="-2110"/>
         </scene>
-        <!--ToDo-->
-        <scene sceneID="iZP-z3-K2z">
+        <!--Navigation Controller-->
+        <scene sceneID="Ah6-3C-UeE">
             <objects>
-                <navigationController title="ToDo" automaticallyAdjustsScrollViewInsets="NO" id="C2k-zJ-gIP" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="To-Do" id="94I-V5-SSR"/>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Pof-KO-1lm" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="A8C-pb-h1h">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="xdN-6H-yRf">
                         <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="k2H-9g-rGP" kind="relationship" relationship="rootViewController" id="tmy-df-c7x"/>
+                        <segue destination="MFU-TC-d6O" kind="relationship" relationship="rootViewController" id="B0p-r9-wm4"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="i5J-63-yLj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xXa-R0-Bzg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="620" y="-818.14092953523243"/>
+            <point key="canvasLocation" x="3447.1999999999998" y="-1896.0591133004928"/>
         </scene>
     </scenes>
     <resources>
         <image name="Search" width="18" height="18"/>
         <image name="Share" width="18" height="18"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="VSi-a5-nk9"/>
+    </inferredMetricsTieBreakers>
 </document>

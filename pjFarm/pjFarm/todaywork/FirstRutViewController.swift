@@ -11,19 +11,21 @@ import UIKit
 class FirstRutViewController: UIViewController {
 
     var datePicker = UIDatePicker()    
-
+    var pigId = String()
+    
+    @IBOutlet weak var pigIdLabel: UILabel!
     @IBOutlet weak var idTextField: NumpadTextField!
     @IBOutlet weak var dateTextField: UITextField!
     
     @IBAction func saveButton(_ sender: Any) {
-        let idString = idTextField.text!
+        let idString = pigId
         ref.child("หมู/\(idString)").observeSingleEvent(of: .value) { (snapshot) in
             if idString.isEmpty {
                 self.showMessage(title: "ลงทะเบียนไม่สำเร็จ", message: "ข้อมูลไม่ถูกต้อง กรุณาใส่ ID แม่พันธุ์")
             } else if let data = snapshot.value as? NSDictionary {
                 if (data["สถานะ"] as! String).elementsEqual("หมูสาว") {
                     regisMP(id: idString, date: self.datePicker.date, primary: 1, secondary: 1)
-                    self.showHomeOKAlert(title: "เปลี่ยนเป็นแม่พันธุ์ !", message: "ID ของแม่พันธุ์ : \(idString)", unwindToHome: "unwindRutToHome")
+                    self.showHomeAlert(title: "เปลี่ยนเป็นแม่พันธุ์ !", message: "ID ของแม่พันธุ์ : \(idString)", unwindToHome: "unwindRutToHome")
                 } else {
                     self.showMessage(title: "สถานะผิดพลาด", message: "ID:\(idString) มีสถานะที่ไม่ใช่หมูสาว")
                 }
@@ -40,6 +42,7 @@ class FirstRutViewController: UIViewController {
         // Do any additional setup after loading the view.
         createDatePicker(datePicker: datePicker, textField: dateTextField, button: UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneActionForDatePicker)))
         dateTextField.text! = dateFormatForTextField.string(from: Date())
+        pigIdLabel.text! = pigId
     }
     
     @objc func doneActionForDatePicker() {

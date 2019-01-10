@@ -17,6 +17,13 @@ let dateFormatForTextField = DateFormatter()
 var currentWork = String()
 var currentID = Int()
 
+var pigs = [String:[String]]()
+
+func addPig(type:String, id:String) {
+    pigs[type]?.append(id)
+    pigs[type]?.sort()
+}
+
 var workList = [String]()
 var workInfo = [String:[Int]]()
 
@@ -72,6 +79,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         dateFormatForTextField.dateFormat = "MMMM d, yyyy"
         
         getAllWorkFrom(date: Date())
+        getAllPig()
         
         return true
     }
@@ -127,12 +135,49 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     }
                     if !(workInfo[work as! String]?.isEmpty)! {
                         workList.append(work as! String)
+                        workInfo[work as! String]?.sort()
+                    } else {
+                        workInfo.removeValue(forKey: work as! String)
                     }
                 }
             }
             print(workInfo)
+            print(workList)
+        }
+    }
+    
+    func getAllPig() {
+        pigs["ทั้งหมด"] = []
+        pigs["หมูสาว"] = []
+        pigs["แม่พันธุ์"] = []
+        pigs["คอกคลอด"] = []
+        pigs["คอกอนุบาล"] = []
+        ref.child("หมู").observeSingleEvent(of: .value) { (snapshot) in
+            if let allpig = snapshot.value as? NSDictionary {
+                for (id, data) in allpig {
+                    if Int(id as! String) != nil {
+                        let status = (data as! NSDictionary)["สถานะ"] as! String
+                        pigs[status]?.append(id as! String)
+                        pigs["ทั้งหมด"]?.append(id as! String)
+                        if status.elementsEqual("แม่พันธุ์") {
+                            let maepunData = (data as! NSDictionary).value(forKey: "แม่พันธุ์") as! NSDictionary
+                            if let amount = maepunData.value(forKey: "จำนวนลูกหมูเพศเมีย") as? Int {
+                                pigs["คอกอนุบาล"]?.append(id as! String)
+                            }
+                        }
+                    }
+                }
+            }
+            print(pigs)
+            pigs["ทั้งหมด"]?.sort()
+            pigs["หมูสาว"]?.sort()
+            pigs["แม่พันธุ์"]?.sort()
+            pigs["คอกคลอด"]?.sort()
+            pigs["คอกอนุบาล"]?.sort()
+            print(pigs)
             
         }
+        
     }
 }
 
@@ -166,10 +211,9 @@ func assignWork(id:Int, work:Work) {
             if !workList.contains(work.name[i]) {
                 workList.append(work.name[i])
                 workInfo[work.name[i]] = []
-                workInfo[work.name[i]]?.append(id)
-            } else {
-                workInfo[work.name[i]]?.append(id)
             }
+            workInfo[work.name[i]]?.append(id)
+            workInfo[work.name[i]]?.sort()
         }
     }
 }
@@ -187,6 +231,7 @@ func regisMP(id:String, date:Date, primary:Int, secondary:Int) {
     }
     
     assignWork(id: Int(id)!, work: workMaepun)
+    addPig(type: "แม่พันธุ์", id: id)
 }
 
 extension UIViewController /* DatePicker */ {
@@ -212,16 +257,13 @@ extension UIViewController /* alert */ {
         self.present(alertController, animated: true)
     }
     
-    func showHomeOKAlert(title:String, message:String, unwindToHome:String) {
+    func showHomeAlert(title:String, message:String, unwindToHome:String) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
         
-        let actionNothing = UIAlertAction(title: "OK", style: UIAlertAction.Style.default)
-        let actionBackHome = UIAlertAction(title: "Home", style: UIAlertAction.Style.default) { action in
-            self.performSegue(withIdentifier: unwindToHome, sender: self)
-        }
-        
-        alertController.addAction(actionBackHome)
-        alertController.addAction(actionNothing)
+        alertController.addAction(
+            UIAlertAction(title: "กลับสู่หน้าแรก", style: UIAlertAction.Style.default) { action in
+                self.performSegue(withIdentifier: unwindToHome, sender: self)
+        })
         
         present(alertController, animated: true)
     }

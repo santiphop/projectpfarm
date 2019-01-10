@@ -11,11 +11,14 @@ import UIKit
 class WeanViewController: UIViewController {
     let datePicker = UIDatePicker()
     
-    @IBOutlet weak var momTextField: NumpadTextField!
+    var momId = String()
+    
+    @IBOutlet weak var momLabel: UILabel!
+    
     @IBOutlet weak var dateTextField: UITextField!
     
     @IBAction func registerButton(_ sender: Any) {
-        let momString = momTextField.text!
+        let momString = momId
         
         ref.child("หมู/\(momString)").observeSingleEvent(of: .value) { (snapshot) in
             if momString.isEmpty {
@@ -23,7 +26,7 @@ class WeanViewController: UIViewController {
             } else if let data = snapshot.value as? NSDictionary {
                 if (data["สถานะ"] as! String).elementsEqual("คอกคลอด") {
                     self.regisKG(id: momString, date: self.datePicker.date)
-                    self.showHomeOKAlert(title: "การย้ายคอกสำเร็จ !", message: "ID ของคอกอนุบาล : \(momString)", unwindToHome: "weanToHome")
+                    self.showHomeAlert(title: "การย้ายคอกสำเร็จ !", message: "ID ของคอกอนุบาล : \(momString)", unwindToHome: "weanToHome")
                 } else {
                     self.showMessage(title: "สถานะผิดพลาด", message: "ID:\(momString) ไม่ได้อยู่ในคอกคลอด")
                 }
@@ -40,6 +43,7 @@ class WeanViewController: UIViewController {
         // Do any additional setup after loading the view.
         createDatePicker(datePicker: datePicker, textField: dateTextField, button: UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneActionForDatePicker)))
         dateTextField.text! = dateFormatForTextField.string(from: Date())
+        momLabel.text! = momId
     }
     
     
@@ -50,6 +54,7 @@ class WeanViewController: UIViewController {
     
     func regisKG(id:String, date:Date) {
         workKinderg.generateSelf(date: date)
+        
         ref.child("หมู/\(id)/แม่พันธุ์").observeSingleEvent(of: .value, with: { snapshot in
             let data = snapshot.value as? NSDictionary
             let currentState = data?["currentState"] as? NSDictionary
@@ -62,6 +67,12 @@ class WeanViewController: UIViewController {
                 ref.child("\(kinderPath)/จำนวนหมู").setValue(remain)
             })
             
+            ref.child("หมู/\(id)/แม่พันธุ์/\(primary)/\(secondary)/คอกคลอด/ประวัติการทำคลอด/จำนวนลูกที่เหลือเพศเมีย").observeSingleEvent(of: .value, with: { (intersnapshot) in
+                let femaleRemain = intersnapshot.value as? Int
+                ref.child("หมู/\(id)/แม่พันธุ์/จำนวนลูกหมูเพศเมีย").setValue(femaleRemain)
+            })
+            
+            
             ref.child("หมู/\(id)/สถานะ").setValue("แม่พันธุ์")
             for i in 0...workKinderg.name.count-1 {
                 ref.child("\(kinderPath)/งาน/\(workKinderg.name[i])").setValue(dateFormat.string(from: workKinderg.date[i]))
@@ -69,6 +80,7 @@ class WeanViewController: UIViewController {
             regisMP(id: id, date: date, primary: primary+1, secondary: 1)
         })
         assignWork(id: Int(id)!, work: workKinderg)
+        addPig(type: "คอกอนุบาล", id: id)
         
         // assignWorkMaepun is in regisMP above
         // assignWork(id: Int(id)!, work: workMaepun)

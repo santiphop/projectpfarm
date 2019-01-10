@@ -61,7 +61,7 @@ class Farrow2ViewController: UIViewController {
         
         if intDead + intMummy + intMale + intFemale == intAll && intAll > 0 {
             regisKK(id: mom, dad: dad, date: date, all: intAll, dead: intDead, mummy: intMummy, male: intMale, female: intFemale)
-            showHomeOKAlert(title: "แม่พันธุ์ทำการคลอด !", message: "ID ของแม่พันธุ์และคอกคลอด : \(mom)", unwindToHome: "KlodDoneToHome")
+            showHomeAlert(title: "แม่พันธุ์ทำการคลอด !", message: "ID ของแม่พันธุ์และคอกคลอด : \(mom)", unwindToHome: "KlodDoneToHome")
         } else {
             showMessage(title: "ลงทะเบียนไม่สำเร็จ", message: "ข้อมูลไม่ถูกต้อง")
         }
@@ -93,6 +93,7 @@ class Farrow2ViewController: UIViewController {
         })
         
         assignWork(id: Int(id)!, work: workKokklod)
+        addPig(type: "คอกคลอด", id: id)
     }
 
 }
