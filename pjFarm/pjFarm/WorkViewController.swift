@@ -25,63 +25,55 @@ class WorkViewController: UIViewController {
         createReportAsHTML()
     }
     
-//    @IBAction func createID(_ sender: Any) {
-//        //  set up new ID
-//        //  prevent setup as func
-//        //  RegisterViewController can't get currentID if using app quickly
-//        ref.child("หมู/currentID").observeSingleEvent(of: .value, with: { (snapshot) in
-//            // Get data
-//            let id = snapshot.value as? Int
-//            currentID = id!
-//            print("init currentID: \(currentID)")
-//            self.performSegue(withIdentifier: "goRegMS", sender: self)
-//        })
-//    }
-    
-    @IBOutlet weak var exportButton: UIButton!
-    @IBAction func register(_ sender: Any) {
-        getAllPig()
+    func createReportAsHTML() {
+        reportComposer = ReportComposer()
+        if let reportHTML = reportComposer.renderReport(reportDate: dateFormatForReportHTML.string(from: Date())) {
+            webView.loadHTMLString(reportHTML, baseURL: NSURL(string: reportComposer.pathToReportHTMLTemplate!)! as URL)
+            HTMLContent = reportHTML
+        }
     }
     
-    @IBAction func goReport(_ sender: Any) {
-        getAllWorkFrom(date: Date())
-    }
     
-    func getAllWorkFrom(date:Date) {
-        workList.removeAll()
-        workInfo.removeAll()
-        
-        //  append workList
-        //  append workInfo
-        
-        let thisDate = dateFormat.string(from: date)
-        ref.child("งาน/\(thisDate)W").observeSingleEvent(of: .value) { (snapshot) in
-            if let today = snapshot.value as? NSDictionary {
-                for (work, ids) in today {
-                    workInfo[work as! String] = []
-                    for (id, status) in (ids as? NSDictionary)! {
-                        //  intID = no pigtype and workstep
-                        //  status 0 = ASSIGNED
-                        //  status 1 = DONE
-                        //  status 2 = UNDONE
-                        if let intID = Int(id as! String), (status as! Int) == 0 {
-                            workInfo[work as! String]?.append(intID)
-                        }
-                    }
-                    if !(workInfo[work as! String]?.isEmpty)! {
-                        workList.append(work as! String)
-                        workInfo[work as! String]?.sort()
-                    } else {
-                        workInfo.removeValue(forKey: work as! String)
+    @IBAction func goSearch(_ sender: Any) {
+        pigs["ทั้งหมด"] = []
+        ref.child("หมู").observeSingleEvent(of: .value) { (snapshot) in
+            if let allpig = snapshot.value as? NSDictionary {
+                for (id, _) in allpig {
+                    if Int(id as! String) != nil {
+                        pigs["ทั้งหมด"]?.append(id as! String)
                     }
                 }
-                self.performSegue(withIdentifier: "goReport", sender: self)
+                pigs["ทั้งหมด"]?.sort()
+                self.performSegue(withIdentifier: "goSearch", sender: self)
             }
         }
     }
     
+    /*
+     
+     // Share Button
+     
+     */
+    
+    @IBOutlet weak var exportButton: UIButton!
+    
+    @IBAction func export(_ sender: Any) {
+        let pdfFilename = reportComposer.exportHTMLContentToPDF(HTMLContent: self.HTMLContent)
+        documentController = UIDocumentInteractionController.init(url: NSURL.init(fileURLWithPath: pdfFilename) as URL)
+        documentController.presentOptionsMenu(from: self.exportButton.frame, in: self.view, animated: true)
+    }
+    
+    /*
+     
+     // Register Button
+     
+     */
+    
+    @IBAction func goRegister(_ sender: Any) {
+        getAllPig()
+    }
+    
     func getAllPig() {
-        pigs["ทั้งหมด"] = []
         pigs["หมูสาว"] = []
         pigs["แม่พันธุ์"] = []
         pigs["คอกคลอด"] = []
@@ -92,7 +84,6 @@ class WorkViewController: UIViewController {
                     if Int(id as! String) != nil {
                         let status = (data as! NSDictionary)["สถานะ"] as! String
                         pigs[status]?.append(id as! String)
-                        pigs["ทั้งหมด"]?.append(id as! String)
                         if status.elementsEqual("แม่พันธุ์") {
                             let maepunData = (data as! NSDictionary).value(forKey: "แม่พันธุ์") as! NSDictionary
                             if (maepunData.value(forKey: "จำนวนลูกหมูเพศเมีย") as? Int) != nil {
@@ -101,17 +92,13 @@ class WorkViewController: UIViewController {
                         }
                     }
                 }
-                pigs["ทั้งหมด"]?.sort()
                 pigs["หมูสาว"]?.sort()
                 pigs["แม่พันธุ์"]?.sort()
                 pigs["คอกคลอด"]?.sort()
                 pigs["คอกอนุบาล"]?.sort()
                 self.chooseRegisterType(message: "เลือกประเภทของการลงทะเบียน")
             }
-            
-            
         }
-        
     }
     
     func chooseRegisterType(message:String) {
@@ -143,20 +130,48 @@ class WorkViewController: UIViewController {
         self.present(alertController, animated: true)
     }
     
-    @IBAction func export(_ sender: Any) {
-        let pdfFilename = reportComposer.exportHTMLContentToPDF(HTMLContent: self.HTMLContent)
-        documentController = UIDocumentInteractionController.init(url: NSURL.init(fileURLWithPath: pdfFilename) as URL)
-        documentController.presentOptionsMenu(from: self.exportButton.frame, in: self.view, animated: true)
+    /*
+     
+     // Report Button
+     
+     */
+    
+    @IBAction func goReport(_ sender: Any) {
+        getAllWorkFrom(dateFormat: dateFormat.string(from: Date()))
     }
     
-    func createReportAsHTML() {
-        reportComposer = ReportComposer()
-        if let reportHTML = reportComposer.renderReport(reportDate: dateFormatForReportHTML.string(from: Date())) {
-            webView.loadHTMLString(reportHTML, baseURL: NSURL(string: reportComposer.pathToReportHTMLTemplate!)! as URL)
-            HTMLContent = reportHTML
+    func getAllWorkFrom(dateFormat:String) {
+        workList.removeAll()
+        workInfo.removeAll()
+        
+        //  append workList
+        //  append workInfo
+        ref.child("งาน/\(dateFormat)W").observeSingleEvent(of: .value) { (snapshot) in
+            if let today = snapshot.value as? NSDictionary {
+                for (work, ids) in today {
+                    workInfo[work as! String] = []
+                    for (id, status) in (ids as? NSDictionary)! {
+                        //  intID = no pigtype and workstep
+                        //  status 0 = ASSIGNED
+                        //  status 1 = DONE
+                        //  status 2 = UNDONE
+                        if let intID = Int(id as! String), (status as! Int) == 0 {
+                            workInfo[work as! String]?.append(intID)
+                        }
+                    }
+                    
+                    if !(workInfo[work as! String]?.isEmpty)! {
+                        workList.append(work as! String)
+                        workInfo[work as! String]?.sort()
+                    } else {
+                        workInfo.removeValue(forKey: work as! String)
+                    }
+                }
+                self.performSegue(withIdentifier: "goReport", sender: self)
+            }
         }
     }
-
+    
     @IBAction func unwindToHome(_ unwindSegue: UIStoryboardSegue) { }
 
 }

@@ -184,7 +184,7 @@ extension UIViewController /* DatePicker */ {
 extension UIViewController /* alert */ {
     func showMessage(title:String, message:String) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
-        alertController.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default))
+        alertController.addAction(UIAlertAction(title: "ตกลง", style: UIAlertAction.Style.default))
         self.present(alertController, animated: true)
     }
     

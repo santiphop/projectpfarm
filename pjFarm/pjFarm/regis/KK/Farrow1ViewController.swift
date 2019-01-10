@@ -65,7 +65,7 @@ class Farrow1ViewController: UIViewController {
             controller.mom = momString
             controller.dad = dadString
             controller.date = datePicker.date
-            controller.titleBar.title = momString
+            controller.titleBar.title = "แม่พันธุ์ " + momString
         }
     }
     

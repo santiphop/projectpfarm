@@ -34,7 +34,9 @@ class RegisterViewController: UIViewController {
 
         if amount <= 1 {
             minusButton.isEnabled = false
+            plusButton.isEnabled = true
         } else if amount >= maxAmount {
+            minusButton.isEnabled = true
             plusButton.isEnabled = false
         } else {
             minusButton.isEnabled = true

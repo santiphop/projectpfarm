@@ -44,7 +44,6 @@
 		8FE376D921E6020C009E1A65 /* PreFarrowTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE376D821E6020C009E1A65 /* PreFarrowTableViewController.swift */; };
 		8FE376DB21E60469009E1A65 /* PreWeanTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE376DA21E60469009E1A65 /* PreWeanTableViewController.swift */; };
 		8FE73F0921E71E4E00E9005B /* PreSearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE73F0821E71E4E00E9005B /* PreSearchTableViewController.swift */; };
-		8FE73F0B21E7445A00E9005B /* CustomFontTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE73F0A21E7445A00E9005B /* CustomFontTableViewCell.swift */; };
 		8FEC468C21B0FE4300B2CB47 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FEC468B21B0FE4300B2CB47 /* SearchViewController.swift */; };
 		8FEDCBED21B4D5CE00F935EA /* WorkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FEDCBEC21B4D5CE00F935EA /* WorkViewController.swift */; };
 		8FEDCBEF21B6620700F935EA /* FirstRutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FEDCBEE21B6620700F935EA /* FirstRutViewController.swift */; };
@@ -122,7 +121,6 @@
 		8FE376D821E6020C009E1A65 /* PreFarrowTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreFarrowTableViewController.swift; sourceTree = "<group>"; };
 		8FE376DA21E60469009E1A65 /* PreWeanTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreWeanTableViewController.swift; sourceTree = "<group>"; };
 		8FE73F0821E71E4E00E9005B /* PreSearchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreSearchTableViewController.swift; sourceTree = "<group>"; };
-		8FE73F0A21E7445A00E9005B /* CustomFontTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFontTableViewCell.swift; sourceTree = "<group>"; };
 		8FEC468B21B0FE4300B2CB47 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		8FEDCBEC21B4D5CE00F935EA /* WorkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkViewController.swift; sourceTree = "<group>"; };
 		8FEDCBEE21B6620700F935EA /* FirstRutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstRutViewController.swift; sourceTree = "<group>"; };
@@ -189,10 +187,10 @@
 			children = (
 				6A57B67021427E53004DE381 /* AppDelegate.swift */,
 				6A57B67221427E53004DE381 /* HomeViewController.swift */,
-				8F295DD821C7BC290017D376 /* todaywork */,
-				8FEC468B21B0FE4300B2CB47 /* SearchViewController.swift */,
-				8FE73F0821E71E4E00E9005B /* PreSearchTableViewController.swift */,
-				8F5E30E521C9177B0035DD97 /* SearchResultViewController.swift */,
+				8FEDCBEC21B4D5CE00F935EA /* WorkViewController.swift */,
+				8F78052B21E79F7F00779EFF /* regis */,
+				8F295DD821C7BC290017D376 /* report */,
+				8F78052C21E79FC300779EFF /* search */,
 				6A57B67421427E53004DE381 /* Main.storyboard */,
 				8F47B53D21B3DF2E00A1F25F /* WorkData.swift */,
 				8FD19BAF21D2123D0027FCEC /* Work.swift */,
@@ -225,24 +223,14 @@
 			path = pjFarmUITests;
 			sourceTree = "<group>";
 		};
-		8F295DD821C7BC290017D376 /* todaywork */ = {
+		8F295DD821C7BC290017D376 /* report */ = {
 			isa = PBXGroup;
 			children = (
-				8FEDCBEC21B4D5CE00F935EA /* WorkViewController.swift */,
 				8F8E845721C8221600CE8CAF /* reportsheet */,
-				8FE376D421E5F715009E1A65 /* PreRegisterTableViewController.swift */,
-				8FDC8B1021AD487700060F65 /* RegisterViewController.swift */,
-				8FEDCBEE21B6620700F935EA /* FirstRutViewController.swift */,
-				8FE376D621E5FC10009E1A65 /* PreFirstRutTableViewController.swift */,
-				8F295DCC21C792940017D376 /* Farrow1ViewController.swift */,
-				8FE376D821E6020C009E1A65 /* PreFarrowTableViewController.swift */,
-				8F295DD021C7971B0017D376 /* Farrow2ViewController.swift */,
-				8F295DCE21C794340017D376 /* WeanViewController.swift */,
-				8FE376DA21E60469009E1A65 /* PreWeanTableViewController.swift */,
 				8F0EECDF21BA2DC4003885BE /* WorkReport1ViewController.swift */,
 				8F0EECE121BA30A4003885BE /* WorkReport2ViewController.swift */,
 			);
-			path = todaywork;
+			path = report;
 			sourceTree = "<group>";
 		};
 		8F5E30E721C917880035DD97 /* UIObject */ = {
@@ -250,9 +238,66 @@
 			children = (
 				8F295DD421C7B1760017D376 /* NumpadTextField.swift */,
 				8F5E30E321C8D4030035DD97 /* RoundButton.swift */,
-				8FE73F0A21E7445A00E9005B /* CustomFontTableViewCell.swift */,
 			);
 			path = UIObject;
+			sourceTree = "<group>";
+		};
+		8F78052721E79F0200779EFF /* MS */ = {
+			isa = PBXGroup;
+			children = (
+				8FE376D421E5F715009E1A65 /* PreRegisterTableViewController.swift */,
+				8FDC8B1021AD487700060F65 /* RegisterViewController.swift */,
+			);
+			path = MS;
+			sourceTree = "<group>";
+		};
+		8F78052821E79F1400779EFF /* MP */ = {
+			isa = PBXGroup;
+			children = (
+				8FEDCBEE21B6620700F935EA /* FirstRutViewController.swift */,
+				8FE376D621E5FC10009E1A65 /* PreFirstRutTableViewController.swift */,
+			);
+			path = MP;
+			sourceTree = "<group>";
+		};
+		8F78052921E79F1A00779EFF /* KK */ = {
+			isa = PBXGroup;
+			children = (
+				8FE376D821E6020C009E1A65 /* PreFarrowTableViewController.swift */,
+				8F295DCC21C792940017D376 /* Farrow1ViewController.swift */,
+				8F295DD021C7971B0017D376 /* Farrow2ViewController.swift */,
+			);
+			path = KK;
+			sourceTree = "<group>";
+		};
+		8F78052A21E79F1F00779EFF /* KG */ = {
+			isa = PBXGroup;
+			children = (
+				8FE376DA21E60469009E1A65 /* PreWeanTableViewController.swift */,
+				8F295DCE21C794340017D376 /* WeanViewController.swift */,
+			);
+			path = KG;
+			sourceTree = "<group>";
+		};
+		8F78052B21E79F7F00779EFF /* regis */ = {
+			isa = PBXGroup;
+			children = (
+				8F78052721E79F0200779EFF /* MS */,
+				8F78052821E79F1400779EFF /* MP */,
+				8F78052921E79F1A00779EFF /* KK */,
+				8F78052A21E79F1F00779EFF /* KG */,
+			);
+			path = regis;
+			sourceTree = "<group>";
+		};
+		8F78052C21E79FC300779EFF /* search */ = {
+			isa = PBXGroup;
+			children = (
+				8FEC468B21B0FE4300B2CB47 /* SearchViewController.swift */,
+				8FE73F0821E71E4E00E9005B /* PreSearchTableViewController.swift */,
+				8F5E30E521C9177B0035DD97 /* SearchResultViewController.swift */,
+			);
+			path = search;
 			sourceTree = "<group>";
 		};
 		8F8E845721C8221600CE8CAF /* reportsheet */ = {
@@ -467,7 +512,6 @@
 				8FE73F0921E71E4E00E9005B /* PreSearchTableViewController.swift in Sources */,
 				8FE376D721E5FC10009E1A65 /* PreFirstRutTableViewController.swift in Sources */,
 				8FD19BB021D2123D0027FCEC /* Work.swift in Sources */,
-				8FE73F0B21E7445A00E9005B /* CustomFontTableViewCell.swift in Sources */,
 				8FEC468C21B0FE4300B2CB47 /* SearchViewController.swift in Sources */,
 				8F8E845021C8121E00CE8CAF /* ReportComposer.swift in Sources */,
 				8F295DD121C7971B0017D376 /* Farrow2ViewController.swift in Sources */,
