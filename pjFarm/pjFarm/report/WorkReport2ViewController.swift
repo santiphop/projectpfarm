@@ -14,7 +14,7 @@ class WorkReport2ViewController: UIViewController {
     var selectedSection = [String]()
     var selectedRow = [[String]]()
     var selectedID = [[Int]]()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

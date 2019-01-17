@@ -10,19 +10,57 @@ import UIKit
 
 class WorkViewController: UIViewController {
 
+    @IBOutlet weak var searchButton: UIButton!
+    @IBOutlet weak var shareButton: UIButton!
+    @IBOutlet weak var registerButton: RoundButton!
+    @IBOutlet weak var reportButton: RoundButton!
+    
     @IBOutlet weak var webView: UIWebView!
 
     let dateFormatForReportHTML = DateFormatter()
     var reportComposer: ReportComposer!
     var HTMLContent: String!
-    var documentController : UIDocumentInteractionController!
+    var documentController: UIDocumentInteractionController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        shareButton.isEnabled = false
+        
         dateFormatForReportHTML.dateFormat = "MMM d, YYYY"
-        createReportAsHTML()
+        
+        workList.removeAll()
+        workInfo.removeAll()
+        
+        //  append workList
+        //  append workInfo
+        let date = dateFormat.string(from: Date())
+        ref.child("งาน/\(date)W").observeSingleEvent(of: .value) { (snapshot) in
+            if let today = snapshot.value as? NSDictionary {
+                for (work, ids) in today {
+                    workInfo[work as! String] = []
+                    for (id, status) in (ids as? NSDictionary)! {
+                        //  intID = no pigtype and workstep
+                        //  status 0 = ASSIGNED
+                        //  status 1 = DONE
+                        //  status 2 = UNDONE
+                        if let intID = Int(id as! String), (status as! Int) == 0 {
+                            workInfo[work as! String]?.append(intID)
+                        }
+                    }
+                    
+                    if !(workInfo[work as! String]?.isEmpty)! {
+                        workList.append(work as! String)
+                        workInfo[work as! String]?.sort()
+                    } else {
+                        workInfo.removeValue(forKey: work as! String)
+                    }
+                }
+                self.createReportAsHTML()
+            }
+        }
+        
     }
     
     func createReportAsHTML() {
@@ -30,11 +68,13 @@ class WorkViewController: UIViewController {
         if let reportHTML = reportComposer.renderReport(reportDate: dateFormatForReportHTML.string(from: Date())) {
             webView.loadHTMLString(reportHTML, baseURL: NSURL(string: reportComposer.pathToReportHTMLTemplate!)! as URL)
             HTMLContent = reportHTML
+            shareButton.isEnabled = true
         }
     }
     
     
     @IBAction func goSearch(_ sender: Any) {
+        searchButton.isEnabled = false
         pigs["ทั้งหมด"] = []
         ref.child("หมู").observeSingleEvent(of: .value) { (snapshot) in
             if let allpig = snapshot.value as? NSDictionary {
@@ -45,6 +85,7 @@ class WorkViewController: UIViewController {
                 }
                 pigs["ทั้งหมด"]?.sort()
                 self.performSegue(withIdentifier: "goSearch", sender: self)
+                self.searchButton.isEnabled = true
             }
         }
     }
@@ -70,6 +111,7 @@ class WorkViewController: UIViewController {
      */
     
     @IBAction func goRegister(_ sender: Any) {
+        registerButton.isEnabled = false
         getAllPig()
     }
     
@@ -128,6 +170,7 @@ class WorkViewController: UIViewController {
         })
         alertController.addAction(UIAlertAction(title: "ยกเลิก", style: UIAlertAction.Style.cancel))
         self.present(alertController, animated: true)
+        registerButton.isEnabled = true
     }
     
     /*
@@ -137,6 +180,7 @@ class WorkViewController: UIViewController {
      */
     
     @IBAction func goReport(_ sender: Any) {
+        reportButton.isEnabled = false
         getAllWorkFrom(dateFormat: dateFormat.string(from: Date()))
     }
     
@@ -168,6 +212,7 @@ class WorkViewController: UIViewController {
                     }
                 }
                 self.performSegue(withIdentifier: "goReport", sender: self)
+                self.reportButton.isEnabled = true
             }
         }
     }
