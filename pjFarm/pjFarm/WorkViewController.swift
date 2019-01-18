@@ -9,6 +9,9 @@
 import UIKit
 
 class WorkViewController: UIViewController {
+    
+    
+    
 
     @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var shareButton: UIButton!
@@ -26,7 +29,7 @@ class WorkViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        shareButton.isEnabled = false
+        disableShareButton()
         
         dateFormatForReportHTML.dateFormat = "MMM d, YYYY"
         
@@ -63,6 +66,7 @@ class WorkViewController: UIViewController {
         
     }
     
+    // continue from viewDidLoad()
     func createReportAsHTML() {
         reportComposer = ReportComposer()
         if let reportHTML = reportComposer.renderReport(reportDate: dateFormatForReportHTML.string(from: Date())) {
@@ -102,6 +106,10 @@ class WorkViewController: UIViewController {
         let pdfFilename = reportComposer.exportHTMLContentToPDF(HTMLContent: self.HTMLContent)
         documentController = UIDocumentInteractionController.init(url: NSURL.init(fileURLWithPath: pdfFilename) as URL)
         documentController.presentOptionsMenu(from: self.exportButton.frame, in: self.view, animated: true)
+    }
+    
+    func disableShareButton() {
+        shareButton.isEnabled = false
     }
     
     /*

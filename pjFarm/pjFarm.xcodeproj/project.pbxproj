@@ -194,7 +194,6 @@
 			isa = PBXGroup;
 			children = (
 				6A57B67021427E53004DE381 /* AppDelegate.swift */,
-				6A57B67221427E53004DE381 /* HomeViewController.swift */,
 				8FEDCBEC21B4D5CE00F935EA /* WorkViewController.swift */,
 				8F78052B21E79F7F00779EFF /* regis */,
 				8F295DD821C7BC290017D376 /* report */,
@@ -203,6 +202,7 @@
 				6A57B67421427E53004DE381 /* Main.storyboard */,
 				8F47B53D21B3DF2E00A1F25F /* WorkData.swift */,
 				8FD19BAF21D2123D0027FCEC /* Work.swift */,
+				8FE82E6321F2102500EDE840 /* unused */,
 				8F5E30E721C917880035DD97 /* UIObject */,
 				6A57B67721427E53004DE381 /* Assets.xcassets */,
 				6A57B67921427E53004DE381 /* LaunchScreen.storyboard */,
@@ -244,9 +244,7 @@
 		8F5E30E721C917880035DD97 /* UIObject */ = {
 			isa = PBXGroup;
 			children = (
-				8F295DD421C7B1760017D376 /* NumpadTextField.swift */,
 				8F5E30E321C8D4030035DD97 /* RoundButton.swift */,
-				8F9555EA21E7D14E00D7EEE3 /* NonCursorTextField.swift */,
 			);
 			path = UIObject;
 			sourceTree = "<group>";
@@ -378,6 +376,16 @@
 				8FAD346021A2D1160048A3EC /* FirebaseDatabase.framework */,
 			);
 			path = Database;
+			sourceTree = "<group>";
+		};
+		8FE82E6321F2102500EDE840 /* unused */ = {
+			isa = PBXGroup;
+			children = (
+				6A57B67221427E53004DE381 /* HomeViewController.swift */,
+				8F295DD421C7B1760017D376 /* NumpadTextField.swift */,
+				8F9555EA21E7D14E00D7EEE3 /* NonCursorTextField.swift */,
+			);
+			path = unused;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

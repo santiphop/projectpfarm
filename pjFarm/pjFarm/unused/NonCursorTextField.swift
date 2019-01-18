@@ -8,6 +8,7 @@
 
 import UIKit
 
+//  UNUSED CLASS
 class NonCursorTextField: UITextField {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)

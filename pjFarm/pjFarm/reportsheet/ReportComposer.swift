@@ -9,7 +9,7 @@
 import UIKit
 
 class ReportComposer: NSObject {
-    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    let app = UIApplication.shared.delegate as! AppDelegate
 
     let pathToReportHTMLTemplate = Bundle.main.path(forResource: "report", ofType: "html")
     let pathToHeadItemHTMLTemplate = Bundle.main.path(forResource: "head-id", ofType: "html")
@@ -18,7 +18,6 @@ class ReportComposer: NSObject {
     
     override init() {
         super.init()
-        dateFormat.dateFormat = "yyyyMMdd"
     }
     
     func renderReport(reportDate: String) -> String! {
@@ -35,14 +34,15 @@ class ReportComposer: NSObject {
                 // For the first one we'll use the "head-id.html" template.
                 // For all the items except for the first one and the last one we'll use the "single-id.html" template.
                 // For the last one we'll use the "last-id.html" template.
-                for i in 0...workInfo.count-1 {
+                
+                for i in 0...workInfo[work]!.count-1 {
                     var itemHTMLContent: String!
-                    
+                    print(workInfo[work]![i])
                     // Determine the proper template file.
                     if i == 0 {
                         itemHTMLContent = try String(contentsOfFile: pathToHeadItemHTMLTemplate!)
                         itemHTMLContent = itemHTMLContent.replacingOccurrences(of: "#WORK#", with: work)
-                    } else if i != workInfo.count - 1 {
+                    } else if i != workInfo[work]!.count - 1 {
                         itemHTMLContent = try String(contentsOfFile: pathToSingleItemHTMLTemplate!)
                     } else {
                         itemHTMLContent = try String(contentsOfFile: pathToLastItemHTMLTemplate!)
@@ -72,7 +72,7 @@ class ReportComposer: NSObject {
         let printFormatter = UIMarkupTextPrintFormatter(markupText: HTMLContent)
         printPageRenderer.addPrintFormatter(printFormatter, startingAtPageAt: 0)
         let pdfData = drawPDFUsingPrintPageRenderer(printPageRenderer: printPageRenderer)!
-        let pdfFilename = "\(appDelegate.getDocumentDirectory())/Report\(dateFormat.string(from: Date()))W.pdf"
+        let pdfFilename = "\(app.getDocumentDirectory())/Report\(dateFormat.string(from: Date()))W.pdf"
         pdfData.write(toFile: pdfFilename, atomically: true)
         return pdfFilename
     }

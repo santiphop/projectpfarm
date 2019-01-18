@@ -15,6 +15,9 @@ class WorkReport2ViewController: UIViewController {
     var selectedRow = [[String]]()
     var selectedID = [[Int]]()
     
+    //  send to WorkVC
+    var isAction = false
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -43,6 +46,7 @@ class WorkReport2ViewController: UIViewController {
     }
     
     func report() {
+        isAction = true
         for i in 0...selectedSection.count-1 {
             self.reportWorkForTomorrow(currentWork: selectedSection[i], ids: selectedID[i])
         }
@@ -100,6 +104,12 @@ class WorkReport2ViewController: UIViewController {
             */
             
         })
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let controller = segue.destination as? WorkViewController, isAction {
+            controller.disableShareButton()
+        }
     }
 }
 

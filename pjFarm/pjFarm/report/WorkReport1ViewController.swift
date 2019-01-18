@@ -20,6 +20,9 @@ class WorkReport1ViewController: UIViewController {
     var selectedSection = [String]()
     var selectedRow = [[String]]()
     var selectedID = [[Int]]()
+    
+    //  send to WorkVC
+    var isAction = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -84,6 +87,7 @@ class WorkReport1ViewController: UIViewController {
             //  prevent reporting today again
             workList.removeAll()
             workInfo.removeAll()
+            self.isAction = true
         }
     }
     
@@ -109,8 +113,11 @@ class WorkReport1ViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let controller = segue.destination as? WorkViewController, isAction {
+            controller.disableShareButton()
+        }
         if let controller = segue.destination as? WorkReport2ViewController {
-            setupWR2VCsTable()
+            self.setupWR2VCsTable()
             controller.selectedSection = self.selectedSection
             controller.selectedRow = self.selectedRow
             controller.selectedID = self.selectedID
@@ -165,6 +172,7 @@ extension WorkReport1ViewController: UITableViewDataSource, UITableViewDelegate 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView.cellForRow(at: indexPath)?.accessoryType != UITableViewCell.AccessoryType.checkmark {
             tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCell.AccessoryType.checkmark
+//            tableView.cellForRow(at: indexPath)?.backgroundColor = UIColor.
             boolIDs[indexPath.section][indexPath.row] = true
         } else {
             tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCell.AccessoryType.none
@@ -175,7 +183,4 @@ extension WorkReport1ViewController: UITableViewDataSource, UITableViewDelegate 
     func numberOfSections(in tableView: UITableView) -> Int {
         return workList.count
     }
-
-
-    
 }

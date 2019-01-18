@@ -10,19 +10,13 @@ import UIKit
 import Foundation
 import FirebaseDatabase
 
-var ref = Database.database().reference()
+let ref = Database.database().reference()
 let dateFormat = DateFormatter()
 let dateFormatForTextField = DateFormatter()
 
-var currentWork = String()
 var currentID = Int()
 
 var pigs = [String:[String]]()
-
-func addPig(type:String, id:String) {
-    pigs[type]?.append(id)
-    pigs[type]?.sort()
-}
 
 var workList = [String]()
 var workInfo = [String:[Int]]()
@@ -109,7 +103,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
     }
     
-    
+}
+
+func addPig(type:String, id:String) {
+    pigs[type]?.append(id)
+    pigs[type]?.sort()
 }
 
 func tomorrow(date:[Date]) -> [Date] {
@@ -167,6 +165,7 @@ func regisMP(id:String, date:Date, primary:Int, secondary:Int) {
 
 extension UIViewController /* DatePicker */ {
     func createDatePicker(datePicker:UIDatePicker, textField:UITextField, button:UIBarButtonItem) {
+        textField.tintColor = UIColor.clear
         datePicker.datePickerMode = .date
         //  let onDone = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneActionForDatePicker))
         let toolbar:UIToolbar = UIToolbar()
@@ -184,7 +183,7 @@ extension UIViewController /* DatePicker */ {
 extension UIViewController /* alert */ {
     func showMessage(title:String, message:String) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
-        alertController.addAction(UIAlertAction(title: "ตกลง", style: UIAlertAction.Style.default))
+        alertController.addAction(UIAlertAction(title: "ตกลง", style: UIAlertAction.Style.cancel))
         self.present(alertController, animated: true)
     }
     
