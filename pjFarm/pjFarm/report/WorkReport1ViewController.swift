@@ -171,11 +171,12 @@ extension WorkReport1ViewController: UITableViewDataSource, UITableViewDelegate 
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView.cellForRow(at: indexPath)?.accessoryType != UITableViewCell.AccessoryType.checkmark {
-            tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCell.AccessoryType.checkmark
-//            tableView.cellForRow(at: indexPath)?.backgroundColor = UIColor.
+//            tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCell.AccessoryType.checkmark
+            tableView.cellForRow(at: indexPath)?.backgroundColor = UIColor.lightGray
             boolIDs[indexPath.section][indexPath.row] = true
         } else {
-            tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCell.AccessoryType.none
+//            tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCell.AccessoryType.none
+            tableView.cellForRow(at: indexPath)?.backgroundColor = UIColor.clear
             boolIDs[indexPath.section][indexPath.row] = false
         }
     }

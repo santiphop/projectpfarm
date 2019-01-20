@@ -136,7 +136,8 @@ class WorkViewController: UIViewController {
                         pigs[status]?.append(id as! String)
                         if status.elementsEqual("แม่พันธุ์") {
                             let maepunData = (data as! NSDictionary).value(forKey: "แม่พันธุ์") as! NSDictionary
-                            if (maepunData.value(forKey: "จำนวนลูกหมูเพศเมีย") as? Int) != nil {
+                            if (maepunData.value(forKey: "จำนวนลูกหมูเพศเมีย") as? Int) != nil,
+                                (maepunData.value(forKey: "จำนวนลูกหมูเพศเมีย") as! Int) > 0 {
                                 pigs["คอกอนุบาล"]?.append(id as! String)
                             }
                         }

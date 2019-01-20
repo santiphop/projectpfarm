@@ -11,11 +11,13 @@ import UIKit
 class RegisterViewController: UIViewController {
 
     let datePicker = UIDatePicker()
+    
     var amount = Int()
+    var maxAmount = Int()
+    
     var momID = String()
     let leastID = currentID + 1
 
-    var maxAmount = Int()
     
     @IBOutlet weak var momLabel: UILabel!
     @IBOutlet weak var dad: UISegmentedControl!{
@@ -101,9 +103,12 @@ class RegisterViewController: UIViewController {
     }
     
     func regisMS(mom:String, dad:String, date:Date) {
+        ref.child("หมู/\(mom)/แม่พันธุ์/จำนวนลูกหมูเพศเมีย").setValue(maxAmount-amount)
+
         for _ in 1...amount {
             currentID += 1
             workMusao.generateSelf(date: date)
+            
             
             ref.child("หมู/currentID").setValue(currentID)
             ref.child("หมู/\(currentID)/สถานะ").setValue("หมูสาว")
