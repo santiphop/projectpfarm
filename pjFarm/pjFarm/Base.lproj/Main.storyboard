@@ -1037,7 +1037,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Vu2-8a-FmW">
-                                <rect key="frame" x="35" y="196" width="305" height="30"/>
+                                <rect key="frame" x="35" y="178" width="305" height="30"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="จำนวนลูกทั้งหมด" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8gx-PV-xLo">
                                         <rect key="frame" x="0.0" y="0.0" width="142.66666666666666" height="30"/>
@@ -1045,12 +1045,15 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aVW-pJ-zbg" customClass="NumpadTextField" customModule="pjFarm" customModuleProvider="target">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="จำนวนไม่เกิน 20 ตัว" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="aVW-pJ-zbg" customClass="NumpadTextField" customModule="pjFarm" customModuleProvider="target">
                                         <rect key="frame" x="162.66666666666663" y="0.0" width="142.33333333333337" height="30"/>
                                         <color key="backgroundColor" red="1" green="0.9843560804" blue="0.98237671140000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="allEdit:" destination="N2q-oG-91M" eventType="editingChanged" id="KrA-Ox-XRo"/>
+                                        </connections>
                                     </textField>
                                 </subviews>
                             </stackView>
@@ -1097,19 +1100,25 @@
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="60" translatesAutoresizingMaskIntoConstraints="NO" id="XT3-fT-oUf">
                                 <rect key="frame" x="64" y="281.66666666666669" width="249" height="30"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oLg-hZ-Hor" customClass="NumpadTextField" customModule="pjFarm" customModuleProvider="target">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oLg-hZ-Hor" customClass="NumpadTextField" customModule="pjFarm" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="94.666666666666671" height="30"/>
                                         <color key="backgroundColor" red="1" green="0.9843560804" blue="0.98237671140000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="deadEdit:" destination="N2q-oG-91M" eventType="editingChanged" id="1Uc-D2-zVK"/>
+                                        </connections>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="a4D-PD-GaT" customClass="NumpadTextField" customModule="pjFarm" customModuleProvider="target">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="a4D-PD-GaT" customClass="NumpadTextField" customModule="pjFarm" customModuleProvider="target">
                                         <rect key="frame" x="154.66666666666666" y="0.0" width="94.333333333333343" height="30"/>
                                         <color key="backgroundColor" red="1" green="0.9843560804" blue="0.98237671140000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="mummyEdit:" destination="N2q-oG-91M" eventType="editingChanged" id="krh-3N-AHb"/>
+                                        </connections>
                                     </textField>
                                 </subviews>
                             </stackView>
@@ -1122,6 +1131,10 @@
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="maleEdit:" destination="N2q-oG-91M" eventType="editingChanged" id="BQR-iG-kPm"/>
+                                            <action selector="maleTouchDown:" destination="N2q-oG-91M" eventType="touchDown" id="2Fw-wU-waj"/>
+                                        </connections>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fy1-dC-QiH" customClass="NumpadTextField" customModule="pjFarm" customModuleProvider="target">
                                         <rect key="frame" x="154.66666666666666" y="0.0" width="94.333333333333343" height="30"/>
@@ -1129,6 +1142,10 @@
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="femaleEdit:" destination="N2q-oG-91M" eventType="editingChanged" id="CLc-Bv-fgv"/>
+                                            <action selector="femaleTouchDown:" destination="N2q-oG-91M" eventType="touchDown" id="1lq-Av-4NZ"/>
+                                        </connections>
                                     </textField>
                                 </subviews>
                             </stackView>
@@ -1146,6 +1163,12 @@
                                     <action selector="save:" destination="N2q-oG-91M" eventType="touchUpInside" id="hD2-U9-NGL"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RgW-QY-bS4">
+                                <rect key="frame" x="35" y="216" width="305" height="0.0"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.93372752569999995" blue="0.90592893839999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
@@ -1157,20 +1180,23 @@
                             <constraint firstItem="35T-k4-sTQ" firstAttribute="trailing" secondItem="e3n-kh-wDf" secondAttribute="trailing" constant="95" id="Dbh-hf-5Cs"/>
                             <constraint firstItem="35T-k4-sTQ" firstAttribute="trailing" secondItem="2Ff-SO-9Rr" secondAttribute="trailing" constant="62" id="Ooq-bs-Yw5"/>
                             <constraint firstItem="35T-k4-sTQ" firstAttribute="trailing" secondItem="EYN-MP-AjZ" secondAttribute="trailing" constant="65" id="U7f-ch-S0h"/>
+                            <constraint firstItem="RgW-QY-bS4" firstAttribute="top" secondItem="Vu2-8a-FmW" secondAttribute="bottom" constant="8" id="V0Y-zC-Zth"/>
                             <constraint firstItem="35T-k4-sTQ" firstAttribute="bottom" secondItem="e3n-kh-wDf" secondAttribute="bottom" constant="229" id="Z8Z-VH-jJF"/>
+                            <constraint firstItem="35T-k4-sTQ" firstAttribute="trailing" secondItem="RgW-QY-bS4" secondAttribute="trailing" constant="35" id="b6T-ME-j6v"/>
                             <constraint firstItem="h3S-ba-vOd" firstAttribute="top" secondItem="XT3-fT-oUf" secondAttribute="bottom" constant="75" id="cJJ-2N-Bpt"/>
                             <constraint firstItem="Vu2-8a-FmW" firstAttribute="leading" secondItem="35T-k4-sTQ" secondAttribute="leading" constant="35" id="emo-Uh-JMf"/>
+                            <constraint firstItem="RgW-QY-bS4" firstAttribute="leading" secondItem="2yc-sm-i4u" secondAttribute="leading" constant="35" id="eov-VC-nje"/>
                             <constraint firstItem="35T-k4-sTQ" firstAttribute="trailing" secondItem="h3S-ba-vOd" secondAttribute="trailing" constant="65" id="fp2-uG-XH9"/>
                             <constraint firstItem="35T-k4-sTQ" firstAttribute="trailing" secondItem="Vu2-8a-FmW" secondAttribute="trailing" constant="35" id="iF6-O7-Tvw"/>
                             <constraint firstItem="EYN-MP-AjZ" firstAttribute="leading" secondItem="35T-k4-sTQ" secondAttribute="leading" constant="90" id="jKV-YE-nl7"/>
                             <constraint firstItem="h3S-ba-vOd" firstAttribute="leading" secondItem="35T-k4-sTQ" secondAttribute="leading" constant="90" id="keL-gu-vWZ"/>
-                            <constraint firstItem="Vu2-8a-FmW" firstAttribute="top" secondItem="35T-k4-sTQ" secondAttribute="top" constant="108" id="lsh-mp-Yqj"/>
+                            <constraint firstItem="Vu2-8a-FmW" firstAttribute="top" secondItem="35T-k4-sTQ" secondAttribute="top" constant="90" id="lsh-mp-Yqj"/>
                             <constraint firstItem="e3n-kh-wDf" firstAttribute="leading" secondItem="35T-k4-sTQ" secondAttribute="leading" constant="95" id="mxM-0t-Mj5"/>
                             <constraint firstItem="2Ff-SO-9Rr" firstAttribute="leading" secondItem="35T-k4-sTQ" secondAttribute="leading" constant="64" id="ne0-g3-kyG"/>
                             <constraint firstItem="XT3-fT-oUf" firstAttribute="leading" secondItem="35T-k4-sTQ" secondAttribute="leading" constant="64" id="qad-Ft-MmV"/>
                             <constraint firstItem="35T-k4-sTQ" firstAttribute="trailing" secondItem="XT3-fT-oUf" secondAttribute="trailing" constant="62" id="rdl-uB-rm9"/>
                             <constraint firstItem="35T-k4-sTQ" firstAttribute="trailing" secondItem="GBX-OG-yNC" secondAttribute="trailing" constant="250" id="w72-VE-gvM"/>
-                            <constraint firstItem="EYN-MP-AjZ" firstAttribute="top" secondItem="Vu2-8a-FmW" secondAttribute="bottom" constant="23" id="zkN-fE-aFg"/>
+                            <constraint firstItem="EYN-MP-AjZ" firstAttribute="top" secondItem="Vu2-8a-FmW" secondAttribute="bottom" constant="41" id="zkN-fE-aFg"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="35T-k4-sTQ"/>
                     </view>
@@ -1182,6 +1208,7 @@
                         <outlet property="maleLeft" destination="P3X-rh-qWI" id="u7u-JW-pRE"/>
                         <outlet property="mummy" destination="a4D-PD-GaT" id="a46-JC-Svn"/>
                         <outlet property="titleBar" destination="M7L-ha-bnf" id="2nQ-pR-Ref"/>
+                        <outlet property="warningAmount" destination="RgW-QY-bS4" id="aQv-gU-MS4"/>
                         <segue destination="T6d-Kq-gAC" kind="unwind" identifier="KlodDoneToHome" unwindAction="unwindToHome:" id="IL8-yH-Dhe"/>
                         <segue destination="T6d-Kq-gAC" kind="unwind" identifier="farrow2to1" unwindAction="unwindToFarrow:" id="ApK-ny-AhA"/>
                     </connections>
@@ -1189,7 +1216,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UFm-VZ-xgo" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="T6d-Kq-gAC" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="8767" y="-2110"/>
+            <point key="canvasLocation" x="8765.6000000000004" y="-2110.344827586207"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Ah6-3C-UeE">
@@ -1214,6 +1241,6 @@
         <image name="Share" width="75" height="75"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ua2-gD-qkk"/>
+        <segue reference="VSi-a5-nk9"/>
     </inferredMetricsTieBreakers>
 </document>

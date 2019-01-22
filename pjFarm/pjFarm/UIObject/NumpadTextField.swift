@@ -8,7 +8,6 @@
 
 import UIKit
 
-//  UNUSED CLASS
 class NumpadTextField: UITextField {
     
     required init?(coder aDecoder: NSCoder) {
@@ -16,13 +15,10 @@ class NumpadTextField: UITextField {
         
         self.addDoneTB()
         self.keyboardType = UIKeyboardType.numberPad
-        //  remove cursor
-        self.tintColor = UIColor.clear
         
     }
     
     func addDoneTB() {
-        self.tintColor = UIColor.clear
         let onDone = (target: self, action: #selector(doneButtonTap))
         
         let toolbar: UIToolbar = UIToolbar()

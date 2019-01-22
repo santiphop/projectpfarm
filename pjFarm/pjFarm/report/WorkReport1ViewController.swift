@@ -128,7 +128,7 @@ class WorkReport1ViewController: UIViewController {
         selectedSection = workList
         selectedRow.removeAll()
         selectedID.removeAll()
-        var indexToRemove = [Int]()
+//        var indexToRemove = [Int]()
         for section in 0...workList.count-1 {
             selectedRow.append([])
             selectedID.append([])
@@ -138,18 +138,18 @@ class WorkReport1ViewController: UIViewController {
                     selectedID[section].append(intIDs[section][row])
                 }
             }
-            if selectedRow[section].isEmpty {
-                indexToRemove.append(section)
-            }
+//            if selectedRow[section].isEmpty {
+//                indexToRemove.append(section)
+//            }
         }
         
         //  .reversed
         //  prevent remove index out of range
-        for index in indexToRemove.reversed() {
-            selectedID.remove(at: index)
-            selectedRow.remove(at: index)
-            selectedSection.remove(at: index)
-        }
+//        for index in indexToRemove.reversed() {
+//            selectedID.remove(at: index)
+//            selectedRow.remove(at: index)
+//            selectedSection.remove(at: index)
+//        }
     }
 }
 
@@ -171,11 +171,11 @@ extension WorkReport1ViewController: UITableViewDataSource, UITableViewDelegate 
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView.cellForRow(at: indexPath)?.accessoryType != UITableViewCell.AccessoryType.checkmark {
-//            tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCell.AccessoryType.checkmark
+            tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCell.AccessoryType.checkmark
             tableView.cellForRow(at: indexPath)?.backgroundColor = UIColor.lightGray
             boolIDs[indexPath.section][indexPath.row] = true
         } else {
-//            tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCell.AccessoryType.none
+            tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCell.AccessoryType.none
             tableView.cellForRow(at: indexPath)?.backgroundColor = UIColor.clear
             boolIDs[indexPath.section][indexPath.row] = false
         }

@@ -70,6 +70,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         workData.add(work: workKinderg)
         
         dateFormat.dateFormat = "yyyyMMdd"
+        dateFormat.timeZone = TimeZone(secondsFromGMT: 3600*7)
         dateFormatForTextField.dateFormat = "MMMM d, yyyy"
                 
         return true
