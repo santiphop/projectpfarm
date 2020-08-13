@@ -28,6 +28,7 @@ class SearchResultViewController: UIViewController {
     }
     
     func search() {
+        // search โดยการนำ id ไปค้นหาใน firebase แล้วดึงผลลัพธ์ออกมา
         let id = self.id
         print(id)
         var output = "ID : \(id)\n"

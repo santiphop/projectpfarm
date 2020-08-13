@@ -36,6 +36,7 @@ class SearchViewController: UIViewController {
     }
     
     func startReading() -> Bool {
+        // เปิดใช้งานกล้อง
         if let captureDevice = AVCaptureDevice.default(for: AVMediaType.video) {
             do {
                 let input = try AVCaptureDeviceInput(device: captureDevice)
@@ -73,6 +74,7 @@ class SearchViewController: UIViewController {
 }
 
 extension SearchViewController:AVCaptureMetadataOutputObjectsDelegate {
+    //  แปลงค่าจาก QR code
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
         var qrText = ""
         

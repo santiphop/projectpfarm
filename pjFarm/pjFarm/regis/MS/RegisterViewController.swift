@@ -32,6 +32,7 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var plusButton: RoundButton!
     
     func updateAmountLabel() {
+        // กำหนดขอบเขตของปุ่มบวกลบ
         amountLabel.text! = String(amount)
 
         if amount <= 1 {
@@ -103,6 +104,7 @@ class RegisterViewController: UIViewController {
     }
     
     func regisMS(mom:String, dad:String, date:Date) {
+        // ลงทะเบียนหมูสาว
         ref.child("หมู/\(mom)/แม่พันธุ์/จำนวนลูกหมูเพศเมีย").setValue(maxAmount-amount)
 
         for _ in 1...amount {

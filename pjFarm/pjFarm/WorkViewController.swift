@@ -103,6 +103,7 @@ class WorkViewController: UIViewController {
     @IBOutlet weak var exportButton: UIButton!
     
     @IBAction func export(_ sender: Any) {
+        // ปุ่ม export หรือปุ่ม share เพื่อใช้ในการแชร์ไฟล์สกุล PDF
         let pdfFilename = reportComposer.exportHTMLContentToPDF(HTMLContent: self.HTMLContent)
         documentController = UIDocumentInteractionController.init(url: NSURL.init(fileURLWithPath: pdfFilename) as URL)
         documentController.presentOptionsMenu(from: self.exportButton.frame, in: self.view, animated: true)
@@ -124,6 +125,7 @@ class WorkViewController: UIViewController {
     }
     
     func getAllPig() {
+        // ดึงข้อมูลทั้งหมดจาก firebase ให้มาอยู่ในโปรแกรม
         pigs["หมูสาว"] = []
         pigs["แม่พันธุ์"] = []
         pigs["คอกคลอด"] = []

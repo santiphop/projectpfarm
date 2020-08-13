@@ -22,6 +22,8 @@ var workList = [String]()
 var workInfo = [String:[Int]]()
 
 var workData = WorkData()
+
+// กำหนดตารางงานของหมูทั้ง 4 ประเภท
 let workMusao = Work(
     typeID: "1",
     name: [
@@ -131,6 +133,7 @@ func addDateComponent(date:Date, intAdding:Int) -> Date {
 }
 
 func assignWork(id:Int, work:Work) {
+    // ใช้ในการ assign ตารางงานให้หมู
     for i in 0...(work.name.count) - 1 {
         ref.child("งาน/\(dateFormat.string(from: work.date[i]))W/\(work.name[i])/pigtype").setValue(work.typeID)
         ref.child("งาน/\(dateFormat.string(from: work.date[i]))W/\(work.name[i])/workstep").setValue(i)
@@ -149,6 +152,7 @@ func assignWork(id:Int, work:Work) {
 }
 
 func regisMP(id:String, date:Date, primary:Int, secondary:Int) {
+    // เมื่อมีการ register แม่พันธุ์
     workMaepun.generateSelf(date: date)
     ref.child("หมู/\(id)/สถานะ").setValue("แม่พันธุ์")
     ref.child("หมู/\(id)/แม่พันธุ์/currentState").setValue([
